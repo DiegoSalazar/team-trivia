@@ -1,0 +1,15 @@
+<tr>
+  <td>
+    <% if team.name.blank? %>
+      <%= text_field_tag 'team[name]' %>
+    <% else %>
+      <%= team.name %>
+    <% end %>
+  </td>
+  <td>
+    <%= link_to 'Save', team, data: { reflex: 'click->Team#save' } if team.name.blank? %>
+  </td>
+  <td><%= link_to 'Show', team %></td>
+  <td><%= link_to 'Edit', edit_team_path(team) %></td>
+  <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

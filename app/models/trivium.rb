@@ -1,0 +1,2 @@
+class Trivium < ApplicationRecord
+end

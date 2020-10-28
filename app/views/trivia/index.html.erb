@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Trivia</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th>Game starts at</th>
+      <th>Game ends at</th>
+      <th>Questions count</th>
+      <th>Likes count</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trivia.each do |trivium| %>
+      <tr>
+        <td><%= trivium.title %></td>
+        <td><%= trivium.body %></td>
+        <td><%= trivium.game_starts_at %></td>
+        <td><%= trivium.game_ends_at %></td>
+        <td><%= trivium.questions_count %></td>
+        <td><%= trivium.likes_count %></td>
+        <td><%= link_to 'Show', trivium %></td>
+        <td><%= link_to 'Edit', edit_trivium_path(trivium) %></td>
+        <td><%= link_to 'Destroy', trivium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Trivium', new_trivium_path %>

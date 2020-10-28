@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyText
+  body: MyText
+  game_starts_at: 2020-10-17 11:03:14
+  game_ends_at: 2020-10-17 11:03:14
+  questions_count: 1
+  likes_count: 1
+
+two:
+  title: MyText
+  body: MyText
+  game_starts_at: 2020-10-17 11:03:14
+  game_ends_at: 2020-10-17 11:03:14
+  questions_count: 1
+  likes_count: 1

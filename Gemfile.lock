@@ -209,6 +209,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
+  cable_ready (~> 4.3)
   capybara (>= 2.15)
   jbuilder (~> 2.7)
   listen (~> 3.2)
