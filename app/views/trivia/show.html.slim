@@ -1,0 +1,29 @@
+p#notice
+  = notice
+p
+  strong
+    | Title:
+  = @trivium.title
+p
+  strong
+    | Body:
+  = @trivium.body
+p
+  strong
+    | Game starts at:
+  = @trivium.game_starts_at
+p
+  strong
+    | Game ends at:
+  = @trivium.game_ends_at
+p
+  strong
+    | Questions count:
+  = @trivium.questions_count
+p
+  strong
+    | Likes count:
+  = @trivium.likes_count
+= link_to 'Edit', edit_trivium_path(@trivium)
+|  | 
+= link_to 'Back', trivia_path

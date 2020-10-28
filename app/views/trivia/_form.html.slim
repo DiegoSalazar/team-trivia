@@ -1,0 +1,30 @@
+= form_with(model: trivium, local: true) do |form|
+  - if trivium.errors.any?
+    #error_explanation
+      h2
+        = pluralize(trivium.errors.count, "error")
+        |  prohibited this trivium from being saved:
+      ul
+        - trivium.errors.full_messages.each do |message|
+          li
+            = message
+  .field
+    = form.label :title
+    = form.text_area :title
+  .field
+    = form.label :body
+    = form.text_area :body
+  .field
+    = form.label :game_starts_at
+    = form.datetime_select :game_starts_at
+  .field
+    = form.label :game_ends_at
+    = form.datetime_select :game_ends_at
+  .field
+    = form.label :questions_count
+    = form.number_field :questions_count
+  .field
+    = form.label :likes_count
+    = form.number_field :likes_count
+  .actions
+    = form.submit
