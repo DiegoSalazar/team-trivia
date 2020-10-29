@@ -58,3 +58,5 @@ gem "stimulus_reflex", "~> 3.3"
 gem "cable_ready", "~> 4.3"
 
 gem "slim-rails", "~> 3.2"
+
+gem "twitter-bootstrap-rails", "~> 3.2"
