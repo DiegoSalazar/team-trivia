@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class PlaysController < ApplicationController
-  before_action :set_play, only: [:show, :edit, :update, :destroy]
+  before_action :set_play, only: %i[show edit update destroy]
 
   # GET /plays
   # GET /plays.json
@@ -9,8 +11,7 @@ class PlaysController < ApplicationController
 
   # GET /plays/1
   # GET /plays/1.json
-  def show
-  end
+  def show; end
 
   # GET /plays/new
   def new
@@ -18,8 +19,7 @@ class PlaysController < ApplicationController
   end
 
   # GET /plays/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /plays
   # POST /plays.json
@@ -62,13 +62,14 @@ class PlaysController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_play
-      @play = Play.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def play_params
-      params.require(:play).permit(:trivia_id, :team_id, :submission_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_play
+    @play = Play.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def play_params
+    params.require(:play).permit(:trivia_id, :team_id, :submission_id)
+  end
 end

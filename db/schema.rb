@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,79 +12,77 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_11_034507) do
-
-  create_table "answers", force: :cascade do |t|
-    t.integer "submission_id"
-    t.integer "question_id"
-    t.integer "user_id"
-    t.integer "vote_count"
-    t.text "value"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+ActiveRecord::Schema.define(version: 20_201_111_034_507) do
+  create_table 'answers', force: :cascade do |t|
+    t.integer 'submission_id'
+    t.integer 'question_id'
+    t.integer 'user_id'
+    t.integer 'vote_count'
+    t.text 'value'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "guesses", force: :cascade do |t|
-    t.integer "submission_id"
-    t.integer "question_id"
-    t.integer "user_id"
-    t.text "value"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'guesses', force: :cascade do |t|
+    t.integer 'submission_id'
+    t.integer 'question_id'
+    t.integer 'user_id'
+    t.text 'value'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "players", force: :cascade do |t|
-    t.string "username"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'players', force: :cascade do |t|
+    t.string 'username'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "plays", force: :cascade do |t|
-    t.integer "trivia_id"
-    t.integer "team_id"
-    t.integer "submission_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'plays', force: :cascade do |t|
+    t.integer 'trivia_id'
+    t.integer 'team_id'
+    t.integer 'submission_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "questions", force: :cascade do |t|
-    t.integer "trivia_id"
-    t.text "body"
-    t.text "answer_type"
-    t.text "correct_value"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'questions', force: :cascade do |t|
+    t.integer 'trivia_id'
+    t.text 'body'
+    t.text 'answer_type'
+    t.text 'correct_value'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "submissions", force: :cascade do |t|
-    t.integer "trivia_id"
-    t.integer "team_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'submissions', force: :cascade do |t|
+    t.integer 'trivia_id'
+    t.integer 'team_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "teams", force: :cascade do |t|
-    t.text "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'teams', force: :cascade do |t|
+    t.text 'name'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "trivia", force: :cascade do |t|
-    t.text "title"
-    t.text "body"
-    t.datetime "game_starts_at"
-    t.datetime "game_ends_at"
-    t.integer "questions_count"
-    t.integer "likes_count"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'trivia', force: :cascade do |t|
+    t.text 'title'
+    t.text 'body'
+    t.datetime 'game_starts_at'
+    t.datetime 'game_ends_at'
+    t.integer 'questions_count'
+    t.integer 'likes_count'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "votes", force: :cascade do |t|
-    t.string "voteable_type"
-    t.integer "voteable_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'votes', force: :cascade do |t|
+    t.string 'voteable_type'
+    t.integer 'voteable_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
-
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class GuessesController < ApplicationController
-  before_action :set_guess, only: [:show, :edit, :update, :destroy]
+  before_action :set_guess, only: %i[show edit update destroy]
 
   # GET /guesses
   # GET /guesses.json
@@ -9,8 +11,7 @@ class GuessesController < ApplicationController
 
   # GET /guesses/1
   # GET /guesses/1.json
-  def show
-  end
+  def show; end
 
   # GET /guesses/new
   def new
@@ -18,8 +19,7 @@ class GuessesController < ApplicationController
   end
 
   # GET /guesses/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /guesses
   # POST /guesses.json
@@ -62,13 +62,14 @@ class GuessesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_guess
-      @guess = Guess.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def guess_params
-      params.require(:guess).permit(:submission_id, :question_id, :user_id, :value)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_guess
+    @guess = Guess.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def guess_params
+    params.require(:guess).permit(:submission_id, :question_id, :user_id, :value)
+  end
 end

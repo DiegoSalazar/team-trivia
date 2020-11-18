@@ -17,7 +17,6 @@ html lang="en"
     /[if lt IE 9]
       = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"
 
-
   body
     .navbar.navbar-default.navbar-static-top
         .container
@@ -25,12 +24,12 @@ html lang="en"
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand href="#"Team Trivia
+          a.navbar-brand href="/"Team Trivia
           .navbar-collapse.collapse.navbar-responsive-collapse
             ul.nav.navbar-nav
-              li= link_to "Play", "/trivia/1/plays"
-              li= link_to "Link 2", "/path2"
-              li= link_to "Link 3", "/path3"
+              li= link_to "Trivia", "/trivia"
+              li= link_to "Teams", "/teams"
+              li= link_to "Plays", "/plays"
 
     .container
       .row

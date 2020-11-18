@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: [:show, :edit, :update, :destroy]
+  before_action :set_submission, only: %i[show edit update destroy]
 
   # GET /submissions
   # GET /submissions.json
@@ -9,8 +11,7 @@ class SubmissionsController < ApplicationController
 
   # GET /submissions/1
   # GET /submissions/1.json
-  def show
-  end
+  def show; end
 
   # GET /submissions/new
   def new
@@ -18,8 +19,7 @@ class SubmissionsController < ApplicationController
   end
 
   # GET /submissions/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /submissions
   # POST /submissions.json
@@ -62,13 +62,14 @@ class SubmissionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_submission
-      @submission = Submission.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def submission_params
-      params.require(:submission).permit(:trivia_id, :team_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_submission
+    @submission = Submission.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def submission_params
+    params.require(:submission).permit(:trivia_id, :team_id)
+  end
 end

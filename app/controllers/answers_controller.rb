@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class AnswersController < ApplicationController
-  before_action :set_answer, only: [:show, :edit, :update, :destroy]
+  before_action :set_answer, only: %i[show edit update destroy]
 
   # GET /answers
   # GET /answers.json
@@ -9,8 +11,7 @@ class AnswersController < ApplicationController
 
   # GET /answers/1
   # GET /answers/1.json
-  def show
-  end
+  def show; end
 
   # GET /answers/new
   def new
@@ -18,8 +19,7 @@ class AnswersController < ApplicationController
   end
 
   # GET /answers/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /answers
   # POST /answers.json
@@ -62,13 +62,14 @@ class AnswersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_answer
-      @answer = Answer.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def answer_params
-      params.require(:answer).permit(:submission_id, :question_id, :user_id, :vote_count, :value)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_answer
+    @answer = Answer.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def answer_params
+    params.require(:answer).permit(:submission_id, :question_id, :user_id, :vote_count, :value)
+  end
 end

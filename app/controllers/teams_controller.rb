@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: %i[show edit update destroy]
 
   # GET /teams
   # GET /teams.json
@@ -10,8 +12,7 @@ class TeamsController < ApplicationController
 
   # GET /teams/1
   # GET /teams/1.json
-  def show
-  end
+  def show; end
 
   # GET /teams/new
   def new
@@ -19,13 +20,11 @@ class TeamsController < ApplicationController
   end
 
   # GET /teams/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /teams
   # POST /teams.json
-  def create
-  end
+  def create; end
 
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
@@ -52,13 +51,14 @@ class TeamsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_team
-      @team = Team.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def team_params
-      params.require(:team).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_team
+    @team = Team.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def team_params
+    params.require(:team).permit(:name)
+  end
 end

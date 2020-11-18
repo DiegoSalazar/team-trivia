@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class TriviaController < ApplicationController
-  before_action :set_trivium, only: [:show, :edit, :update, :destroy]
+  before_action :set_trivium, only: %i[show edit update destroy]
 
   # GET /trivia
   # GET /trivia.json
@@ -9,8 +11,7 @@ class TriviaController < ApplicationController
 
   # GET /trivia/1
   # GET /trivia/1.json
-  def show
-  end
+  def show; end
 
   # GET /trivia/new
   def new
@@ -18,8 +19,7 @@ class TriviaController < ApplicationController
   end
 
   # GET /trivia/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /trivia
   # POST /trivia.json
@@ -62,13 +62,14 @@ class TriviaController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_trivium
-      @trivium = Trivium.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def trivium_params
-      params.require(:trivium).permit(:title, :body, :game_starts_at, :game_ends_at, :questions_count, :likes_count)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_trivium
+    @trivium = Trivium.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def trivium_params
+    params.require(:trivium).permit(:title, :body, :game_starts_at, :game_ends_at, :questions_count, :likes_count)
+  end
 end
