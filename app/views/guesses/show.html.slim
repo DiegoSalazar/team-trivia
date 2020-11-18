@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Submission:
+  = @guess.submission_id
+p
+  strong Question:
+  = @guess.question_id
+p
+  strong User:
+  = @guess.user_id
+p
+  strong Value:
+  = @guess.value
+
+=> link_to 'Edit', edit_guess_path(@guess)
+'|
+=< link_to 'Back', guesses_path

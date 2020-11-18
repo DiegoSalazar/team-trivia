@@ -1,0 +1,29 @@
+h1 Listing answers
+
+table
+  thead
+    tr
+      th Submission
+      th Question
+      th User
+      th Vote count
+      th Value
+      th
+      th
+      th
+
+  tbody
+    - @answers.each do |answer|
+      tr
+        td = answer.submission_id
+        td = answer.question_id
+        td = answer.user_id
+        td = answer.vote_count
+        td = answer.value
+        td = link_to 'Show', answer
+        td = link_to 'Edit', edit_answer_path(answer)
+        td = link_to 'Destroy', answer, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Answer', new_answer_path

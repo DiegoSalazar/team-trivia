@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Submission:
+  = @answer.submission_id
+p
+  strong Question:
+  = @answer.question_id
+p
+  strong User:
+  = @answer.user_id
+p
+  strong Vote count:
+  = @answer.vote_count
+p
+  strong Value:
+  = @answer.value
+
+=> link_to 'Edit', edit_answer_path(@answer)
+'|
+=< link_to 'Back', answers_path

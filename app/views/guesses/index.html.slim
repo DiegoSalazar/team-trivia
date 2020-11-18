@@ -1,0 +1,27 @@
+h1 Listing guesses
+
+table
+  thead
+    tr
+      th Submission
+      th Question
+      th User
+      th Value
+      th
+      th
+      th
+
+  tbody
+    - @guesses.each do |guess|
+      tr
+        td = guess.submission_id
+        td = guess.question_id
+        td = guess.user_id
+        td = guess.value
+        td = link_to 'Show', guess
+        td = link_to 'Edit', edit_guess_path(guess)
+        td = link_to 'Destroy', guess, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Guess', new_guess_path
