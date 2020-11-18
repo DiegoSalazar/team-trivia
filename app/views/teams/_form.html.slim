@@ -1,15 +1,11 @@
-= form_with(model: team, local: true) do |form|
-  - if team.errors.any?
-    #error_explanation
-      h2
-        = pluralize(team.errors.count, "error")
-        |  prohibited this team from being saved:
-      ul
-        - team.errors.full_messages.each do |message|
-          li
-            = message
-  .field
-    = form.label :name
-    = form.text_area :name
-  .actions
-    = form.submit
+= form_for @team, html: { class: "form form-horizontal team" } do |f|
+  .form-group
+    = f.label :name, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :name, :class => 'form-control'
+    = f.error_span(:name)
+  .form-group
+    .col-lg-offset-2.col-lg-10
+      = f.submit nil, :class => 'btn btn-primary'
+      '
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), teams_path, :class => 'btn'

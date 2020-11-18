@@ -1,43 +1,28 @@
-p#notice
-  = notice
-h1
-  | Trivia
-table
+- model_class = Trivium
+.page-header
+  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+table.table.table-striped
   thead
     tr
-      th
-        | Title
-      th
-        | Body
-      th
-        | Game starts at
-      th
-        | Game ends at
-      th
-        | Questions count
-      th
-        | Likes count
-      th[colspan="3"]
+      th= model_class.human_attribute_name(:id)
+      th= model_class.human_attribute_name(:title)
+      th= model_class.human_attribute_name(:body)
+      th= model_class.human_attribute_name(:game_starts_at)
+      th= model_class.human_attribute_name(:game_ends_at)
+      th= model_class.human_attribute_name(:created_at)
+      th=t '.actions', :default => t("helpers.actions")
   tbody
     - @trivia.each do |trivium|
       tr
+        td= link_to trivium.id, trivium_path(trivium)
+        td= trivium.title
+        td= trivium.body
+        td= trivium.game_starts_at
+        td= trivium.game_ends_at
+        td=l trivium.created_at
         td
-          = trivium.title
-        td
-          = trivium.body
-        td
-          = trivium.game_starts_at
-        td
-          = trivium.game_ends_at
-        td
-          = trivium.questions_count
-        td
-          = trivium.likes_count
-        td
-          = link_to 'Show', trivium
-        td
-          = link_to 'Edit', edit_trivium_path(trivium)
-        td
-          = link_to 'Destroy', trivium, method: :delete, data: { confirm: 'Are you sure?' }
-br
-= link_to 'New Trivium', new_trivium_path
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_trivium_path(trivium), :class => 'btn btn-default btn-xs'
+          '
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), trivium_path(trivium), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_trivium_path, :class => 'btn btn-primary'

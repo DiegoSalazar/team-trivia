@@ -10,7 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_20_030601) do
+ActiveRecord::Schema.define(version: 2020_11_11_034507) do
+
+  create_table "answers", force: :cascade do |t|
+    t.integer "submission_id"
+    t.integer "question_id"
+    t.integer "user_id"
+    t.integer "vote_count"
+    t.text "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "guesses", force: :cascade do |t|
+    t.integer "submission_id"
+    t.integer "question_id"
+    t.integer "user_id"
+    t.text "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "username"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "plays", force: :cascade do |t|
+    t.integer "trivia_id"
+    t.integer "team_id"
+    t.integer "submission_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.integer "trivia_id"
+    t.text "body"
+    t.text "answer_type"
+    t.text "correct_value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.integer "trivia_id"
+    t.integer "team_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "teams", force: :cascade do |t|
     t.text "name"
@@ -25,6 +74,13 @@ ActiveRecord::Schema.define(version: 2020_10_20_030601) do
     t.datetime "game_ends_at"
     t.integer "questions_count"
     t.integer "likes_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.string "voteable_type"
+    t.integer "voteable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
