@@ -6,7 +6,10 @@
       .col
         h1.display-4 Next Trivia
       .col
-        h2.display-4 00:13:28s
+        .card
+          .card-body.p-0.pt-2.bg-dark.text-light
+            .card-title.text-center
+              h2 00:13:28s
       .col
         .row
           .col
@@ -14,20 +17,21 @@
             = link_to 'Join', joins_path, class: 'btn btn-primary btn-block'
           .col
             = link_to 'Contribute', '#', class: 'btn btn-primary btn-block'
-            = link_to 'New Trivia', '#', class: 'btn btn-primary btn-block'
+            = link_to 'New Trivia', new_trivium_path, class: 'btn btn-primary btn-block'
 
-.container
-  .row
-    .col
-      h2 Past Games
-
-      table.table.table-striped
-        tbody
-          - @trivia.each do |trivium|
-            tr
-              td= link_to trivium.id, trivium_path(trivium)
-              td= trivium.title
-              td= trivium.body
-              td= trivium.game_starts_at
-              td= trivium.game_ends_at
-              td=l trivium.created_at
+.row
+  .col
+    .card
+      .card-body
+        h3.card-title Past Games
+        .card-text
+          table.table.table-striped
+            tbody
+              - @trivia.each do |trivium|
+                tr
+                  td= link_to trivium.id, trivium_path(trivium)
+                  td= trivium.title
+                  td= trivium.body
+                  td= trivium.game_starts_at
+                  td= trivium.game_ends_at
+                  td=l trivium.created_at

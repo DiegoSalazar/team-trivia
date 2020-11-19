@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2020_11_19_000226) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.integer "trivia_id"
+    t.integer "trivium_id"
     t.text "body"
     t.text "answer_type"
     t.text "correct_value"
