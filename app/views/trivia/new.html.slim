@@ -1,15 +1,23 @@
-.row.mt-3
-  .col
-    = form_for @trivium do |f|
-      = f.text_field :title, class: 'form-control form-control-lg', placeholder: 'Trivia Title'
-      = f.text_field :body, class: 'form-control', placeholder: 'Hint'
+= form_for @trivium do |f|
+  .row.mt-3
+    .col
+      .form-group.row
+        = f.text_field :title, class: 'form-control', placeholder: 'Trivia Title'
+      .form-group.row
+        = f.text_field :body, class: 'form-control', placeholder: 'Hint'
 
-  .col
-    h3 Start time
-    h3 End Time
+    .col
+      .form-group.row
+        label.col-sm-3 Starts
+        .col
+          = f.time_field :game_starts_at, class: 'form-control'
+      .form-group.row
+        label.col-sm-3 Ends
+        .col
+          = f.time_field :game_ends_at, class: 'form-control'
 
-  .col
-    h3 Moderator
+    .col
+      = icon 'person-badge-fill', width: '90px', height: '90px'
 
 .row
   .col
