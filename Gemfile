@@ -62,4 +62,5 @@ gem 'cable_ready', '~> 4.3'
 
 gem 'slim-rails', '~> 3.2'
 
-gem 'twitter-bootstrap-rails', '~> 3.2'
+gem 'bootstrap', '~> 4.5.3'
+gem 'twitter-bootstrap-rails'

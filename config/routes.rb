@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   root to: 'trivia#index'
 
+  resources :joins
   resources :players
   resources :answers
   resources :questions
