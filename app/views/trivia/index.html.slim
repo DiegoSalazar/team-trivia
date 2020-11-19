@@ -10,12 +10,11 @@
       .col
         .row
           .col
-            a.btn.btn-primary.btn-block.btn-lg href="/plays"
-              | Play
-            a.btn.btn-primary.btn-block.btn-lg Join Team
+            = link_to 'Play', plays_path, class: 'btn btn-primary btn-block'
+            = link_to 'Join', joins_path, class: 'btn btn-primary btn-block'
           .col
-            a.btn.btn-primary.btn-block.btn-lg Contribute
-            a.btn.btn-primary.btn-block.btn-lg New Trivia
+            = link_to 'Contribute', '#', class: 'btn btn-primary btn-block'
+            = link_to 'New Trivia', '#', class: 'btn btn-primary btn-block'
 
 .container
   .row
@@ -32,7 +31,3 @@
               td= trivium.game_starts_at
               td= trivium.game_ends_at
               td=l trivium.created_at
-              td
-                = link_to t('.edit', :default => t("helpers.links.edit")), edit_trivium_path(trivium), :class => 'btn btn-default btn-xs'
-                '
-                = link_to t('.destroy', :default => t("helpers.links.destroy")), trivium_path(trivium), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
