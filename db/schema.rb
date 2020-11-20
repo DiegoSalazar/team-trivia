@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_19_000226) do
+ActiveRecord::Schema.define(version: 2020_11_20_022453) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "submission_id"
@@ -75,12 +75,12 @@ ActiveRecord::Schema.define(version: 2020_11_19_000226) do
   end
 
   create_table "trivia", force: :cascade do |t|
-    t.text "title"
-    t.text "body"
-    t.datetime "game_starts_at"
-    t.datetime "game_ends_at"
-    t.integer "questions_count"
-    t.integer "likes_count"
+    t.text "title", null: false
+    t.text "body", null: false
+    t.datetime "game_starts_at", null: false
+    t.datetime "game_ends_at", null: false
+    t.integer "questions_count", default: 0
+    t.integer "likes_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

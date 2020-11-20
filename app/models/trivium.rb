@@ -2,4 +2,6 @@
 
 class Trivium < ApplicationRecord
   has_many :questions
+
+  validates :title, :body, presence: true
 end

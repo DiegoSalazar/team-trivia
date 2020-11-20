@@ -70,6 +70,6 @@ class TriviaController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def trivium_params
-    params.require(:trivium).permit(:title, :body, :game_starts_at, :game_ends_at, :questions_count, :likes_count)
+    params.require(:trivium).permit(:title, :body, :game_starts_at, :game_ends_at)
   end
 end
