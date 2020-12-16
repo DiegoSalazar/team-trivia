@@ -31,7 +31,10 @@ class TriviaController < ApplicationController
         format.html { redirect_to @trivium, notice: 'Trivium was successfully created.' }
         format.json { render :show, status: :created, location: @trivium }
       else
-        format.html { render :new }
+        format.html do
+          @errors = @trivium.errors.full_messages
+          render :new
+        end
         format.json { render json: @trivium.errors, status: :unprocessable_entity }
       end
     end

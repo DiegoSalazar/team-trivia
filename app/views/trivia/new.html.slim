@@ -1,5 +1,9 @@
 = form_for @trivium do |f|
   .row.mt-3
+    .col
+      - if @errors.present?
+        .alert.alert-danger= @errors.to_sentence
+  .row
     .col-md-8
       .form-group.row
         = f.text_field :title, class: 'form-control', placeholder: 'Trivia Title'
@@ -10,11 +14,11 @@
       .form-group.row
         label.col-sm-3 Starts
         .col
-          = f.datetime_field :game_starts_at, class: 'form-control'
+          = f.datetime_field :game_starts_at, class: 'form-control', data: { provide: 'datetimepicker' }
       .form-group.row
         label.col-sm-3 Ends
         .col
-          = f.datetime_field :game_ends_at, class: 'form-control'
+          = f.datetime_field :game_ends_at, class: 'form-control', data: { provide: 'datetimepicker' }
 
     .col-md-1
       = icon 'person-badge-fill', width: '90', height: '90'
