@@ -15,4 +15,8 @@ Rails.application.routes.draw do
       resource :submission, only: [:show]
     end
   end
+  resources :question_templates do
+    get :add_answer
+    resources :answer_templates
+  end
 end

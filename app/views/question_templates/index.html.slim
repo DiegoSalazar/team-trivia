@@ -1,0 +1,27 @@
+br
+.question-template-index
+  .new-question
+  = link_to 'Create ', new_question_template_url, class: 'btn btn-primary btn-block'
+
+  br
+  .existing-questions
+    table.table.table-striped
+      thead
+        tr
+          td Question
+          td Correct Answer
+          td Question Type
+          td
+
+      tbody
+      - @question_templates.each do |template|
+        tr
+          td
+            = template.body
+          td
+            = template.correct_answer
+          td
+            = template.question_type
+          td
+            = form_for(template, method: 'delete') do |f|
+              = f.submit_tag "Destroy", data: { confirm: 'Are you sure you want to permanently delete question' }, class: 'btn btn-block btn-success'
