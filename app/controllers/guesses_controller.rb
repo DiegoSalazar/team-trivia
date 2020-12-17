@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class GuessesController < ApplicationController
+  before_action :authenticate_player!
   before_action :set_guess, only: %i[show edit update destroy]
 
   # GET /guesses

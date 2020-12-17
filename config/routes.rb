@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :players
   root to: 'trivia#index'
+  devise_for :players
 
   resources :joins
   resources :players
