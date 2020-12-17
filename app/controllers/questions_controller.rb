@@ -70,6 +70,6 @@ class QuestionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def question_params
-    params.require(:question).permit(:trivia_id, :body, :answer_type, :correct_value)
+    params.require(:question).permit(:trivium_id, :body, :answer_type, :correct_value)
   end
 end

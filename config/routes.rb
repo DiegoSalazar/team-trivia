@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   resources :questions
   resources :guesses
   resources :submissions
-  resources :plays
   resources :teams
-  resources :trivia
+  resources :trivia do
+    resources :teams, only: [] do
+      resource :submission, only: [:show]
+    end
+  end
 end

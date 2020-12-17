@@ -5,7 +5,7 @@ table.table.table-striped
   thead
     tr
       th= model_class.human_attribute_name(:id)
-      th= model_class.human_attribute_name(:trivia_id)
+      th= model_class.human_attribute_name(:trivium_id)
       th= model_class.human_attribute_name(:team_id)
       th= model_class.human_attribute_name(:submission_id)
       th= model_class.human_attribute_name(:created_at)
@@ -14,7 +14,7 @@ table.table.table-striped
     - @plays.each do |play|
       tr
         td= link_to play.id, play_path(play)
-        td= play.trivia_id
+        td= play.trivium_id
         td= play.team_id
         td= play.submission_id
         td=l play.created_at
