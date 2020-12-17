@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   resources :submissions
   resources :teams
   resources :trivia do
+    member do
+      get :add_question
+      post :create_question
+      post :delete_question
+    end
     resources :teams, only: [] do
       resource :submission, only: [:show]
     end

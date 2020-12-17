@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TriviaController < ApplicationController
-  before_action :set_trivium, only: %i[show edit update destroy]
+  before_action :set_trivium, only: %i[show edit update destroy add_question create_question delete_question]
 
   # GET /trivia
   # GET /trivia.json
@@ -11,7 +11,9 @@ class TriviaController < ApplicationController
 
   # GET /trivia/1
   # GET /trivia/1.json
-  def show; end
+  def show
+    @trivium_questions = @trivium.trivium_questions
+  end
 
   # GET /trivia/new
   def new
@@ -62,6 +64,32 @@ class TriviaController < ApplicationController
       format.html { redirect_to trivia_url, notice: 'Trivium was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def add_question
+    @question_template = QuestionTemplate.new
+    render 'trivia/add_question'
+  end
+
+  def create_question
+    question = QuestionTemplate.new
+    question.body = params[:body]
+    question.correct_answer = params[:correct_answer]
+    question.save!
+
+    tq = TriviumQuestion.new
+    tq.trivium = @trivium
+    tq.question_template = question
+    tq.save
+
+
+    redirect_to @trivium
+  end
+
+  def delete_question
+    TriviumQuestion.find(params[:id]).destroy!
+
+    redirect_to @trivium
   end
 
   private

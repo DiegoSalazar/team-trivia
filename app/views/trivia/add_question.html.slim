@@ -1,0 +1,19 @@
+/ = javascript_include_tag 'question_template'
+
+= form_with url: "/trivia/#{@trivium.id}/create_question", method: :post do |f|
+  .row.mt-3
+    .col
+      - if @errors.present?
+        .alert.alert-danger= @errors.to_sentence
+  .row
+    .col-md-8
+      .form-group.row
+        = f.label 'Question'
+        = f.text_field :body, class: 'form-control'
+      .form-group.row
+        = f.label 'Correct Answer'
+        = f.text_field :correct_answer, class: 'form-control'
+
+  .row
+    .col-sm-8
+      = f.submit "Create Question", class: 'btn btn-block btn-success'
