@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: %i[show edit update destroy]
+  before_action :set_submission, only: %i[edit update destroy]
 
   # GET /submissions
   # GET /submissions.json
@@ -11,7 +11,9 @@ class SubmissionsController < ApplicationController
 
   # GET /submissions/1
   # GET /submissions/1.json
-  def show; end
+  def show
+    @submission = Submission.find_by(submission_params) || Submission.create(submission_params)
+  end
 
   # GET /submissions/new
   def new
@@ -70,6 +72,6 @@ class SubmissionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def submission_params
-    params.require(:submission).permit(:trivia_id, :team_id)
+    params.permit(:trivium_id, :team_id)
   end
 end

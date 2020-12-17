@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_20_022453) do
+ActiveRecord::Schema.define(version: 2020_12_17_170945) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "submission_id"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_11_20_022453) do
   end
 
   create_table "plays", force: :cascade do |t|
-    t.integer "trivia_id"
+    t.integer "trivium_id"
     t.integer "team_id"
     t.integer "submission_id"
     t.datetime "created_at", precision: 6, null: false
@@ -62,10 +62,10 @@ ActiveRecord::Schema.define(version: 2020_11_20_022453) do
   end
 
   create_table "submissions", force: :cascade do |t|
-    t.integer "trivia_id"
     t.integer "team_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "trivium_id", null: false
   end
 
   create_table "teams", force: :cascade do |t|

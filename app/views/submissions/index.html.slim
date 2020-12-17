@@ -12,7 +12,7 @@ table
   tbody
     - @submissions.each do |submission|
       tr
-        td = submission.trivia_id
+        td = submission.trivium_id
         td = submission.team_id
         td = link_to 'Show', submission
         td = link_to 'Edit', edit_submission_path(submission)
