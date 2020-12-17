@@ -1,26 +1,32 @@
-= form_for @trivium, html: { class: "form form-horizontal trivium" } do |f|
-  .form-group
-    = f.label :title, :class => 'control-label col-lg-2'
-    .col-lg-10
-      = f.text_field :title, :class => 'form-control'
-    = f.error_span(:title)
-  .form-group
-    = f.label :body, :class => 'control-label col-lg-2'
-    .col-lg-10
-      = f.text_field :body, :class => 'form-control'
-    = f.error_span(:body)
-  .form-group
-    = f.label :game_starts_at, :class => 'control-label col-lg-2'
-    .col-lg-10
-      = f.text_field :game_starts_at, :class => 'form-control'
-    = f.error_span(:game_starts_at)
-  .form-group
-    = f.label :game_ends_at, :class => 'control-label col-lg-2'
-    .col-lg-10
-      = f.text_field :game_ends_at, :class => 'form-control'
-    = f.error_span(:game_ends_at)
-  .form-group
-    .col-lg-offset-2.col-lg-10
-      = f.submit nil, :class => 'btn btn-primary'
-      '
-      = link_to t('.cancel', :default => t("helpers.links.cancel")), trivia_path, :class => 'btn'
+= form_for trivium do |f|
+  .row.mt-3
+    .col
+      - if errors.present?
+        .alert.alert-danger= errors.to_sentence
+  .row
+    .col-md-8
+      .form-group.row
+        = f.text_field :title, class: 'form-control', placeholder: 'Trivia Title'
+      .form-group.row
+        = f.text_field :body, class: 'form-control', placeholder: 'Hint'
+
+    .col-md-2
+      .form-group.row
+        label.col-sm-3 Starts
+        .col
+          = f.datetime_field :game_starts_at, class: 'form-control', data: { provide: 'datetimepicker' }
+      .form-group.row
+        label.col-sm-3 Ends
+        .col
+          = f.datetime_field :game_ends_at, class: 'form-control', data: { provide: 'datetimepicker' }
+
+    .col-md-2
+      label
+        | Max Q
+        = f.number_field :max_questions, class: 'form-control', min: 1, max: 999
+
+  .row
+    .col-sm-8
+      = f.submit "#{action_name == 'new' ? 'Create' : 'Update'} Trivia", class: 'btn btn-block btn-success'
+    .col-sm-4
+      = link_to 'Cancel', @trivium, class: 'btn btn-danger btn-block' if action_name == 'edit'
