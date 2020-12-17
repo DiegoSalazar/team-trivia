@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_17_172509) do
+ActiveRecord::Schema.define(version: 2020_12_17_182057) do
+
+  create_table "answer_templates", force: :cascade do |t|
+    t.text "body"
+    t.integer "question_template_id", null: false
+    t.index ["question_template_id"], name: "index_answer_templates_on_question_template_id"
+  end
 
   create_table "answers", force: :cascade do |t|
     t.integer "submission_id"
@@ -52,6 +58,12 @@ ActiveRecord::Schema.define(version: 2020_12_17_172509) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "question_templates", force: :cascade do |t|
+    t.text "body"
+    t.text "correct_answer"
+    t.text "question_type"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.integer "trivium_id"
     t.text "body"
@@ -62,10 +74,10 @@ ActiveRecord::Schema.define(version: 2020_12_17_172509) do
   end
 
   create_table "submissions", force: :cascade do |t|
-    t.integer "trivia_id"
     t.integer "team_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "trivium_id", null: false
   end
 
   create_table "teams", force: :cascade do |t|
@@ -86,6 +98,13 @@ ActiveRecord::Schema.define(version: 2020_12_17_172509) do
     t.integer "max_questions", default: 20, null: false
   end
 
+  create_table "trivium_questions", force: :cascade do |t|
+    t.integer "trivium_id", null: false
+    t.integer "question_template_id", null: false
+    t.index ["question_template_id"], name: "index_trivium_questions_on_question_template_id"
+    t.index ["trivium_id"], name: "index_trivium_questions_on_trivium_id"
+  end
+
   create_table "votes", force: :cascade do |t|
     t.string "voteable_type"
     t.integer "voteable_id"
@@ -93,4 +112,7 @@ ActiveRecord::Schema.define(version: 2020_12_17_172509) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "answer_templates", "question_templates"
+  add_foreign_key "trivium_questions", "question_templates"
+  add_foreign_key "trivium_questions", "trivia"
 end
