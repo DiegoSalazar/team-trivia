@@ -5,6 +5,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
+gem 'stimulus_reflex', '~> 3.3'
+gem 'cable_ready', '~> 4.3'
+gem 'slim-rails', '~> 3.2'
+gem 'bootstrap', '~> 4.5.3'
+gem 'twitter-bootstrap-rails'
+gem 'devise'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 # Use sqlite3 as the database for Active Record
@@ -60,12 +67,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-
-gem 'stimulus_reflex', '~> 3.3'
-
-gem 'cable_ready', '~> 4.3'
-
-gem 'slim-rails', '~> 3.2'
-
-gem 'bootstrap', '~> 4.5.3'
-gem 'twitter-bootstrap-rails'
