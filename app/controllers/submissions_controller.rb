@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: %i[edit update destroy]
+  include CableReady::Broadcaster
+
+  skip_before_action :verify_authenticity_token, only: [:add_guess]
+
+  before_action :set_submission, only: %i[show update destroy]
 
   # GET /submissions
   # GET /submissions.json
@@ -11,9 +15,7 @@ class SubmissionsController < ApplicationController
 
   # GET /submissions/1
   # GET /submissions/1.json
-  def show
-    @submission = Submission.find_by(submission_params) || Submission.create(submission_params)
-  end
+  def show; end
 
   # GET /submissions/new
   def new
@@ -21,7 +23,23 @@ class SubmissionsController < ApplicationController
   end
 
   # GET /submissions/1/edit
-  def edit; end
+  def edit
+    @trivium = Trivium.find(submission_params[:trivium_id])
+    @submission = Submission.find_by(submission_params) || Submission.create(submission_params)
+    # Init guesses with likes starts with 0
+    if @submission.guesses.length == 0
+      @trivium.question_templates.each do |question_template|
+        question_template.answer_templates.each do |answer_template|
+          guess = Guess.create!(
+            submission_id: @submission.id,
+            question_template_id: question_template.id,
+            value: answer_template.body
+          )
+        end
+      end
+      @submission.reload
+    end
+  end
 
   # POST /submissions
   # POST /submissions.json
@@ -63,11 +81,22 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def add_guess
+    if (params[:guess].present?)
+      Guess.create!(
+        submission_id: params[:submission_id],
+        question_template_id: params[:question_template_id],
+        value: params[:guess]
+      )
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_submission
-    @submission = Submission.find(params[:id])
+    @submission = Submission.find_by(submission_params) || Submission.create(submission_params)
   end
 
   # Only allow a list of trusted parameters through.

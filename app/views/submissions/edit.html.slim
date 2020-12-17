@@ -1,8 +1,22 @@
 h1 Editing submission
 
-== render 'form'
-
-=> link_to 'Show', @submission
-'|
-=< link_to 'Back', submissions_path
-
+ul
+  - @trivium.question_templates.each do |question|
+    li
+      #question
+        h3 Question:
+        div
+          == question.body
+      #guesses
+        h3 Guesses:
+        = form_with url: "/submissions/#{@submission.id}/add_guess", method: :post do |f|
+          = f.label 'Add a guess'
+          = f.text_field :guess
+          = hidden_field_tag(:question_template_id, question.id)
+          = f.submit 'Submit'
+        ul
+          - @submission.guesses_of(question.id).each do |guess|
+            li
+              == guess.value
+              = form_with url: "/guesses/#{guess.id}/vote", method: :post do |f|
+                = f.submit "Vote (#{guess.likes})"

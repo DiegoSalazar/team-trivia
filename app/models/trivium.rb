@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Trivium < ApplicationRecord
-  has_many :questions
+  has_many :trivium_questions
+  has_many :question_templates, through: :trivium_questions
 
   validates :title, :body, presence: true
   validates :game_starts_at, :game_ends_at, format: {

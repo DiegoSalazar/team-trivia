@@ -2,5 +2,4 @@
 
 class AnswerTemplate < ApplicationRecord
   belongs_to :question_template
-  attr_accessor :body
 end

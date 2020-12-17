@@ -7,12 +7,16 @@ Rails.application.routes.draw do
   resources :players
   resources :answers
   resources :questions
-  resources :guesses
-  resources :submissions
+  resources :guesses do
+    post :vote
+  end
+  resources :submissions do
+    post :add_guess
+  end
   resources :teams
   resources :trivia do
     resources :teams, only: [] do
-      resource :submission, only: [:show]
+      resource :submission, only: [:edit]
     end
   end
   resources :question_templates do
