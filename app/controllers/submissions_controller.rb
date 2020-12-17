@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class SubmissionsController < ApplicationController
+  before_action :authenticate_player!
   before_action :set_submission, only: %i[edit update destroy]
 
   # GET /submissions

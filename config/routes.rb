@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   root to: 'trivia#index'
+  devise_for :players
 
   resources :joins
   resources :players

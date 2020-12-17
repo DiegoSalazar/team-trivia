@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class TriviaController < ApplicationController
+  before_action :authenticate_player!, except: :index
   before_action :set_trivium, only: %i[show edit update destroy]
 
   # GET /trivia

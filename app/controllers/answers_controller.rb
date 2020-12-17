@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AnswersController < ApplicationController
+  before_action :authenticate_player!
   before_action :set_answer, only: %i[show edit update destroy]
 
   # GET /answers
