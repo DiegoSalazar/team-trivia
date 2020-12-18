@@ -8,4 +8,8 @@ class Team < ApplicationRecord
   def chat_room
     "team-#{id}"
   end
+
+  def chat_title
+    "Team #{name.titleize} Chat"
+  end
 end

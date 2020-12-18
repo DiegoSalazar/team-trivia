@@ -1,4 +1,8 @@
 li
-  dl
-    dt= message.sender_name
-    dd= message.body
+  dl.mb-1
+    dt
+      .text-muted
+        = message.sender_name
+        small= " (#{l message.created_at, format: :short})"
+    dd.alert.alert-primary.d-inline-block.p-1.pl-3.pr-3
+      = message.body
