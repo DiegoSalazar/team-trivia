@@ -2,6 +2,7 @@
 
 class Trivium < ApplicationRecord
   has_many :questions
+  has_many :trivium_questions
 
   validates :title, :body, presence: true
   validates :game_starts_at, :game_ends_at, format: {
@@ -17,7 +18,7 @@ class Trivium < ApplicationRecord
   private
 
   def starts_before_it_ends
-    return true if seconds_apart < 60
+    return true if seconds_apart > 60
     errors.add :game_starts_at, 'must start at least a minute before it ends'
   end
 end

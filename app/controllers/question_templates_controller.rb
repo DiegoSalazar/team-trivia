@@ -14,10 +14,6 @@ class QuestionTemplatesController < ApplicationController
 
   end
 
-  def add_answer
-
-  end
-
   def new
     @question_template = QuestionTemplate.new
   end
