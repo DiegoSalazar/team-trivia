@@ -11,6 +11,7 @@ gem 'slim-rails', '~> 3.2'
 gem 'bootstrap', '~> 4.5.3'
 gem 'twitter-bootstrap-rails'
 gem 'devise'
+gem 'pagy'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
