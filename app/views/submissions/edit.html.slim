@@ -1,6 +1,6 @@
 h1 Editing submission
 
-ul
+ul.list-group
   - @trivium.question_templates.each do |question|
-    li
+    li.list-group-item
       = render partial: "question", locals: { submission: @submission, question: question }

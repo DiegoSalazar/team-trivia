@@ -3,7 +3,7 @@
 class SubmissionsController < ApplicationController
   include CableReady::Broadcaster
 
-  skip_before_action :verify_authenticity_token, only: [:add_guess]
+  # skip_before_action :verify_authenticity_token, only: [:add_guess]
 
   before_action :set_submission, only: %i[show update destroy]
   before_action :authenticate_player!
