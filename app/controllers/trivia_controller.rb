@@ -74,16 +74,8 @@ class TriviaController < ApplicationController
   end
 
   def create_question
-    question = QuestionTemplate.new
-    question.body = params[:body]
-    question.correct_answer = params[:correct_answer]
-    question.save!
-
-    tq = TriviumQuestion.new
-    tq.trivium = @trivium
-    tq.question_template = question
-    tq.save
-
+    question = params[:question_template_id].present? ? QuestionTemplate.find(params[:question_template_id]) : QuestionTemplate.create(body: params[:body], correct_answer: params[:correct_answer])
+    TriviumQuestion.create(trivium: @trivium, question_template: question)
 
     redirect_to @trivium
   end
