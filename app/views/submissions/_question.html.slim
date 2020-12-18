@@ -1,0 +1,18 @@
+#question
+  h4 Question:
+  div
+    == question.body
+.dropdown-divider
+#guesses
+  h4 Guesses:
+  = form_with url: "/submissions/#{submission.id}/add_guess", method: :post do |f|
+    = f.label 'Add a guess'
+    = f.text_field :guess
+    = hidden_field_tag(:question_template_id, question.id)
+    = f.submit 'Submit'
+  ul.list-group
+    - submission.guesses_of(question.id).each do |guess|
+      li.list-group-item
+        == guess.value
+        = link_to "#", class: "card-link", data: { reflex: "click->GuessesReflex#vote", id: guess.id }
+          div id="guess-#{guess.id}-votes" Vote (#{guess.likes})
