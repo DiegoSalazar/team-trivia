@@ -87,7 +87,7 @@ class TriviaController < ApplicationController
   end
 
   def delete_question
-    TriviumQuestion.find(params[:id]).destroy!
+    TriviumQuestion.find(params[:trivium_question_id]).destroy!
 
     redirect_to @trivium
   end
