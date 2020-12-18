@@ -1,7 +1,7 @@
 / = javascript_include_tag 'question_template'
 
 = form_for @question_template do |f|
-  .row.mt-3
+  .row
     .col
       - if @errors.present?
         .alert.alert-danger= @errors.to_sentence

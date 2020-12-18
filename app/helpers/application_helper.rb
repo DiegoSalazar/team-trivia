@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  include Pagy::Frontend
+
   def icon(icon, options = {})
     file = File.read "node_modules/bootstrap-icons/icons/#{icon}.svg"
     doc = Nokogiri::HTML::DocumentFragment.parse file

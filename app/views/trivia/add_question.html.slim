@@ -2,7 +2,7 @@
 br
 h2 Create New Question
 = form_with url: "/trivia/#{@trivium.id}/create_question", method: :post do |f|
-  .row.mt-3
+  .row
     .col
       - if @errors.present?
         .alert.alert-danger= @errors.to_sentence
