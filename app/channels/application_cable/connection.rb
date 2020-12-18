@@ -2,10 +2,19 @@
 
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
-    identified_by :session_id
+    identified_by :current_player
 
     def connect
-      self.session_id = cookies.encrypted[:session_id]
+      self.current_player = authenticated_player
+    end
+
+    protected
+
+    def authenticated_player
+      player = env['warden'].user
+      return player if player.present?
+
+      reject_unauthorized_connection
     end
   end
 end

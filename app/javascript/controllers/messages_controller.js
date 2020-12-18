@@ -1,6 +1,6 @@
 import ApplicationController from './application_controller'
 
-/* This is the custom StimulusReflex controller for the Example Reflex.
+/* This is the custom StimulusReflex controller for the Messages Reflex.
  * Learn more at: https://docs.stimulusreflex.com
  */
 export default class extends ApplicationController {
@@ -21,6 +21,10 @@ export default class extends ApplicationController {
     // add your code here, if applicable
   }
 
+  create (event) {
+    this.stimulate("Messages#create", event.target)
+  }
+
   /* Reflex specific lifecycle methods.
    *
    * For every method defined in your Reflex class, a matching set of lifecycle methods become available
@@ -28,26 +32,26 @@ export default class extends ApplicationController {
    * need them.
    *
    * Important:
-   * Make sure to add data-controller="example" to your markup alongside
-   * data-reflex="Example#dance" for the lifecycle methods to fire properly.
+   * Make sure to add data-controller="messages" to your markup alongside
+   * data-reflex="Messages#dance" for the lifecycle methods to fire properly.
    *
    * Example:
    *
-   *   <a href="#" data-reflex="click->Example#dance" data-controller="example">Dance!</a>
+   *   <a href="#" data-reflex="click->Messages#dance" data-controller="messages">Dance!</a>
    *
    * Arguments:
    *
    *   element - the element that triggered the reflex
    *             may be different than the Stimulus controller's this.element
    *
-   *   reflex - the name of the reflex e.g. "Example#dance"
+   *   reflex - the name of the reflex e.g. "Messages#dance"
    *
    *   error/noop - the error message (for reflexError), otherwise null
    *
    *   reflexId - a UUID4 or developer-provided unique identifier for each Reflex
    */
 
-  // Assuming you create a "Example#dance" action in your Reflex class
+  // Assuming you create a "Messages#dance" action in your Reflex class
   // you'll be able to use the following lifecycle methods:
 
   // beforeDance(element, reflex, noop, reflexId) {

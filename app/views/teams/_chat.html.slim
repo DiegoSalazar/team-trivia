@@ -2,15 +2,11 @@
   .card-body
     h2.card-title.border-bottom Team Chat
 
-    ul id='messages'
-      li Message
-      li Message
-      li Message
-      li Message
-      li Message
+    ul.list-unstyled id='messages'
+      = render @messages
 
-    = form_for [@current_trivium, @team, current_player, @message] do |f|
+    = form_for @message, data: { controller: 'messages', action: 'submit->messages#create' } do |f|
       .input-group
         = f.text_field :body, placeholder: 'Type a message', class: 'form-control', aria: { label: 'Type a message',  describedby: 'basic-addon2' }
         .input-group-append
-          = f.submit 'Send', class: 'btn btn-success'
+          = f.submit 'Send', class: 'btn btn-success', data: { action: 'click->messages#create' }

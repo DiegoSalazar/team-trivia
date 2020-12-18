@@ -12,4 +12,8 @@ class Player < ApplicationRecord
   def username
     email.split(?@).first
   end
+
+  def current_team
+    teams.first
+  end
 end

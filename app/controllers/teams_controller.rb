@@ -53,6 +53,7 @@ class TeamsController < ApplicationController
 
   def play
     @current_trivium = Trivium.last
+    @messages = @team.messages
     @message = current_player.messages.new trivium: @current_trivium, team: @team
 
     render layout: 'side_chat'
