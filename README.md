@@ -13,3 +13,4 @@ https://bbgithub.dev.bloomberg.com/dni/di-hackathon-2020-ideas/issues/13
  - [Chen Huang](https://bbgithub.dev.bloomberg.com/chuang285)
  - [Alex Kao](https://bbgithub.dev.bloomberg.com/akao)
  - [Joel Lim](https://bbgithub.dev.bloomberg.com/jlim)
+ - [Praveen Banthia](https://bbgithub.dev.bloomberg.com/pbanthia1)
