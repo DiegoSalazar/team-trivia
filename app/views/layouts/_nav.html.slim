@@ -14,3 +14,8 @@ nav.navbar.navbar-expand-md.navbar-dark.bg-dark
       li.nav-item class="#{'active' if current_page? '/joins'}"
         a.nav-link[href="/joins"]
           | Join
+
+  div
+    - if player_signed_in?
+      = link_to 'Profile', player_path(current_player)
+      = link_to 'Logout', destroy_player_session_path, method: :delete, class: 'ml-3'

@@ -2,6 +2,8 @@
 
 class TriviaController < ApplicationController
   before_action :set_trivium, only: %i[show edit update destroy add_question create_question delete_question]
+  before_action :authenticate_player!, except: :index
+
 
   # GET /trivia
   # GET /trivia.json
