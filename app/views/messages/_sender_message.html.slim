@@ -3,6 +3,6 @@ li.text-right
     dt
       .text-muted
         = message.sender_name
-        small= " (#{l message.created_at, format: :short})"
+        small= " - #{time_ago_in_words message.created_at} ago"
     dd.alert.alert-secondary.d-inline-block.p-1.pl-3.pr-3
       = message.body
