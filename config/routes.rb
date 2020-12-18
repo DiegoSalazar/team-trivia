@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'messages/create'
   root to: 'trivia#index'
   devise_for :players
 
@@ -26,6 +27,9 @@ Rails.application.routes.draw do
     end
     resources :teams, only: [] do
       resource :submission, only: :show
+      resources :players, only: [] do
+        resources :messages, only: :create
+      end
     end
   end
   resources :question_templates do

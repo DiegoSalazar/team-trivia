@@ -1,0 +1,14 @@
+#chat {
+  height: 95%;
+
+  .card-body {
+    position: relative;
+    overflow: hidden;
+
+    form {
+      position: absolute;
+      bottom: 17px;
+      width: 92.7%;
+    }
+  }
+}
