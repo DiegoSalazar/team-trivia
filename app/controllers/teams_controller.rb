@@ -2,7 +2,7 @@
 
 class TeamsController < ApplicationController
   before_action :authenticate_player!
-  before_action :set_team, only: %i[show edit update destroy]
+  before_action :set_team, only: %i[show edit update destroy play]
 
   # GET /teams
   # GET /teams.json
@@ -49,6 +49,10 @@ class TeamsController < ApplicationController
       format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def play
+    render layout: 'side_chat'
   end
 
   private
