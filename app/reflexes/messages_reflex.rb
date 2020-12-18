@@ -23,18 +23,4 @@ class MessagesReflex < ApplicationReflex
   #   end
   #
   # Learn more at: https://docs.stimulusreflex.com
-
-  # TODO: remove mock team
-  def create
-    message = current_player.messages.new message_params
-    message.team = current_player.current_team || Team.find(1)
-    message.trivium = Trivium.active
-    message.save!
-  end
-
-  private
-
-  def message_params
-    params.require(:message).permit :body
-  end
 end

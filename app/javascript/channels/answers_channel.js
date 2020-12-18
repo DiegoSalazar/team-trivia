@@ -10,6 +10,6 @@ consumer.subscriptions.create("AnswersChannel", {
   },
 
   received(data) {
-    if (data.cableReady) CableReady.perform(data.operations);
+
   }
 });

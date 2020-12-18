@@ -21,10 +21,6 @@ export default class extends ApplicationController {
     // add your code here, if applicable
   }
 
-  create (event) {
-    this.stimulate("Messages#create", event.target)
-  }
-
   /* Reflex specific lifecycle methods.
    *
    * For every method defined in your Reflex class, a matching set of lifecycle methods become available

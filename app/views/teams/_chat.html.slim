@@ -5,7 +5,7 @@
     ul.list-unstyled id='messages'
       = render @messages
 
-    = form_for @message, data: { controller: 'messages', action: 'submit->messages#create' } do |f|
+    = form_for @message do |f|
       .input-group
         = f.text_field :body, placeholder: 'Type a message', class: 'form-control', aria: { label: 'Type a message',  describedby: 'basic-addon2' }
         .input-group-append
