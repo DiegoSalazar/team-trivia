@@ -25,13 +25,14 @@
       .card-body
         h3.card-title Past Games
         .card-text
-          table.table.table-striped
+          table.table.table-hover
             tbody
               - @trivia.each do |trivium|
                 tr
-                  td= link_to trivium.id, trivium_path(trivium)
                   td= trivium.title
                   td= trivium.body
-                  td= trivium.game_starts_at
-                  td= trivium.game_ends_at
-                  td=l trivium.created_at
+                  td= l trivium.game_starts_at, format: :short
+                  td= l trivium.game_ends_at, format: :short
+                  td= link_to 'Edit', trivium_path(trivium), class: 'btn btn-info btn-sm btn-block'
+.row.mt-4
+  .col= pagy_bootstrap_nav(@pagy).html_safe

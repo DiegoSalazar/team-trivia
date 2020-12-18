@@ -1,5 +1,5 @@
 doctype html
-html lang="en"
+html.h-100 lang="en"
   head
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
@@ -14,11 +14,11 @@ html lang="en"
     /[if lt IE 9]
       = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"
 
-  body
+  body.h-100
     = render partial: 'layouts/nav'
 
-    main role='main'
-      .container.pt-4
+    main.h-100 role='main'
+      .container-fluid.h-100.pt-4
         = bootstrap_flash
         = yield
 
