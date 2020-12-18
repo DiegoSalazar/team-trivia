@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   resources :answers
   resources :questions
   resources :guesses
-  resources :submissions
+  resources :submissions do
+    post :add_guess
+  end
   resources :teams do
     resources :players, only: :index do
       resource :messages, only: :create
@@ -26,7 +28,7 @@ Rails.application.routes.draw do
       post :delete_question
     end
     resources :teams, only: [] do
-      resource :submission, only: :show
+      resource :submission, only: [:edit, :show]
     end
   end
   resources :question_templates do

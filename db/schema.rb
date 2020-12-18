@@ -30,11 +30,11 @@ ActiveRecord::Schema.define(version: 2020_12_18_042040) do
 
   create_table "guesses", force: :cascade do |t|
     t.integer "submission_id"
-    t.integer "question_id"
-    t.integer "user_id"
     t.text "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "question_template_id", null: false
+    t.integer "likes", default: 0
   end
 
   create_table "joins", force: :cascade do |t|
@@ -90,10 +90,10 @@ ActiveRecord::Schema.define(version: 2020_12_18_042040) do
   end
 
   create_table "submissions", force: :cascade do |t|
-    t.integer "trivia_id"
     t.integer "team_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "trivium_id", null: false
   end
 
   create_table "teams", force: :cascade do |t|

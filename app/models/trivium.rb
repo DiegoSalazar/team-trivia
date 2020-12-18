@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Trivium < ApplicationRecord
-  has_many :questions
   has_many :trivium_questions
+  has_many :question_templates, through: :trivium_questions
+  has_many :questions
 
   validates :title, presence: true
   validates :body, presence: { message: 'should include a hint' }
