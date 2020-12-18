@@ -13,6 +13,8 @@ class Trivium < ApplicationRecord
   validate :starts_before_it_ends
 
   scope :recent, -> { order(game_ends_at: :desc) }
+  # TODO: write logic to get current started game according to the game times
+  scope :active, -> { last }
 
   def seconds_apart
     game_ends_at.to_i - game_starts_at.to_i

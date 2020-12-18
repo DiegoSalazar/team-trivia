@@ -1,6 +1,6 @@
 import consumer from "./consumer"
 
-consumer.subscriptions.create("AnswersChannel", {
+consumer.subscriptions.create("MessagesChannel", {
   connected() {
     // Called when the subscription is ready for use on the server
   },
@@ -10,6 +10,6 @@ consumer.subscriptions.create("AnswersChannel", {
   },
 
   received(data) {
-
+    if (data.cableReady) CableReady.perform(data.operations);
   }
 });
