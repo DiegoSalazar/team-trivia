@@ -3,10 +3,40 @@
     h1= @trivium.title
     h2= @trivium.body
   .col
-    = link_to 'Edit', [:edit, @trivium], class: 'btn btn-primary'
+    .row
+      = link_to 'Edit', [:edit, @trivium], class: 'btn btn-primary'
   .col
     = l @trivium.game_starts_at, format: :short
   .col
     = l @trivium.game_ends_at, format: :short
   .col
     = @trivium.max_questions
+
+br
+.question-template-index
+  .new-question
+  = link_to 'Add Question', [:add_question, @trivium], class: 'btn btn-primary btn-block'
+
+  br
+  .existing-questions
+    table.table.table-striped
+      thead
+        tr
+          td Question
+          td Correct Answer
+          td Question Type
+          td
+
+      tbody
+      - @trivium_questions&.each do |q|
+        tr
+          td
+            = q.question_template.body
+          td
+            = q.question_template.correct_answer
+          td
+            = q.question_template.question_type
+          td
+            = form_with(url: "/trivia/#{@trivium.id}/delete_question", method: 'post') do |f|
+              = f.hidden_field "trivium_question_id", value: q.id
+              = f.submit_tag "Destroy", class: 'btn btn-block btn-success'

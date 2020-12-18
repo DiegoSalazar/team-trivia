@@ -6,6 +6,7 @@ class SubmissionsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:add_guess]
 
   before_action :set_submission, only: %i[show update destroy]
+  before_action :authenticate_player!
 
   # GET /submissions
   # GET /submissions.json

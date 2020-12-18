@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   root to: 'trivia#index'
+  devise_for :players
 
   resources :joins
   resources :players
@@ -12,6 +13,11 @@ Rails.application.routes.draw do
   end
   resources :teams
   resources :trivia do
+    member do
+      get :add_question
+      post :create_question
+      post :delete_question
+    end
     resources :teams, only: [] do
       resource :submission, only: [:edit]
     end
