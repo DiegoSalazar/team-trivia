@@ -7,18 +7,21 @@ class MessagesController < ApplicationController
 
   def create
     message = current_player.messages.new message_params
-    message.team = current_player.current_team || Team.find(1)
-    message.trivium = Trivium.active
+    message.team = @team
+    message.trivium = @trivium
     message.save!
+    message_html = render_to_string partial: 'message', locals: { message: message }
 
-    cable_ready[current_player.chat_room].insert_adjacent_html(
-      selector: '#messages',
-      position: 'afterend',
-      html: render_to_string(partial: 'message', locals: { message: message })
-    )
+    @team.players.each do |player|
+      next if player.id == current_player.id
+
+      cable_ready[player.chat_channel].insert_adjacent_html(
+        selector: '#messages',
+        position: 'beforeend',
+        html: message_html
+      )
+    end
     cable_ready.broadcast
-
-    redirect_to play_team_path(message.team)
   end
 
   private

@@ -6,6 +6,6 @@ class Team < ApplicationRecord
   has_many :messages
 
   def chat_room
-    "team-#{id}-messages"
+    "team-#{id}"
   end
 end

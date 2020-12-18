@@ -4,4 +4,4 @@
     pre= @team.inspect
     pre= current_player.inspect
   .col
-    = render partial: 'chat', locals: { team: @team }
+    = render partial: 'chat', locals: { title: @title, messages: @messages }
