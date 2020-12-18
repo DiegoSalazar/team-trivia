@@ -1,0 +1,7 @@
+= form_for Message.new, remote: true do |f|
+  = hidden_field_tag :authenticity_token, form_authenticity_token
+
+  .input-group
+    = f.text_field :body, required: true, placeholder: 'Type a message', class: 'form-control', aria: { label: 'Type a message',  describedby: 'basic-addon2' }
+    .input-group-append
+      = f.submit 'Send', class: 'btn btn-success'

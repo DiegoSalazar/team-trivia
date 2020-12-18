@@ -21,12 +21,6 @@ export default class extends ApplicationController {
     // add your code here, if applicable
   }
 
-  create(e) {
-    e.preventDefault()
-    e.target.submit()
-    e.target.reset()
-  }
-
   /* Reflex specific lifecycle methods.
    *
    * For every method defined in your Reflex class, a matching set of lifecycle methods become available

@@ -3,11 +3,10 @@
     h2.card-title.border-bottom title
 
     ul.list-unstyled id='messages'
-      = render messages
+      - messages.each do |message|
+        - if message.player_id == current_player.id
+          = render partial: 'messages/sender_message', locals: { message: message }
+        - else
+          = render partial: 'messages/recipient_message', locals: { message: message }
 
-    = form_for Message.new, data: { controller: 'messages', action: 'submit->messages#create' } do |f|
-      = hidden_field_tag :authenticity_token, form_authenticity_token
-      .input-group
-        = f.text_field :body, placeholder: 'Type a message', class: 'form-control', aria: { label: 'Type a message',  describedby: 'basic-addon2' }
-        .input-group-append
-          = f.submit 'Send', class: 'btn btn-success'
+    = render 'messages/form'

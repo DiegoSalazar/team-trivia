@@ -6,7 +6,7 @@ class TeamsController < ApplicationController
 
   def play
     @current_trivium = Trivium.active
-    @messages = @team.messages.except_for current_player.messages
+    @messages = @team.messages
     @title = 'TEAM CHAT'
 
     render layout: 'side_chat'
