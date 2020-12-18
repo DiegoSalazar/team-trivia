@@ -7,9 +7,6 @@ Rails.application.routes.draw do
   resources :players
   resources :answers
   resources :questions
-  resources :guesses do
-    post :vote
-  end
   resources :submissions do
     post :add_guess
   end

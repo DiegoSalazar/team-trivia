@@ -14,4 +14,4 @@
       li
         == guess.value
         = link_to "#", class: "card-link", data: { reflex: "click->GuessesReflex#vote", id: guess.id }
-          div id="guess-#{guess.id}-votes" Vote ("#{guess.likes}")
+          div id="guess-#{guess.id}-votes" Vote (#{guess.likes})

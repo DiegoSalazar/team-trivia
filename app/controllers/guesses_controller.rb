@@ -5,12 +5,6 @@ class GuessesController < ApplicationController
 
   skip_before_action :verify_authenticity_token, only: [:vote]
 
-  def vote
-    guess = Guess.find(params[:guess_id])
-    guess.upvote
-    redirect_back(fallback_location: root_path)
-  end
-
   # GET /guesses
   # GET /guesses.json
   def index
