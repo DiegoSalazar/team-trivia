@@ -1,3 +1,4 @@
+import CableReady from "cable_ready";
 import consumer from "./consumer"
 
 consumer.subscriptions.create("MessagesChannel", {
@@ -10,6 +11,11 @@ consumer.subscriptions.create("MessagesChannel", {
   },
 
   received(data) {
-    if (data.cableReady) CableReady.perform(data.operations);
+    if (data.cableReady) {
+      CableReady.perform(data.operations)
+
+      const messages = document.getElementById('messages')
+      messages.scrollTop = messages.scrollHeight
+    }
   }
 });

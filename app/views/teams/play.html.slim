@@ -1,7 +1,7 @@
 .row.h-100
-  .col
+  .col-sm-8
     h1 PLAY
     pre= @team.inspect
     pre= current_player.inspect
-  .col
-    = render partial: 'chat', locals: { team: @team }
+  .col-sm-4
+    = render partial: 'chat', locals: { title: @title, messages: @messages }

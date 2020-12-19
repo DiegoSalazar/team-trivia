@@ -9,10 +9,12 @@ class Player < ApplicationRecord
   has_many :teams, through: :joins
   has_many :messages
 
-  delegate :chat_room, to: :current_team
-
   def username
     email.split(?@).first
+  end
+
+  def chat_channel
+    "#{current_team.chat_room}-player-#{id}"
   end
 
   # TODO: remove Team.first when team join logic is done

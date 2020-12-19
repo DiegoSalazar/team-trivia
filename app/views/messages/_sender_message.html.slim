@@ -1,0 +1,8 @@
+li.text-right
+  dl
+    dt
+      .text-muted
+        | You
+        small= " - #{time_ago_in_words message.created_at} ago"
+    dd.alert.alert-secondary.d-inline-block.p-1.pl-3.pr-3
+      = message.body

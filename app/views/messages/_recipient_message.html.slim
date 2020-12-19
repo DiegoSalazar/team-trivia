@@ -1,0 +1,8 @@
+li
+  dl.mb-1
+    dt
+      .text-muted
+        = message.sender_name
+        small= " - #{time_ago_in_words message.created_at} ago"
+    dd.alert.alert-primary.d-inline-block.p-1.pl-3.pr-3
+      = message.body

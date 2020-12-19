@@ -4,6 +4,14 @@ class TeamsController < ApplicationController
   before_action :authenticate_player!
   before_action :set_team, only: %i[show edit update destroy play]
 
+  def play
+    @current_trivium = Trivium.active
+    @messages = @team.messages
+    @title = @team.chat_title
+
+    render layout: 'side_chat'
+  end
+
   # GET /teams
   # GET /teams.json
   def index
@@ -61,14 +69,6 @@ class TeamsController < ApplicationController
       format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def play
-    @current_trivium = Trivium.last
-    @messages = @team.messages
-    @message = current_player.messages.new trivium: @current_trivium, team: @team
-
-    render layout: 'side_chat'
   end
 
   private
