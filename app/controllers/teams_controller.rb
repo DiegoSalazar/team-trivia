@@ -8,6 +8,7 @@ class TeamsController < ApplicationController
   def play
     @current_trivium = Trivium.active
     @current_question ||= current_trivium.question_templates.first
+    @current_guess = @current_question.guesses.new
     @messages = current_team.messages
     @title = current_team.chat_title
 

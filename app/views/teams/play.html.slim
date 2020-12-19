@@ -16,13 +16,18 @@
       .col-sm-7
         ul.list-group
           - @current_trivium.question_templates.each do |question|
-            = link_to question.body, 'javascript:return false', class: "list-group-item list-group-item-action #{'active' if question.id == @current_question.id}", data: { reflex: 'click->play#select_question', question_id: question.id }
+            = button_tag question.body, class: "list-group-item list-group-item-action #{'active' if question.id == @current_question.id}", data: { reflex: 'click->play#select_question', question_id: question.id }
 
       .col-sm-5
         .card
           .card-body
-            .card-title= @current_question.body
-            .card-text Form
+            = form_for @current_guess, data: { reflex: 'submit->guesses#create' } do |f|
+              .form-group
+                = f.label :value, 'Type your answer or guess', class: 'sr-only'
+                = f.text_field :value, required: true, placeholder: 'Type your answer or guess', class: 'form-control'
+                = f.hidden_field :question_template_id
+              = f.submit 'Submit', class: 'btn btn-success btn-block'
+
 
   .col-sm-4
     = render partial: 'chat', locals: { title: @title, messages: @messages }
