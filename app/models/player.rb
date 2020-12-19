@@ -17,8 +17,7 @@ class Player < ApplicationRecord
     "#{current_team.chat_room}-player-#{id}"
   end
 
-  # TODO: remove Team.first when team join logic is done
   def current_team
-    teams.first || Team.first
+    teams.first
   end
 end

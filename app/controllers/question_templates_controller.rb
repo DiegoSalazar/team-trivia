@@ -1,5 +1,5 @@
 class QuestionTemplatesController < ApplicationController
-
+  before_action :authenticate_player!
   before_action :set_question_template, only: [:destroy, :add_answer]
 
   def index

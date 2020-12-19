@@ -1,22 +1,19 @@
-- model_class = Team
-.page-header
-  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
-table.table.table-striped
-  thead
-    tr
-      th= model_class.human_attribute_name(:id)
-      th= model_class.human_attribute_name(:name)
-      th= model_class.human_attribute_name(:created_at)
-      th=t '.actions', :default => t("helpers.actions")
-  tbody
-    - @teams.each do |team|
-      tr
-        td= link_to team.id, team_path(team)
-        td= team.name
-        td=l team.created_at
-        td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_team_path(team), :class => 'btn btn-default btn-xs'
-          '
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), team_path(team), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
+.row
+  .col
+    .row
+      .col-sm-2
+        h1 Create
+      .col
+        = link_to 'New Team', new_team_path, class: 'btn btn-primary btn-block'
+    .row
+      .col
+        h2 Join Team
 
-= link_to t('.new', :default => t("helpers.links.new")), new_team_path, :class => 'btn btn-primary'
+        table.table.table-striped
+          tbody
+            - @teams.each do |team|
+              tr
+                td= team.name
+                td=l team.created_at
+                td.text-right
+                  = link_to 'Join', team_player_joins_path(team, current_player), method: :post, class: 'btn btn-success btn-block'

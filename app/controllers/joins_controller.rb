@@ -29,7 +29,9 @@ class JoinsController < ApplicationController
 
     respond_to do |format|
       if @join.save
-        format.html { redirect_to @join, notice: 'Join was successfully created.' }
+        format.html do
+          redirect_to play_team_path(@join.team), notice: "Successfully joined Team #{@join.team.name}"
+        end
         format.json { render :show, status: :created, location: @join }
       else
         format.html { render :new }
@@ -71,6 +73,10 @@ class JoinsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def join_params
-    params.require(:join).permit(:player_id, :team_id)
+    return params.require(:join).permit(:player_id, :team_id) if params[:join]
+
+    # player is coming here via team_player_joins_path (a team's Join button)
+    p = { join: params.slice(:player_id, :team_id) }
+    ActionController::Parameters.new(p).require(:join).permit(:player_id, :team_id)
   end
 end

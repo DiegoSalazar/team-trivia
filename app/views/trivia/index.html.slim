@@ -13,8 +13,8 @@
       .col
         .row
           .col
-            = link_to 'Play', '/', class: 'btn btn-primary btn-block'
-            = link_to 'Join', teams_path, class: 'btn btn-primary btn-block'
+            = link_to 'Play', current_play_path, class: 'btn btn-primary btn-block' if current_team
+            = link_to 'Join', teams_path, class: 'btn btn-primary btn-block' unless current_team
           .col
             = link_to 'Contribute', question_templates_path, class: 'btn btn-primary btn-block'
             = link_to 'New Trivia', new_trivium_path, class: 'btn btn-primary btn-block'

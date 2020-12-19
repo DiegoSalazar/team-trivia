@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :teams do
     resources :players, only: :index do
       resource :messages, only: :create
+      resource :joins, only: :create
     end
     member do
       get :play

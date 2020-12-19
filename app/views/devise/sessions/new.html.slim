@@ -11,11 +11,16 @@
         = f.label :password
         br
         = f.password_field :password, autocomplete: 'current-password', class: 'form-control'
-      - if devise_mapping.rememberable?
-        .form-check
-          = f.check_box :remember_me, class: 'form-check-input'
-          = f.label :remember_me, class: 'form-chec-label'
-      .actions
-        = f.submit 'Log in', class: 'btn btn-primary'
-    = render 'devise/shared/links'
+
+      .form-row.form-group
+        .col-auto
+          = f.submit 'Log in', class: 'btn btn-primary'
+        .col-auto
+          .form-check.mt-2.ml-2
+            = f.check_box :remember_me, class: 'form-check-input'
+            = f.label :remember_me, class: 'form-check-label'
+
+      .form-group
+        = render 'devise/shared/links'
+
   .col-sm-3

@@ -2,13 +2,14 @@
 
 class TeamsController < ApplicationController
   before_action :authenticate_player!
-  before_action :set_team, only: %i[show edit update destroy play]
+  before_action :ensure_player_team!, only: %i[play update]
+  before_action :set_team, only: %i[show edit update destroy]
 
   def play
     @current_trivium = Trivium.active
-    @current_question ||= @current_trivium.question_templates.first
-    @messages = @team.messages
-    @title = @team.chat_title
+    @current_question ||= current_trivium.question_templates.first
+    @messages = current_team.messages
+    @title = current_team.chat_title
 
     render layout: 'side_chat'
   end
@@ -52,12 +53,12 @@ class TeamsController < ApplicationController
   # PATCH/PUT /teams/1.json
   def update
     respond_to do |format|
-      if @team.update(team_params)
-        format.html { redirect_to @team, notice: 'Team was successfully updated.' }
-        format.json { render :show, status: :ok, location: @team }
+      if current_team.update(team_params)
+        format.html { redirect_to current_team, notice: 'Team was successfully updated.' }
+        format.json { render :show, status: :ok, location: current_team }
       else
         format.html { render :edit }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
+        format.json { render json: current_team.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,7 +66,7 @@ class TeamsController < ApplicationController
   # DELETE /teams/1
   # DELETE /teams/1.json
   def destroy
-    @team.destroy
+    current_team.destroy
     respond_to do |format|
       format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
       format.json { head :no_content }
@@ -74,13 +75,13 @@ class TeamsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_team
-    @team = Team.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
   def team_params
     params.require(:team).permit(:name)
   end
+
+  def set_team
+    @team = Team.find params[:id]
+
+  end
+
 end
