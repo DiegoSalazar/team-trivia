@@ -1,7 +1,15 @@
 .row.h-100
   .col-sm-8
-    h1 PLAY
-    pre= @team.inspect
-    pre= current_player.inspect
+    .jumbotron.p-4
+      .container
+        .row
+          .col
+            h1.display-7= @current_trivium.title
+            h2.display-8= @current_trivium.body
+          .col
+            .card.align-middle
+              .card-body.p-0.pt-2.bg-dark.text-light
+                .card-title.text-center
+                  h2 00:13:28s
   .col-sm-4
     = render partial: 'chat', locals: { title: @title, messages: @messages }
