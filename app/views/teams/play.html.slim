@@ -1,4 +1,4 @@
-.row.h-100
+.row
   .col-sm-8
     .jumbotron.p-4
       .container
@@ -11,5 +11,18 @@
               .card-body.p-0.pt-2.bg-dark.text-light
                 .card-title.text-center
                   h2 00:13:28s
+
+    #questions.row
+      .col-sm-7
+        ul.list-group
+          - @current_trivium.question_templates.each do |question|
+            = link_to question.body, 'javascript:return false', class: "list-group-item list-group-item-action #{'active' if question.id == @current_question.id}", data: { reflex: 'click->play#select_question', question_id: question.id }
+
+      .col-sm-5
+        .card
+          .card-body
+            .card-title= @current_question.body
+            .card-text Form
+
   .col-sm-4
     = render partial: 'chat', locals: { title: @title, messages: @messages }
