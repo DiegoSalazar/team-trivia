@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'trivia#index'
   devise_for :players
 
-  resources :messages, only: :create
+  resources :team_messages, only: :create
   resources :joins
   resources :players
   resources :answers
@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   end
   resources :teams do
     resources :players, only: :index do
-      resource :messages, only: :create
       resource :joins, only: :create
     end
     member do

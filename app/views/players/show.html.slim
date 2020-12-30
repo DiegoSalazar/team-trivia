@@ -7,6 +7,9 @@
           h1
             | Player:&nbsp;
             = @player.username
+          h2
+            | Team:&nbsp;
+            = @player.team_name
 
         .card-text
           = link_to t('.back', :default => t("helpers.links.back")), players_path, :class => 'btn btn-default'

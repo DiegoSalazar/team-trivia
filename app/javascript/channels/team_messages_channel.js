@@ -1,7 +1,7 @@
 import CableReady from "cable_ready";
 import consumer from "./consumer"
 
-consumer.subscriptions.create("MessagesChannel", {
+consumer.subscriptions.create("TeamMessagesChannel", {
   connected() {
     // Called when the subscription is ready for use on the server
   },

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_18_042040) do
+ActiveRecord::Schema.define(version: 2020_12_30_023635) do
 
   create_table "answer_templates", force: :cascade do |t|
     t.text "body"
@@ -40,15 +40,6 @@ ActiveRecord::Schema.define(version: 2020_12_18_042040) do
   create_table "joins", force: :cascade do |t|
     t.integer "player_id"
     t.integer "team_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.text "body"
-    t.integer "trivium_id"
-    t.integer "team_id"
-    t.integer "player_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -95,6 +86,15 @@ ActiveRecord::Schema.define(version: 2020_12_18_042040) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "trivium_id", null: false
+  end
+
+  create_table "team_messages", force: :cascade do |t|
+    t.text "body"
+    t.integer "trivium_id"
+    t.integer "team_id"
+    t.integer "player_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "teams", force: :cascade do |t|

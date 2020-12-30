@@ -1,6 +1,4 @@
 #chat {
-
-
   .card-body {
     position: relative;
     overflow: hidden;
@@ -15,5 +13,5 @@
 
 #messages {
   overflow-y: auto;
-  max-height: 85%;
+  max-height: 75vh;
 }

@@ -3,7 +3,7 @@
 class Team < ApplicationRecord
   has_many :joins
   has_many :players, through: :joins
-  has_many :messages
+  has_many :team_messages
 
   def chat_room
     "team-#{id}"

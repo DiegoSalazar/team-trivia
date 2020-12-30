@@ -3,11 +3,11 @@
     h2.card-title.border-bottom
       = title
 
-    ul.list-unstyled id='messages'
+    ul.list-unstyled id='team_messages' data-controller="team_messages"
       - messages.each do |message|
         - if message.player_id == current_player.id
-          = render partial: 'messages/sender_message', locals: { message: message }
+          = render partial: 'team_messages/sender_message', locals: { message: message }
         - else
-          = render partial: 'messages/recipient_message', locals: { message: message }
+          = render partial: 'team_messages/recipient_message', locals: { message: message }
 
-    = render 'messages/form'
+    = render 'team_messages/form'

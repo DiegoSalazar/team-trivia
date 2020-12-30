@@ -1,4 +1,4 @@
-class MessagesChannel < ApplicationCable::Channel
+class TeamMessagesChannel < ApplicationCable::Channel
   def subscribed
     stream_from current_player.chat_channel
   end

@@ -7,7 +7,7 @@ class Player < ApplicationRecord
 
   has_many :joins
   has_many :teams, through: :joins
-  has_many :messages
+  has_many :team_messages
 
   def username
     email.split(?@).first
@@ -19,5 +19,9 @@ class Player < ApplicationRecord
 
   def current_team
     teams.first
+  end
+
+  def team_name
+    current_team&.name || username
   end
 end
