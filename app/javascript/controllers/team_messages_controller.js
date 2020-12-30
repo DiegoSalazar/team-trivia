@@ -23,7 +23,7 @@ export default class extends ApplicationController {
 
   initialize () {
     // Messages list should be scrolled to the bottom on page load
-    this.element.scrollTop = this.element.scrollHeight
+    if (this.element) this.element.scrollTop = this.element.scrollHeight
   }
 
   /* Reflex specific lifecycle methods.

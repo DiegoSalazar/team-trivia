@@ -14,8 +14,9 @@ consumer.subscriptions.create("TeamMessagesChannel", {
     if (data.cableReady) {
       CableReady.perform(data.operations)
 
-      const messages = document.getElementById('messages')
-      messages.scrollTop = messages.scrollHeight
+      const messages = document.getElementById('team_messages')
+      console.debug({ channel: 'team_messages', messages }) // debug
+      if (messages) messages.scrollTop = messages.scrollHeight
     }
   }
 });

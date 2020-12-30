@@ -4,17 +4,15 @@ class TeamMessagesController < ApplicationController
   before_action :authenticate_player!
 
   def create
-    message = current_player.team_messages.new message_params
-    message.team = current_team
-    message.trivium = current_trivium
-    message.save!
-    message_html = render_to_string partial: 'recipient_message', locals: { message: message }
+    message = current_player.team_messages.new team: current_team, trivium: current_trivium
+    message.update! message_params
+    message_html = render_to_string partial: 'recipient_message', locals: { team_message: message }
 
     current_team.players.each do |player|
       next if player.id == current_player.id
 
       cable_ready[player.chat_channel].insert_adjacent_html(
-        selector: '#team_messages',
+        selecto[r: '#team_messages',
         position: 'beforeend',
         html: message_html
       )
@@ -23,7 +21,7 @@ class TeamMessagesController < ApplicationController
     cable_ready[current_player.chat_channel].insert_adjacent_html(
       selector: '#team_messages',
       position: 'beforeend',
-      html: render_to_string(partial: 'sender_message', locals: { message: message })
+      html: render_to_string(partial: 'sender_message', locals: { team_message: message })
     )
     cable_ready[current_player.chat_channel].inner_html(
       selector: '#new_team_message',

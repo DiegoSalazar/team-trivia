@@ -9,7 +9,7 @@ class TeamsController < ApplicationController
     @current_trivium = Trivium.active
     @current_question ||= current_trivium.question_templates.first
     @current_guess = @current_question.guesses.new
-    @messages = current_team.team_messages
+    @team_messages = current_team.team_messages
     @title = current_team.chat_title
 
     render layout: 'side_chat'

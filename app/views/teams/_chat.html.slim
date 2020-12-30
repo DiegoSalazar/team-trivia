@@ -4,10 +4,10 @@
       = title
 
     ul.list-unstyled id='team_messages' data-controller="team_messages"
-      - messages.each do |message|
+      - team_messages.each do |message|
         - if message.player_id == current_player.id
-          = render partial: 'team_messages/sender_message', locals: { message: message }
+          = render partial: 'team_messages/sender_message', locals: { team_message: message }
         - else
-          = render partial: 'team_messages/recipient_message', locals: { message: message }
+          = render partial: 'team_messages/recipient_message', locals: { team_message: message }
 
     = render 'team_messages/form'
