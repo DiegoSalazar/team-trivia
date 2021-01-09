@@ -2,6 +2,7 @@
 
 class JoinsController < ApplicationController
   before_action :authenticate_player!
+  before_action :method
   before_action :set_join, only: %i[show edit update destroy]
 
   # GET /joins

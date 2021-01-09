@@ -6,13 +6,15 @@ class TeamMessagesController < ApplicationController
   def create
     message = current_player.team_messages.new team: current_team, trivium: current_trivium
     message.update! message_params
-    message_html = render_to_string partial: 'recipient_message', locals: { team_message: message }
 
+    message_html = render_to_string partial: 'recipient_message', locals: {
+      team_message: message
+    }
     current_team.players.each do |player|
       next if player.id == current_player.id
 
       cable_ready[player.chat_channel].insert_adjacent_html(
-        selecto[r: '#team_messages',
+        selector: '#team_messages',
         position: 'beforeend',
         html: message_html
       )

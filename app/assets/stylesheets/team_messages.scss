@@ -2,6 +2,7 @@
   .card-body {
     position: relative;
     overflow: hidden;
+    padding-bottom: 4vh;
 
     form {
       position: absolute;
@@ -14,4 +15,5 @@
 #team_messages {
   overflow-y: auto;
   max-height: 75vh;
+  padding-right: 1em;
 }
