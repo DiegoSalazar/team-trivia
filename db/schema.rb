@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_30_023635) do
+ActiveRecord::Schema.define(version: 2021_01_10_032931) do
 
   create_table "answer_templates", force: :cascade do |t|
     t.text "body"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2020_12_30_023635) do
     t.integer "player_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "guess_id"
   end
 
   create_table "teams", force: :cascade do |t|

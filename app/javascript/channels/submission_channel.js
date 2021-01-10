@@ -3,6 +3,9 @@ import consumer from "./consumer"
 
 consumer.subscriptions.create("SubmissionChannel", {
   received(data) {
-    if (data.cableReady) CableReady.perform(data.operations)
+    if (data.cableReady) {
+      console.debug('SubmissionChannel received:', { data }) // debug
+      CableReady.perform(data.operations)
+    }
   }
 });

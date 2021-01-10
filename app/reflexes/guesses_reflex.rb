@@ -5,15 +5,16 @@ class GuessesReflex < ApplicationReflex
 
   def create
     current_trivium = Trivium.active
-    guess = Guess.new guess_params
+    @current_guess = Guess.create! guess_params
+    @current_question = @current_guess.question_template
     # Create the Guess for this QuestionTemplate
     
     # Create a voteable Message for this Guess
     message = current_player.team_messages.create! \
       team: current_player.current_team,
       trivium: current_trivium,
-      body: guess.value
-    
+      guess: @current_guess
+
     # Broadcast this Message
     message_html = controller.render_to_string partial: 'team_messages/recipient_message', locals: {
       team_message: message
@@ -38,7 +39,7 @@ class GuessesReflex < ApplicationReflex
     cable_ready[current_player.chat_channel].inner_html(
       selector: '#guess_form',
       focus_selector: '#guess_value',
-      html: controller.render_to_string(partial: 'teams/guess_form', locals: { guess: Guess.new })
+      html: controller.render_to_string(partial: 'teams/guess_form', locals: { guess: Guess.new, reflex_root: '#guess_form' })
     )
     cable_ready.broadcast
   end
