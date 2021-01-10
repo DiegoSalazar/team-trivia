@@ -6,9 +6,5 @@
     ul.list-unstyled id='team_messages' data-controller="team_messages"
       - team_messages.each do |message|
         = render TeamMessageComponent.new(team_message: message, current_player: current_player)
-        / - if message.player_id == current_player.id
-        /   = render partial: 'team_messages/sender_message', locals: { team_message: message }
-        / - else
-        /   = render partial: 'team_messages/recipient_message', locals: { team_message: message }
 
     = render 'team_messages/form'
