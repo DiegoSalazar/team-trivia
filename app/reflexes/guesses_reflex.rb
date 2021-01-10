@@ -16,9 +16,7 @@ class GuessesReflex < ApplicationReflex
       guess: @current_guess
 
     # Broadcast this Message
-    message_html = controller.render_to_string partial: 'team_messages/recipient_message', locals: {
-      team_message: message
-    }
+    message_html = controller.render TeamMessageComponent.new(message: message, player: current_player)
     current_player.current_team.players.each do |player|
       next if player.id == current_player.id
 
@@ -32,7 +30,7 @@ class GuessesReflex < ApplicationReflex
     cable_ready[current_player.chat_channel].insert_adjacent_html(
       selector: '#team_messages',
       position: 'beforeend',
-      html: controller.render_to_string(partial: 'team_messages/sender_message', locals: { team_message: message })
+      html: controller.render(TeamMessageComponent.new(message: message, player: current_player))
     )
     
     # Refresh the question and answer form input views

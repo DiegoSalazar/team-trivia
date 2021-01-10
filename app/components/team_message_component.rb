@@ -3,24 +3,22 @@
 class TeamMessageComponent < ViewComponent::Base
   attr_reader :body,  :created_at
 
-  def initialize(team_message:, current_player:, sender_name: 'You (or sender')
-    @team_message = team_message
-    @current_player = current_player
+  def initialize(message:, player:, sender_name: 'You (or sender')
+    @message = message
+    @player = player
     @sender_name = sender_name
-    @body = team_message.body
-    @created_at = team_message.created_at
+    @body = message.body
+    @created_at = message.created_at
   end
 
-  def description
-    return 'You' if sender?
-    
-    @team_message.sender_name
+  def sender
+    sender? ? 'You' : @message.sender_name
   end
 
   private
 
   def sender?
-    @current_player.id == @team_message.player_id
+    @player.id == @message.player_id
   end
 
   def container_class
@@ -28,7 +26,7 @@ class TeamMessageComponent < ViewComponent::Base
   end
   
   def body_class
-    return 'alert-secondary' if sender?
-    'alert-primary'
+    alert_class = sender? ? 'secondary' : 'primary'
+    "alert-#{alert_class}"
   end
 end

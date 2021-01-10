@@ -5,6 +5,6 @@
 
     ul.list-unstyled id='team_messages' data-controller="team_messages"
       - team_messages.each do |message|
-        = render TeamMessageComponent.new(team_message: message, current_player: current_player)
+        = render TeamMessageComponent.new(message: message, player: current_player)
 
     = render 'team_messages/form'

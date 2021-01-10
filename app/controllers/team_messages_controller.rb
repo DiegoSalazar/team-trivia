@@ -7,12 +7,13 @@ class TeamMessagesController < ApplicationController
     message = current_player.team_messages.new team: current_team, trivium: current_trivium
     message.update! message_params
 
-    message_html = render_to_string partial: 'recipient_message', locals: {
-      team_message: message
-    }
     current_team.players.each do |player|
       next if player.id == current_player.id
 
+      message_html = render_to_string TeamMessageComponent.new(
+        message: message,
+        player: player
+      )
       cable_ready[player.chat_channel].insert_adjacent_html(
         selector: '#team_messages',
         position: 'beforeend',
@@ -23,7 +24,7 @@ class TeamMessagesController < ApplicationController
     cable_ready[current_player.chat_channel].insert_adjacent_html(
       selector: '#team_messages',
       position: 'beforeend',
-      html: render_to_string(partial: 'sender_message', locals: { team_message: message })
+      html: render_to_string(TeamMessageComponent.new(message: message, player: current_player))
     )
     cable_ready[current_player.chat_channel].inner_html(
       selector: '#new_team_message',
