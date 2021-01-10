@@ -1,0 +1,8 @@
+li class= container_class
+  dl
+    dt
+      .text-muted
+        = description
+        small= " - #{time_ago_in_words created_at} ago"
+    dd.alert.d-inline-block.shadow-sm.p-1.pl-3.pr-3 class= body_class
+      = body
