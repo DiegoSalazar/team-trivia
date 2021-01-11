@@ -9,16 +9,4 @@ class TeamMessage < ApplicationRecord
   def sender_name
     player.username
   end
-
-  def body
-    return guess_body if guess_id?
-
-    read_attribute :body
-  end
-
-  private
-
-  def guess_body
-    "Guess for question #{guess.question_template_id}: #{guess.value}"
-  end
 end

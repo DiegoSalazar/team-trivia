@@ -27,7 +27,6 @@ class GuessesReflex < ApplicationReflex
         html: message_html
       )
     end
-
     cable_ready[current_player.chat_channel].insert_adjacent_html(
       selector: '#team_messages',
       position: 'beforeend',
