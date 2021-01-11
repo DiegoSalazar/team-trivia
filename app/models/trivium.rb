@@ -21,6 +21,10 @@ class Trivium < ApplicationRecord
     game_ends_at.to_i - game_starts_at.to_i
   end
 
+  def question_index(question)
+    question_template_ids.index(question.id).succ
+  end
+
   private
 
   def starts_before_it_ends

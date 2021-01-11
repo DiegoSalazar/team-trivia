@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class TeamMessageComponent < ViewComponent::Base
-  attr_reader :body,  :created_at
+  attr_reader :created_at
 
-  def initialize(message:, player:, sender_name: 'You (or sender')
+  def initialize(message:, player:)
+    super
     @message = message
     @player = player
     @guess = message.guess
-    @sender_name = sender_name
     @created_at = message.created_at
   end
 
@@ -16,9 +16,7 @@ class TeamMessageComponent < ViewComponent::Base
   end
 
   def body
-    return guess_body if @guess.present?
-
-    @message.body
+    @guess.present? ? guess_body : @message.body
   end
 
   private
