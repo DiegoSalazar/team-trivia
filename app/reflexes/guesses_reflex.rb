@@ -16,10 +16,11 @@ class GuessesReflex < ApplicationReflex
       guess: @current_guess
 
     # Broadcast this Message
-    message_html = controller.render TeamMessageComponent.new(message: message, player: current_player)
     current_player.current_team.players.each do |player|
-      next if player.id == current_player.id
-
+      message_html = controller.render TeamMessageComponent.new(
+        message: message,
+        player: player
+      )
       cable_ready[player.chat_channel].insert_adjacent_html(
         selector: '#team_messages',
         position: 'beforeend',
