@@ -13,8 +13,9 @@
 }
 
 #team_messages {
-  overflow-y: auto;
+  overflow-y: scroll;
   scrollbar-width: thin;
+  scroll-behavior: smooth;
   max-height: 75vh;
-  padding-right: 0.2em;
+  padding-right: 0.3em;
 }

@@ -3,7 +3,7 @@
     h2.card-title.border-bottom
       = title
 
-    ul.list-unstyled id='team_messages' data-controller="team_messages"
+    ul.list-unstyled id='team_messages' data-controller='team_messages' scrollTop=9999999
       - team_messages.each do |message|
         = render TeamMessageComponent.new(message: message, player: current_player)
 

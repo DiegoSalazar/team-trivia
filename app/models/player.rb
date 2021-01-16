@@ -5,6 +5,8 @@ class Player < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
+  acts_as_voter
+
   has_many :joins
   has_many :teams, through: :joins
   has_many :team_messages

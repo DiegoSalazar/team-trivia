@@ -19,6 +19,15 @@ class TeamMessageComponent < ViewComponent::Base
     @guess.present? ? guess_body : @message.body
   end
 
+  def container_class
+    'text-right' if sender?
+  end
+
+  def body_class
+    alert_class = sender? ? 'secondary' : 'primary'
+    "alert-#{alert_class}"
+  end
+
   private
 
   def sender?
@@ -27,14 +36,5 @@ class TeamMessageComponent < ViewComponent::Base
 
   def guess_body
     "Guess for question #{@guess.question_template_id}: #{@guess.value}"
-  end
-
-  def container_class
-    'text-right' if sender?
-  end
-  
-  def body_class
-    alert_class = sender? ? 'secondary' : 'primary'
-    "alert-#{alert_class}"
   end
 end

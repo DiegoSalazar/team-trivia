@@ -1,6 +1,6 @@
 class TeamMessage < ApplicationRecord
   acts_as_votable
-  
+
   belongs_to :player
   belongs_to :team
   belongs_to :trivium
