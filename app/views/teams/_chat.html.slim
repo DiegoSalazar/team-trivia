@@ -5,6 +5,6 @@
 
     ul.list-unstyled id='team_messages' data-controller='team_messages' scrollTop=9999999
       - team_messages.each do |message|
-        = render TeamMessageComponent.new(message: message, player: current_player)
+        = render TeamMessageComponent.new(message: message, player: current_player, trivium: current_trivium)
 
     = render 'team_messages/form'

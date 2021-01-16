@@ -12,7 +12,8 @@ class TeamMessagesController < ApplicationController
 
       message_html = render_to_string TeamMessageComponent.new(
         message: message,
-        player: player
+        player: player,
+        trivium: current_trivium
       )
       cable_ready[player.chat_channel].insert_adjacent_html(
         selector: '#team_messages',
@@ -24,7 +25,11 @@ class TeamMessagesController < ApplicationController
     cable_ready[current_player.chat_channel].insert_adjacent_html(
       selector: '#team_messages',
       position: 'beforeend',
-      html: render_to_string(TeamMessageComponent.new(message: message, player: current_player))
+      html: render_to_string(TeamMessageComponent.new(
+        message: message,
+        player: current_player,
+        trivium: current_trivium
+      ))
     )
     cable_ready[current_player.chat_channel].inner_html(
       selector: '#new_team_message',
