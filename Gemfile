@@ -61,11 +61,13 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
+gem 'acts_as_votable', '~> 0.13.1'
 gem 'bootstrap', '~> 4.5.3'
 gem 'cable_ready', '~> 4.3'
 gem 'devise'
 gem 'pagy'
+gem 'redis-session-store', '~> 0.11.3'
 gem 'slim-rails', '~> 3.2'
 gem 'stimulus_reflex', '~> 3.3'
 gem 'twitter-bootstrap-rails'
-gem 'view_component', '~> 2.24', require: "view_component/engine"
+gem 'view_component', '~> 2.24', require: 'view_component/engine'

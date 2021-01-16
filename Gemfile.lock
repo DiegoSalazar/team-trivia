@@ -56,6 +56,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    acts_as_votable (0.13.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.1)
@@ -201,6 +202,9 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redis (4.2.2)
+    redis-session-store (0.11.3)
+      actionpack (>= 3, < 7)
+      redis (>= 3, < 5)
     regexp_parser (1.8.2)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -324,6 +328,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_votable (~> 0.13.1)
   bootsnap (>= 1.4.2)
   bootstrap (~> 4.5.3)
   byebug
@@ -338,6 +343,7 @@ DEPENDENCIES
   pry-rails
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
+  redis-session-store (~> 0.11.3)
   rspec-rails
   rubocop
   sass-rails (>= 6)
