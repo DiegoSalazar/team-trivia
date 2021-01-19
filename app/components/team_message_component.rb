@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TeamMessageComponent < ViewComponent::Base
-  attr_reader :created_at
+  attr_reader :message, :created_at
 
   def initialize(message:, player:, trivium:)
     super
@@ -31,7 +31,13 @@ class TeamMessageComponent < ViewComponent::Base
   end
 
   def votable
-    vote_component unless sender? || @guess.blank?
+    return if @guess.blank?
+
+    if sender? && @guess.accepted?
+      'Voted on'
+    elsif !sender?
+      vote_component
+    end
   end
 
   private

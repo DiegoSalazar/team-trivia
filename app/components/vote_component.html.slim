@@ -1,2 +1,2 @@
-span class="upvote badge rounded-pill shadow border"
+= button_tag data: { reflex: 'click->votes#create', player_id: @player.id, guess_id: @guess.id }, class: link_class do
   = helpers.icon 'hand-thumbs-up'

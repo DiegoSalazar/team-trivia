@@ -26,6 +26,7 @@
 
 .upvote {
   position: relative;
+  color: theme-color("primary");
   top: -0.8rem;
   background: white;
   right: 0.5rem;
@@ -33,6 +34,15 @@
 
   &:hover {
     background-color: theme-color("primary");
+    color: theme-color("light");
     box-shadow: none;
+  }
+
+  &.active {
+    background-color: theme-color("primary");
+    color: theme-color("light");
+    box-shadow: none;
+    border: none;
+    cursor: default;
   }
 }
