@@ -26,4 +26,8 @@ class Player < ApplicationRecord
   def team_name
     current_team&.name || username
   end
+
+  def joined_team?(team)
+    team_ids.include? team.id
+  end
 end

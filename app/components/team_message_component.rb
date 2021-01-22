@@ -26,18 +26,21 @@ class TeamMessageComponent < ViewComponent::Base
 
   def body_class
     alert_class = sender? ? 'secondary' : 'primary'
-    alert_class = 'success' if !sender? && @guess.present?
+    alert_class = 'success' if their_guess_accepted?
+    alert_class = 'dark border shadow' if my_guess_accepted?
     "alert-#{alert_class}"
   end
 
   def votable
-    return if @guess.blank?
+    return if sender? || @guess.blank?
 
-    if sender? && @guess.accepted?
-      'Voted on'
-    elsif !sender?
-      vote_component
-    end
+    controller.render VoteComponent.new @player, @guess
+  end
+
+  def acceptable
+    return unless my_guess_accepted?
+
+    controller.render CheckmarkComponent.new
   end
 
   private
@@ -46,13 +49,16 @@ class TeamMessageComponent < ViewComponent::Base
     @player.id == @message.player_id
   end
 
+  def their_guess_accepted?
+    @guess&.accepted? && !sender?
+  end
+
+  def my_guess_accepted?
+    @guess&.accepted? && sender?
+  end
+
   def guess_body
     q_num = @guess.question_number @trivium
     "Guess for question #{q_num}: #{@guess.value}"
-  end
-
-  def vote_component
-    vote = VoteComponent.new @player, @guess
-    controller.render_to_string vote
   end
 end

@@ -16,4 +16,4 @@
                 td= team.name
                 td=l team.created_at
                 td.text-right
-                  = link_to 'Join', team_player_joins_path(team, current_player), method: :post, class: 'btn btn-success btn-block'
+                  = link_to 'Join', team_player_joins_path(team, current_player), method: :post, class: 'btn btn-success btn-block' unless current_player.joined_team? team

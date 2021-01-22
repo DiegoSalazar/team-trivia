@@ -7,21 +7,22 @@ class TeamMessagesController < ApplicationController
     message = current_player.team_messages.new team: current_team, trivium: current_trivium
     message.update! message_params
 
+    # Broadcast message to team
     current_team.players.each do |player|
       next if player.id == current_player.id
 
-      message_html = render_to_string TeamMessageComponent.new(
-        message: message,
-        player: player,
-        trivium: current_trivium
-      )
       cable_ready[player.chat_channel].insert_adjacent_html(
         selector: '#team_messages',
         position: 'beforeend',
-        html: message_html
+        html: render_to_string(TeamMessageComponent.new(
+          message: message,
+          player: player,
+          trivium: current_trivium
+        ))
       )
     end
 
+    # Update current_player's message and form
     cable_ready[current_player.chat_channel].insert_adjacent_html(
       selector: '#team_messages',
       position: 'beforeend',

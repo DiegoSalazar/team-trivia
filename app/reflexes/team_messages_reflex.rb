@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class MessagesReflex < ApplicationReflex
-  delegate :current_player, to: :connection
-
+class TeamMessagesReflex < ApplicationReflex
   # Add Reflex methods in this file.
   #
   # All Reflex instances expose the following properties:

@@ -1,2 +1,2 @@
-= button_tag data: { reflex: 'click->votes#create', player_id: @player.id, guess_id: @guess.id }, class: link_class do
+= button_tag data: { reflex: 'click->votes#create', reflex_root: reflex_root, player_id: player.id, guess_id: guess.id }, class: link_class, disabled: disabled? do
   = helpers.icon 'hand-thumbs-up'

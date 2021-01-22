@@ -13,7 +13,7 @@ describe Trivium, type: :model do
       end
 
       it 'body' do
-        expect(subject.errors[:body]).to eq ["can't be blank"]
+        expect(subject.errors[:body]).to eq ["should include a hint"]
       end
 
       it 'start date' do

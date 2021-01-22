@@ -4,6 +4,7 @@ class GuessesReflex < ApplicationReflex
   include CableReady::Broadcaster
 
   def create
+    @current_team = current_player.current_team
     current_trivium = Trivium.active
     @current_guess = Guess.create! guess_params
     @current_question = @current_guess.question_template
@@ -11,21 +12,22 @@ class GuessesReflex < ApplicationReflex
 
     # Create a voteable Message for this Guess
     message = current_player.team_messages.create! \
-      team: current_player.current_team,
+      team: @current_team,
       trivium: current_trivium,
       guess: @current_guess
 
     # Broadcast this Message
-    current_player.current_team.players.each do |player|
-      message_html = controller.render TeamMessageComponent.new(
-        message: message,
-        player: player,
-        trivium: current_trivium
-      )
+    @current_team.players.each do |player|
+      next if player.id == current_player.id
+
       cable_ready[player.chat_channel].insert_adjacent_html(
         selector: '#team_messages',
         position: 'beforeend',
-        html: message_html
+        html: controller.render(TeamMessageComponent.new(
+          message: message,
+          player: player,
+          trivium: current_trivium
+        ))
       )
     end
     cable_ready[current_player.chat_channel].insert_adjacent_html(
@@ -42,7 +44,13 @@ class GuessesReflex < ApplicationReflex
     cable_ready[current_player.chat_channel].inner_html(
       selector: '#guess_form',
       focus_selector: '#guess_value',
-      html: controller.render_to_string(partial: 'teams/guess_form', locals: { guess: Guess.new, reflex_root: '#guess_form' })
+      html: controller.render_to_string(
+        partial: 'teams/guess_form',
+        locals: {
+          guess: Guess.new,
+          reflex_root: '#guess_form'
+        }
+      )
     )
     cable_ready.broadcast
   end

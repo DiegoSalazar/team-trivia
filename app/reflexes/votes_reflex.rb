@@ -35,7 +35,9 @@ class VotesReflex < ApplicationReflex
 
     # Broadcast upvote to team
     @current_team.players.each do |player|
-      message_html = controller.render_to_string TeamMessageComponent.new \
+      next if player.id == current_player.id
+
+      message_html = controller.render TeamMessageComponent.new \
         message: @message,
         player: player,
         trivium: @current_trivium
@@ -43,5 +45,17 @@ class VotesReflex < ApplicationReflex
         selector: dom_id(@message),
         html: message_html
     end
+
+    # Update current_player's message
+    message_html = controller.render TeamMessageComponent.new \
+      message: @message,
+      player: current_player,
+      trivium: @current_trivium
+    cable_ready[current_player.chat_channel].outer_html \
+      selector: dom_id(@message),
+      html: message_html
+
+    cable_ready.broadcast
+    morph :nothing
   end
 end

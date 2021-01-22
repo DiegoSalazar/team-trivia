@@ -22,6 +22,10 @@
 
 .team-message {
   position: relative;
+
+  .message-body {
+    max-width: 90%;
+  }
 }
 
 .upvote {
@@ -45,4 +49,10 @@
     border: none;
     cursor: default;
   }
+}
+
+.guess-accepted {
+  position: relative;
+  top: -3.8rem;
+  color: theme-color("success");
 }
