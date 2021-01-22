@@ -14,4 +14,8 @@ class Guess < ApplicationRecord
   def question_number(trivium)
     trivium.question_template_ids.index(question_template_id) + 1
   end
+
+  def question_body
+    question_template.body
+  end
 end

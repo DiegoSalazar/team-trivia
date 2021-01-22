@@ -23,6 +23,9 @@
 .team-message {
   position: relative;
 
+  dl, dd {
+    margin-bottom: 0.3rem;
+  }
   .message-body {
     max-width: 90%;
   }
@@ -52,7 +55,25 @@
 }
 
 .guess-accepted {
+  color: #28a745;
   position: relative;
-  top: -3.8rem;
-  color: theme-color("success");
+  top: -3rem;
+  left: 0.2rem;
+}
+
+.guessed-by {
+  display: block;
+  line-height: 0;
+
+  .badge {
+    cursor: help;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    position: relative;
+    left: 7px;
+
+    &.my-guess {
+      left: -7px;
+    }
+  }
 }

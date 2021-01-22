@@ -9,4 +9,8 @@ class TeamMessage < ApplicationRecord
   def sender_name
     player.username
   end
+
+  def body
+    guess_id? ? guess.value : read_attribute(:body)
+  end
 end

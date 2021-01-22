@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class TeamMessageComponent < ViewComponent::Base
-  attr_reader :message, :created_at
+  include PlayerGuesses
+
+  attr_reader :message, :body, :created_at
 
   def initialize(message:, player:, trivium:)
     super
@@ -9,15 +11,12 @@ class TeamMessageComponent < ViewComponent::Base
     @player = player
     @trivium = trivium
     @guess = message.guess
+    @body = message.body
     @created_at = message.created_at
   end
 
   def sender
     sender? ? 'You' : @message.sender_name
-  end
-
-  def body
-    @guess.present? ? guess_body : @message.body
   end
 
   def container_class
@@ -31,6 +30,12 @@ class TeamMessageComponent < ViewComponent::Base
     "alert-#{alert_class}"
   end
 
+  def guessable
+    return if @guess.blank?
+
+    controller.render GuessedByComponent.new @message, @player, @trivium
+  end
+
   def votable
     return if sender? || @guess.blank?
 
@@ -41,24 +46,5 @@ class TeamMessageComponent < ViewComponent::Base
     return unless my_guess_accepted?
 
     controller.render CheckmarkComponent.new
-  end
-
-  private
-
-  def sender?
-    @player.id == @message.player_id
-  end
-
-  def their_guess_accepted?
-    @guess&.accepted? && !sender?
-  end
-
-  def my_guess_accepted?
-    @guess&.accepted? && sender?
-  end
-
-  def guess_body
-    q_num = @guess.question_number @trivium
-    "Guess for question #{q_num}: #{@guess.value}"
   end
 end
