@@ -33,17 +33,29 @@ class VotesReflex < ApplicationReflex
 
     @current_guess.vote_by voter: current_player
 
-    # Broadcast upvote to team
+    # Updated question list
+    question_list = controller.render QuestionListComponent.new \
+      @current_trivium.question_templates,
+      @current_question,
+      @current_trivium
+
+    # Broadcast to team
     @current_team.players.each do |player|
       next if player.id == current_player.id
 
-      message_html = controller.render TeamMessageComponent.new \
+      # Update their chat
+      message = controller.render TeamMessageComponent.new \
         message: @message,
         player: player,
         trivium: @current_trivium
       cable_ready[player.chat_channel].outer_html \
         selector: dom_id(@message),
-        html: message_html
+        html: message
+
+      # Update their question list
+      cable_ready[player.chat_channel].outer_html \
+        selector: '#question-list',
+        html: question_list
     end
 
     # Update current_player's message
@@ -54,6 +66,10 @@ class VotesReflex < ApplicationReflex
     cable_ready[current_player.chat_channel].outer_html \
       selector: dom_id(@message),
       html: message_html
+    # Update current_player's question_list
+    cable_ready[current_player.chat_channel].outer_html \
+      selector: '#question-list',
+      html: question_list
 
     cable_ready.broadcast
     morph :nothing

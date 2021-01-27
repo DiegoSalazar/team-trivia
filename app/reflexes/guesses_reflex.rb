@@ -6,15 +6,15 @@ class GuessesReflex < ApplicationReflex
   def create
     @current_team = current_player.current_team
     current_trivium = Trivium.active
-    @current_guess = Guess.create! guess_params
-    @current_question = @current_guess.question_template
+    guess = Guess.create! guess_params
+    @current_question = guess.question_template
     # Create the Guess for this QuestionTemplate
 
     # Create a voteable Message for this Guess
     message = current_player.team_messages.create! \
       team: @current_team,
       trivium: current_trivium,
-      guess: @current_guess
+      guess: guess
 
     # Broadcast this Message
     @current_team.players.each do |player|

@@ -7,6 +7,9 @@ class Guess < ApplicationRecord
   belongs_to :submission, optional: true
   has_one :team_message
 
+  scope :by_most_votes, -> { order cached_votes_up: :desc }
+  scope :accepted, -> { where 'cached_votes_up > 0' }
+
   def accepted?
     cached_votes_total > 0
   end
