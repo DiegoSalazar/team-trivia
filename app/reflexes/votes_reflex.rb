@@ -33,11 +33,9 @@ class VotesReflex < ApplicationReflex
 
     @current_guess.vote_by voter: current_player
 
-    # Updated question list
-    question_list = controller.render QuestionListComponent.new \
-      @current_trivium.question_templates,
-      @current_question,
-      @current_trivium
+    # Updated upvoted question status
+    question_status = QuestionStatusComponent.new @current_question
+    question_status_html = controller.render question_status
 
     # Broadcast to team
     @current_team.players.each do |player|
@@ -54,8 +52,8 @@ class VotesReflex < ApplicationReflex
 
       # Update their question list
       cable_ready[player.chat_channel].outer_html \
-        selector: '#question-list',
-        html: question_list
+        selector: "##{question_status.id}",
+        html: question_status_html
     end
 
     # Update current_player's message
@@ -68,8 +66,8 @@ class VotesReflex < ApplicationReflex
       html: message_html
     # Update current_player's question_list
     cable_ready[current_player.chat_channel].outer_html \
-      selector: '#question-list',
-      html: question_list
+      selector: "##{question_status.id}",
+      html: question_status_html
 
     cable_ready.broadcast
     morph :nothing

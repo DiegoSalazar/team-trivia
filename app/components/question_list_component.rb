@@ -14,17 +14,6 @@ class QuestionListComponent < ViewComponent::Base
     c
   end
 
-  def question_status(question)
-    "#{question.guesses.count} / #{question.num_accepted_guesses}"
-  end
-
-  def question_status_class(question)
-    c = 'badge-primary'
-    c = 'badge-light' if active? question
-    c = 'badge-success' if question.num_accepted_guesses > 0
-    c
-  end
-
   private
 
   def active?(question)
