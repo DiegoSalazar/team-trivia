@@ -16,10 +16,15 @@ class GuessesReflex < ApplicationReflex
       trivium: current_trivium,
       guess: guess
 
-    # Broadcast this Message
+    # Upvoted question status
+    question_status = QuestionStatusComponent.new @current_question
+    question_status_html = controller.render question_status
+
+    # Broadcast to team
     @current_team.players.each do |player|
       next if player.id == current_player.id
 
+      # Update their chat
       cable_ready[player.chat_channel].insert_adjacent_html(
         selector: '#team_messages',
         position: 'beforeend',
@@ -29,6 +34,11 @@ class GuessesReflex < ApplicationReflex
           trivium: current_trivium
         ))
       )
+
+      # Update question status
+      cable_ready[player.chat_channel].outer_html \
+        selector: "##{question_status.id}",
+        html: question_status_html
     end
     cable_ready[current_player.chat_channel].insert_adjacent_html(
       selector: '#team_messages',
@@ -52,7 +62,14 @@ class GuessesReflex < ApplicationReflex
         }
       )
     )
+
+    # Update current_player's question status
+    cable_ready[current_player.chat_channel].outer_html \
+      selector: "##{question_status.id}",
+      html: question_status_html
+
     cable_ready.broadcast
+    morph :nothing
   end
 
   def vote

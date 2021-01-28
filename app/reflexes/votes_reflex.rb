@@ -33,7 +33,7 @@ class VotesReflex < ApplicationReflex
 
     @current_guess.vote_by voter: current_player
 
-    # Updated upvoted question status
+    # Upvoted question status
     question_status = QuestionStatusComponent.new @current_question
     question_status_html = controller.render question_status
 
@@ -50,7 +50,7 @@ class VotesReflex < ApplicationReflex
         selector: dom_id(@message),
         html: message
 
-      # Update their question list
+      # Update question status
       cable_ready[player.chat_channel].outer_html \
         selector: "##{question_status.id}",
         html: question_status_html
@@ -64,7 +64,8 @@ class VotesReflex < ApplicationReflex
     cable_ready[current_player.chat_channel].outer_html \
       selector: dom_id(@message),
       html: message_html
-    # Update current_player's question_list
+
+    # Update current_player's question status
     cable_ready[current_player.chat_channel].outer_html \
       selector: "##{question_status.id}",
       html: question_status_html
