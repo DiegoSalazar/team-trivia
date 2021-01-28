@@ -1,16 +1,6 @@
 .row
   .col-sm-8
-    .jumbotron.p-4
-      .container
-        .row
-          .col
-            h1.display-7= @current_trivium.title
-            h2.display-8= @current_trivium.body
-          .col
-            .card.align-middle
-              .card-body.p-0.pt-2.bg-dark.text-light
-                .card-title.text-center
-                  h2 00:13:28s
+    = render TriviumBannerComponent.new @current_trivium
 
     #questions.row
       .col-sm-7

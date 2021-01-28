@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class QuestionStatusComponent < ViewComponent::Base
+  attr_reader :title
+
   def initialize(question, active = false)
     @question = question
     @active = active
+    @title = 'Guesses / Votes'
   end
 
   def id
