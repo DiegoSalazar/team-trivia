@@ -38,6 +38,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'pry-rails'
   gem 'pry-byebug'
+  gem 'factory_bot_rails', '~> 6.1'
 end
 
 group :development do

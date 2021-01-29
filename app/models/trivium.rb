@@ -22,7 +22,10 @@ class Trivium < ApplicationRecord
   end
 
   def question_index(question)
-    question_template_ids.index(question.id).succ
+    i = question_template_ids.index(question.id)
+    return -1 if i.nil?
+
+    i.succ
   end
 
   private

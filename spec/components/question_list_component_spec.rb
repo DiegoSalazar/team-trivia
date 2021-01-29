@@ -1,13 +1,24 @@
-require "rails_helper"
+# frozen_string_literal: true
+
+require 'rails_helper'
 
 RSpec.describe QuestionListComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { described_class.new questions, question, trivium }
+  let(:questions) { create_list :question_template, 2 }
+  let(:question) { questions.last }
+  let(:trivium) { create :trivium }
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  it 'renders questions' do
+    expect(render_inline(subject).to_html).to include question.body
+  end
+
+  context '#button_class' do
+    it 'starts with list classes' do
+      expect(subject.button_class(questions.first)).to start_with 'list-group-item'
+    end
+
+    it 'appends active' do
+      expect(subject.button_class(question)).to end_with 'active'
+    end
+  end
 end
