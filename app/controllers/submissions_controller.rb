@@ -45,7 +45,6 @@ class SubmissionsController < ApplicationController
   # POST /submissions
   # POST /submissions.json
   def create
-    binding.pry # debug
     @submission = Submission.new(submission_params)
 
     respond_to do |format|

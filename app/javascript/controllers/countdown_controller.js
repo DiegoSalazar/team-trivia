@@ -18,12 +18,13 @@ export default class extends ApplicationController {
 
   connect () {
     super.connect()
-    console.log('Countdown') // debug
+    console.log('Countdown connect') // debug
 
     const el = this.context.scope.element
-    const { startTime, _endTime } = el.dataset
-    const s = Date.parse(startTime)
-    debugger
+    const { startTime, endTime } = el.dataset
+    this.startTime = new Date(Date.parse(startTime))
+    this.endTime = new Date(Date.parse(endTime))
+    console.log(`Trivia starts on ${this.startTime}`) // debug
   }
 
   /* Reflex specific lifecycle methods.
