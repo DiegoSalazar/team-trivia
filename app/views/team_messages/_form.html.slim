@@ -2,6 +2,6 @@
   = hidden_field_tag :authenticity_token, form_authenticity_token
 
   .input-group
-    = f.text_field :body, required: true, placeholder: 'Type a message', class: 'form-control', aria: { label: 'Type a message',  describedby: 'basic-addon2' }, autofocus: true
+    = f.text_field :body, required: true, placeholder: 'Type a message', class: 'form-control', aria: { label: 'Type a message',  describedby: 'basic-addon2' }, autofocus: true, autocomplete: 'off'
     .input-group-append
       = f.submit 'Send', class: 'btn btn-primary'

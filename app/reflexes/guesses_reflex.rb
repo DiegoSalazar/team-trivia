@@ -25,7 +25,7 @@ class GuessesReflex < ApplicationReflex
       next if player.id == current_player.id
 
       # Update their chat
-      cable_ready[player.chat_channel].insert_adjacent_html(
+      cable_ready[player.chat_channel].insert_adjacent_html \
         selector: '#team_messages',
         position: 'beforeend',
         html: controller.render(TeamMessageComponent.new(
@@ -33,14 +33,16 @@ class GuessesReflex < ApplicationReflex
           player: player,
           trivium: current_trivium
         ))
-      )
 
       # Update question status
       cable_ready[player.chat_channel].outer_html \
         selector: "##{question_status.id}",
         html: question_status_html
     end
-    cable_ready[current_player.chat_channel].insert_adjacent_html(
+
+    # Update the current_player's chat
+    cable_ready[current_player.chat_channel].insert_adjacent_html \
+      focus_selector: '#team_message_body',
       selector: '#team_messages',
       position: 'beforeend',
       html: controller.render(TeamMessageComponent.new(
@@ -48,13 +50,11 @@ class GuessesReflex < ApplicationReflex
         player: current_player,
         trivium: current_trivium
       ))
-    )
 
-    # Refresh guess form to clear the input
-    cable_ready[current_player.chat_channel].set_value(
+    # Clear the guess form
+    cable_ready[current_player.chat_channel].set_value \
       selector: '#guess_value',
       value: nil
-    )
 
     # Update current_player's question status
     cable_ready[current_player.chat_channel].outer_html \
