@@ -50,17 +50,10 @@ class GuessesReflex < ApplicationReflex
       ))
     )
 
-    # Refresh the question and answer form input views
-    cable_ready[current_player.chat_channel].inner_html(
-      selector: '#guess_form',
-      focus_selector: '#guess_value',
-      html: controller.render_to_string(
-        partial: 'teams/guess_form',
-        locals: {
-          guess: Guess.new,
-          reflex_root: '#guess_form'
-        }
-      )
+    # Refresh guess form to clear the input
+    cable_ready[current_player.chat_channel].set_value(
+      selector: '#guess_value',
+      value: nil
     )
 
     # Update current_player's question status

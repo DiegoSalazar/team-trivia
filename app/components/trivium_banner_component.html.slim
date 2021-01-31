@@ -9,7 +9,7 @@
           .card-body.p-0.pt-2.bg-dark.text-light
             .card-title.text-center
               h2 data-controller='countdown' data-start-time=@start_time data-end-time=@end_time
-                = @start_time
+                = starts_at
 
         = form_for Submission.new, html: { class: 'form mt-3' } do |f|
           = f.submit 'Submit', class: 'btn btn-success float-right'

@@ -15,7 +15,9 @@ class Guess < ApplicationRecord
   end
 
   def question_number(trivium)
-    trivium.question_template_ids.index(question_template_id) + 1
+    i = trivium.question_template_ids.index(question_template_id)
+    return unless i
+    i + 1
   end
 
   def question_body
