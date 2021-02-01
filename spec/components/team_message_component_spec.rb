@@ -46,4 +46,42 @@ RSpec.describe TeamMessageComponent, type: :component do
       end
     end
   end
+
+  describe '#body_class' do
+    context 'current_player is the sender' do
+      it 'is alert-secondary' do
+        expect(subject.body_class).to eq 'alert-secondary'
+      end
+    end
+
+    context 'other player is the sender' do
+      include_context 'other_player'
+
+      it "is alert-primary" do
+        expect(subject.body_class).to eq 'alert-primary'
+      end
+    end
+  end
+
+  context '#guessable' do
+    it 'is nil when there is no guess' do
+      expect(subject.guessable).to eq nil
+    end
+  end
+
+  context '#votable' do
+    it 'is nil when you are the sender' do
+      expect(subject.votable).to eq nil
+    end
+
+    it 'is nil when this message is not a guess' do
+      expect(subject.votable).to eq nil
+    end
+  end
+
+  context '#acceptable' do
+    it 'is nil when your guess has not been accepted' do
+      expect(subject.acceptable).to eq nil
+    end
+  end
 end
