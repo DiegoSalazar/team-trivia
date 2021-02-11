@@ -1,4 +1,6 @@
 #chat {
+  height: 90vh;
+
   .card-body {
     position: relative;
     overflow: hidden;
@@ -16,8 +18,6 @@
   overflow-y: scroll;
   scrollbar-width: thin;
   scroll-behavior: smooth;
-  max-height: 75vh;
-  padding-right: 0.3em;
 }
 
 .team-message {

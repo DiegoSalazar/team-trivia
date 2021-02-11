@@ -12,4 +12,4 @@
             = render partial: 'teams/guess_form', locals: { guess: @current_guess, reflex_root: '#questions' }
 
   .col-sm-4
-    = render partial: 'chat', locals: { title: @title, team_messages: @team_messages, player: current_player, trivium: @current_trivium }
+    = render ChatComponent.new @title, @team_messages, current_player, @current_trivium

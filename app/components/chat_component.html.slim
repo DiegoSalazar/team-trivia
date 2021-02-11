@@ -1,0 +1,10 @@
+#chat.d-flex.flex-column.w-100
+  h3.border-bottom.shadow-sm.mb-0.p-1
+    = @title
+
+  .messages id='team_messages' data-controller='team_messages' scrollTop=9999999
+    - @messages.each do |message|
+      = render TeamMessageComponent.new message: message, player: @player, trivium: @trivium
+
+  .flex-shrink-1
+    = render 'team_messages/form'

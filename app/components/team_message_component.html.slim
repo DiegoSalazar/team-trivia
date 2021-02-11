@@ -1,14 +1,12 @@
-li.team-message id= dom_id(message) class= container_class
-  dl
-    dt
-      .text-muted
-        = sender
-        small= " - #{time_ago_in_words created_at} ago"
+.team-message id= dom_id(message) class= container_class
+  .text-muted
+    = sender
+    small= sent_ago
 
-    = guessable
+  = guessable
 
-    dd.message-body.alert.d-inline-block.shadow-sm.p-1.pl-3.pr-3 class= body_class
-      = body
+  .message-body.alert.d-inline-block.shadow-sm.p-0.pl-2.pr-2 class= body_class
+    = body
 
-    = votable
-    = acceptable
+  = votable
+  = acceptable

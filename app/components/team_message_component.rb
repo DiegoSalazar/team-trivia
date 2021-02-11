@@ -19,6 +19,10 @@ class TeamMessageComponent < ViewComponent::Base
     sender? ? 'You' : @message.sender_name
   end
 
+  def sent_ago
+    " - #{time_ago_in_words created_at} ago"
+  end
+
   def container_class
     'text-right' if sender?
   end
