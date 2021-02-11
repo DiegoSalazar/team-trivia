@@ -2,7 +2,6 @@
 
 Rails.application.routes.draw do
   root to: 'trivia#index'
-  devise_for :players
 
   resources :team_messages, only: :create
   resources :joins
@@ -35,4 +34,6 @@ Rails.application.routes.draw do
     get :add_answer
     resources :answer_templates
   end
+
+  devise_for :player
 end
