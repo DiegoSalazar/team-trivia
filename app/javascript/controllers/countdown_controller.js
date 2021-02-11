@@ -1,4 +1,5 @@
 import ApplicationController from './application_controller'
+import Countdown from '../components/countdown.ts'
 
 /* This is the custom StimulusReflex controller for the Countdown Reflex.
  * Learn more at: https://docs.stimulusreflex.com
@@ -22,39 +23,12 @@ export default class extends ApplicationController {
 
     this.startTime = new Date(Date.parse(startTime))
     this.endTime = new Date(Date.parse(endTime))
-    console.log(`Trivia starts on ${this.startTime}`) // debug
-
-    this.startCountdown()
+    this.countdown = new Countdown(this.startTime, this.element)
+    this.countdown.startCountdown()
   }
 
-  startCountdown () {
-    this.updateClock()
-    return setInterval(() => this.updateClock(), 1000)
-  }
-
-  updateClock () {
-    const now = new Date().getTime()
-    const { days, hours, minutes, seconds } = this.calcCountdown(now)
-
-    this.element.innerHTML = this.clock(days, hours, minutes, seconds)
-  }
-
-  clock (days, hours, minutes, seconds) {
-    const parts = []
-    if (days > 0) parts.push(`<span>${days}</span><small>d</small>`)
-    if (hours > 0) parts.push(`<span>${hours}</span><small>h</small>`)
-    if (minutes > 0) parts.push(`<span>${minutes}</span><small>m</small>`)
-    if (seconds > 0) parts.push(`<span>${seconds}</span><small>s</small>`)
-    return parts.join(' ')
-  }
-
-  calcCountdown (to) {
-    const diffMs = this.startTime.getTime() - to
-    const days = Math.floor(diffMs / (1000 * 60 * 60 * 24))
-    const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60))
-    const seconds = Math.floor((diffMs % (1000 * 60)) / 1000)
-
-    return { days, hours, minutes, seconds }
+  disconnect () {
+    super.disconnect()
+    this.countdown.stopCountdown()
   }
 }
