@@ -18,54 +18,43 @@ export default class extends ApplicationController {
 
   connect () {
     super.connect()
-    console.log('Countdown connect') // debug
+    const { startTime, endTime } = this.element.dataset
 
-    const el = this.context.scope.element
-    const { startTime, endTime } = el.dataset
     this.startTime = new Date(Date.parse(startTime))
     this.endTime = new Date(Date.parse(endTime))
     console.log(`Trivia starts on ${this.startTime}`) // debug
+
+    this.startCountdown()
   }
 
-  /* Reflex specific lifecycle methods.
-   *
-   * For every method defined in your Reflex class, a matching set of lifecycle methods become available
-   * in this javascript controller. These are optional, so feel free to delete these stubs if you don't
-   * need them.
-   *
-   * Important:
-   * Make sure to add data-controller="countdown" to your markup alongside
-   * data-reflex="Countdown#dance" for the lifecycle methods to fire properly.
-   *
-   * Example:
-   *
-   *   <a href="#" data-reflex="click->Countdown#dance" data-controller="countdown">Dance!</a>
-   *
-   * Arguments:
-   *
-   *   element - the element that triggered the reflex
-   *             may be different than the Stimulus controller's this.element
-   *
-   *   reflex - the name of the reflex e.g. "Countdown#dance"
-   *
-   *   error/noop - the error message (for reflexError), otherwise null
-   *
-   *   reflexId - a UUID4 or developer-provided unique identifier for each Reflex
-   */
+  startCountdown () {
+    this.updateClock()
+    return setInterval(() => this.updateClock(), 1000)
+  }
 
-  // Assuming you create a "Countdown#dance" action in your Reflex class
-  // you'll be able to use the following lifecycle methods:
+  updateClock () {
+    const now = new Date().getTime()
+    const { days, hours, minutes, seconds } = this.calcCountdown(now)
 
-  // beforeDance(element, reflex, noop, reflexId) {
-  //  element.innerText = 'Putting dance shoes on...'
-  // }
+    this.element.innerHTML = this.clock(days, hours, minutes, seconds)
+  }
 
-  // danceSuccess(element, reflex, noop, reflexId) {
-  //   element.innerText = 'Danced like no one was watching! Was someone watching?'
-  // }
+  clock (days, hours, minutes, seconds) {
+    const parts = []
+    if (days > 0) parts.push(`<span>${days}</span><small>d</small>`)
+    if (hours > 0) parts.push(`<span>${hours}</span><small>h</small>`)
+    if (minutes > 0) parts.push(`<span>${minutes}</span><small>m</small>`)
+    if (seconds > 0) parts.push(`<span>${seconds}</span><small>s</small>`)
+    return parts.join(' ')
+  }
 
-  // danceError(element, reflex, error, reflexId) {
-  //   console.error('danceError', error);
-  //   element.innerText = "Couldn't dance!"
-  // }
+  calcCountdown (to) {
+    const diffMs = this.startTime.getTime() - to
+    const days = Math.floor(diffMs / (1000 * 60 * 60 * 24))
+    const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60))
+    const seconds = Math.floor((diffMs % (1000 * 60)) / 1000)
+
+    return { days, hours, minutes, seconds }
+  }
 }
