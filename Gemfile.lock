@@ -101,6 +101,8 @@ GEM
     factory_bot_rails (6.1.0)
       factory_bot (~> 6.1.0)
       railties (>= 5.0.0)
+    faker (2.16.0)
+      i18n (>= 1.6, < 2)
     ffi (1.13.1)
     formatador (0.2.5)
     globalid (0.4.2)
@@ -343,6 +345,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   devise
   factory_bot_rails (~> 6.1)
+  faker (~> 2.16)
   guard-rspec
   jbuilder (~> 2.7)
   listen (~> 3.2)

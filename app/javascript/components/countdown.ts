@@ -1,11 +1,11 @@
 export default class Countdown {
-  startTimeMs: number
   el: Element
+  startTimeMs: number
   intervalId: number | NodeJS.Timeout
 
-  constructor (startTime: Date, el: Element) {
-    this.startTimeMs = startTime.getTime()
+  constructor (el: Element, startTime: Date) {
     this.el = el
+    this.startTimeMs = startTime.getTime()
   }
 
   startCountdown () {

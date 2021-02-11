@@ -6,3 +6,29 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+ActiveRecord::Base.transaction do
+  player = Player.where(email: ENV['TEAM_TRIVIA_TEST_EM']).first
+
+  if player.nil?
+    binding.pry # debug
+    player = Player.new
+    player.email = ENV['TEAM_TRIVIA_TEST_EM']
+    player.password = ENV['TEAM_TRIVIA_TEST_PW']
+    player.save!
+  end
+
+  3.times do |i|
+    starts_at = ((i + 1) * 10).minutes
+    trivium = FactoryBot.create :trivium, {
+      title: Faker::Marketing.buzzwords,
+      body: Faker::Fantasy::Tolkien.poem,
+      game_starts_at: starts_at.from_now,
+      game_ends_at: (starts_at + 15.minutes).from_now,
+      question_count: 10
+    }
+    trivium.question_templates.each do |question|
+      question.update! body: Faker::Fantasy::Tolkien.poem
+    end
+  end
+end

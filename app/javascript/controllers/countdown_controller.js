@@ -23,7 +23,7 @@ export default class extends ApplicationController {
 
     this.startTime = new Date(Date.parse(startTime))
     this.endTime = new Date(Date.parse(endTime))
-    this.countdown = new Countdown(this.startTime, this.element)
+    this.countdown = new Countdown(this.element, this.startTime)
     this.countdown.startCountdown()
   }
 

@@ -39,6 +39,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'factory_bot_rails', '~> 6.1'
+  gem 'faker', '~> 2.16'
 end
 
 group :development do
