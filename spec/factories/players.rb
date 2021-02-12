@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :player do
-    sequence(:username) { |i| "genius#{i}" }
-    sequence(:email) { |i| "genius#{i}@trivia.com" }
-    password { 'a surprisingly secure password' }
+    username { Faker::Internet.username }
+    email { Faker::Internet.email }
+    password { Faker::Internet.password }
   end
 end

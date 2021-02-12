@@ -1,8 +1,36 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 describe Trivium, type: :model do
   subject { described_class.new attributes }
   let(:attributes) { {} }
+
+  describe '.active' do
+    let(:active) { described_class.active }
+
+    context 'no trivia exist coming up this quarter' do
+      it 'is an empty relation' do
+        expect(active).to be_empty
+      end
+    end
+
+    context 'active trivia' do
+      subject { described_class.active }
+      let!(:active) { create :trivium }
+      let!(:far_future) { create :trivium, :far_future }
+      let!(:expired) { create :trivium, :expired }
+
+      it 'is a trivium instance' do
+        expect(subject).to eq active
+      end
+
+      it 'is has a start time in the future' do
+        expect(subject.game_starts_at).to be > Time.now
+      end
+    end
+  end
 
   describe 'validations' do
     before { subject.valid? }
@@ -40,3 +68,4 @@ describe Trivium, type: :model do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
