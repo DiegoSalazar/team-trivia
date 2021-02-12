@@ -1,0 +1,32 @@
+- model_class = TeamMessage
+
+.row
+  .col-auto
+    h1 Team Messages
+  .col.row.justify-content-end
+    = will_paginate @team_messages, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
+
+.row
+  table.table.table-striped
+    thead
+      tr
+        th= model_class.human_attribute_name(:id)
+        th= model_class.human_attribute_name(:body)
+        th= model_class.human_attribute_name(:trivium_id)
+        th= model_class.human_attribute_name(:team_id)
+        th= model_class.human_attribute_name(:player_id)
+        th= model_class.human_attribute_name(:guess_id)
+        th= model_class.human_attribute_name(:created_at)
+    tbody
+      - @team_messages.each do |team_message|
+        tr
+          td= team_message.id
+          td= team_message.body
+          td= team_message.trivium_id
+          td= team_message.team_id
+          td= team_message.player_id
+          td= team_message.guess_id
+          td=l team_message.created_at
+
+.row.justify-content-end
+  = will_paginate @team_messages, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
