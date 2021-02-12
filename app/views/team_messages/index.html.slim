@@ -28,5 +28,8 @@
           td= team_message.guess_id
           td=l team_message.created_at
 
-.row.justify-content-end
-  = will_paginate @team_messages, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
+.row
+  .col-auto
+    = page_entries_info @team_messages
+  .col.row.justify-content-end
+    = will_paginate @team_messages, renderer: WillPaginate::ActionView::BootstrapLinkRenderer

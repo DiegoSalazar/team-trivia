@@ -8,6 +8,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 ActiveRecord::Base.transaction do
+  puts "Seeding the database!"
   player = Player.where(email: ENV['TEAM_TRIVIA_TEST_EM']).first
 
   if player.nil?

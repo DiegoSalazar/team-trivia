@@ -3,7 +3,7 @@ class QuestionTemplatesController < ApplicationController
   before_action :set_question_template, only: [:destroy, :add_answer]
 
   def index
-    @question_templates = QuestionTemplate.all
+    @question_templates = QuestionTemplate.paginate page: params[:page]
   end
 
   def show
