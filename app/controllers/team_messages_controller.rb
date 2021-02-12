@@ -3,6 +3,10 @@ class TeamMessagesController < ApplicationController
 
   before_action :authenticate_player!
 
+  def index
+    @team_messages = TeamMessage.paginate page: params[:page]
+  end
+
   def create
     message = current_player.team_messages.new team: current_team, trivium: current_trivium
     message.update! message_params

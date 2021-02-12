@@ -11,14 +11,13 @@ ActiveRecord::Base.transaction do
   player = Player.where(email: ENV['TEAM_TRIVIA_TEST_EM']).first
 
   if player.nil?
-    binding.pry # debug
     player = Player.new
     player.email = ENV['TEAM_TRIVIA_TEST_EM']
     player.password = ENV['TEAM_TRIVIA_TEST_PW']
     player.save!
   end
 
-  3.times do |i|
+  (ENV['n'] || 10).times do |i|
     starts_at = ((i + 1) * 10).minutes
     trivium = FactoryBot.create :trivium, {
       title: Faker::Marketing.buzzwords,
