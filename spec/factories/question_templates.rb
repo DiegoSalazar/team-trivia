@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :question_template do
-    body { 'MyText' }
+    body { Faker::Hacker.say_something_smart.sub %r/\W$/, '?' }
   end
 end

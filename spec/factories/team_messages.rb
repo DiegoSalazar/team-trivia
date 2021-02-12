@@ -5,7 +5,7 @@ FactoryBot.define do
     player
     team
     trivium_id {}
-    body { 'MyText' }
+    body { Faker::Hacker.say_something_smart }
 
     factory :guess_message do
       guess

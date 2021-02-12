@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :team do
-    name { 'team 1' }
+    name { Faker::Superhero.name.pluralize }
   end
 end
