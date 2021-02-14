@@ -4,6 +4,7 @@ class TeamMessage < ApplicationRecord
   belongs_to :trivium
   belongs_to :guess, optional: true, dependent: :destroy
 
+  scope :recent, -> { order :created_at, :desc }
   scope :except_for, ->(messages) { where.not messages: { id: messages } }
 
   def sender_name

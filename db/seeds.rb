@@ -8,13 +8,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 ActiveRecord::Base.transaction do
-  puts "Seeding the database!"
+  puts 'Seeding the database!'
   player = Player.where(email: ENV['TEAM_TRIVIA_TEST_EM']).first
+  team = Team.find_or_create_by!(name: 'Test Team')
 
   if player.nil?
     player = Player.new
     player.email = ENV['TEAM_TRIVIA_TEST_EM']
     player.password = ENV['TEAM_TRIVIA_TEST_PW']
+    player.teams << team
     player.save!
   end
 

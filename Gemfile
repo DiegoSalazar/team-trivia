@@ -73,6 +73,5 @@ gem 'slim-rails', '~> 3.2'
 gem 'stimulus_reflex', '~> 3.3'
 gem 'twitter-bootstrap-rails'
 gem 'view_component', '~> 2.24', require: 'view_component/engine'
-gem 'will_paginate', '~> 3.3'
 
 gem "will_paginate-bootstrap4", "~> 0.2.2"

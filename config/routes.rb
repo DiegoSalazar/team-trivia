@@ -35,5 +35,5 @@ Rails.application.routes.draw do
     resources :answer_templates
   end
 
-  devise_for :player
+  devise_for :player, controllers: { sessions: 'player/sessions' }
 end

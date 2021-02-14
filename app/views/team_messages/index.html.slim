@@ -4,7 +4,7 @@
   .col-auto
     h1 Team Messages
   .col.row.justify-content-end
-    = will_paginate @team_messages, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
+    = pagy_bootstrap_nav(@pagy).html_safe
 
 .row
   table.table.table-striped
@@ -28,8 +28,5 @@
           td= team_message.guess_id
           td=l team_message.created_at
 
-.row
-  .col-auto
-    = page_entries_info @team_messages
-  .col.row.justify-content-end
-    = will_paginate @team_messages, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
+.row.justify-content-end
+  = pagy_bootstrap_nav(@pagy).html_safe

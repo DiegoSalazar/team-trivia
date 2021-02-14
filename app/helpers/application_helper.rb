@@ -4,7 +4,7 @@ module ApplicationHelper
   include Pagy::Frontend
 
   def current_play_path
-    return new_join_path if current_team.nil?
+    return teams_path if current_team.nil?
 
     play_team_path current_team
   end

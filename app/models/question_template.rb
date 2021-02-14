@@ -4,6 +4,8 @@ class QuestionTemplate < ApplicationRecord
   has_many :answer_templates
   has_many :guesses
 
+  scope :recent, -> { order created_at: :desc }
+
   # attr_accessor :body
   # attr_accessor :correct_answer
   # attr_accessor :question_type

@@ -1,10 +1,11 @@
 class TeamMessagesController < ApplicationController
+  include Pagy::Backend
   include CableReady::Broadcaster
 
   before_action :authenticate_player!
 
   def index
-    @team_messages = TeamMessage.paginate page: params[:page]
+    @pagy, @team_messages = pagy TeamMessage.recent
   end
 
   def create

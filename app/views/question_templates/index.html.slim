@@ -1,11 +1,8 @@
 .row
-  = link_to 'Create ', new_question_template_url, class: 'btn btn-primary btn-block mb-3'
+  = render CreateQuestionTemplateComponent.new @question_template
 
-.row.align-items-center.justify-content-between
-  .col
-    = page_entries_info @question_templates
-  .col
-    = will_paginate @question_templates, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
+.row.justify-content-end
+  = pagy_bootstrap_nav(@pagy).html_safe
 
 .row
   table.table.table-striped.table-hover
@@ -19,18 +16,12 @@
     tbody
     - @question_templates.each do |template|
       tr
-        td
-          = template.body
-        td
-          = template.correct_answer
-        td
-          = template.question_type
+        td= template.body
+        td= template.correct_answer
+        td= template.question_type
         td
           = form_for(template, method: 'delete') do |f|
-            = f.submit_tag "Destroy", data: { confirm: 'Are you sure you want to permanently delete question' }, class: 'btn btn-block btn-success'
+            = f.submit_tag "Destroy", data: { confirm: 'Are you sure you want to permanently delete question' }, class: 'btn btn-block btn-danger'
 
-.row.align-items-center.justify-content-between
-  .col
-    = page_entries_info @question_templates
-  .col
-    = will_paginate @question_templates, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
+.row.justify-content-end
+  = pagy_bootstrap_nav(@pagy).html_safe
