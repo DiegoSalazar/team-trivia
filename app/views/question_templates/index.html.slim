@@ -1,5 +1,5 @@
-.row
-  = render CreateQuestionTemplateComponent.new @question_template
+#new-question.row
+  = render CreateQuestionTemplateComponent.new nil
 
 .row.justify-content-end
   = pagy_bootstrap_nav(@pagy).html_safe

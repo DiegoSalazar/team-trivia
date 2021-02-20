@@ -21,6 +21,18 @@ export default class Countdown {
     this.el.innerHTML = this.newClock()
   }
 
+  newClock () {
+    const { days, hours, minutes, seconds } = this.calcCountdown()
+    const parts = []
+
+    if (days) parts.push(this.timeLabel(days, 'd'))
+    if (hours) parts.push(this.timeLabel(hours, 'h'))
+    parts.push(this.timeLabel(this.zeroPad(minutes), 'm'))
+    parts.push(this.timeLabel(this.zeroPad(seconds), 's'))
+
+    return parts.join('')
+  }
+
   calcCountdown () {
     const now = new Date().getTime()
     const diff = this.startTimeMs - now
@@ -33,18 +45,6 @@ export default class Countdown {
     const minutes = Math.floor(diff % hour / min)
     const seconds = Math.floor(diff % min / sec)
     return { days, hours, minutes, seconds }
-  }
-
-  newClock () {
-    const { days, hours, minutes, seconds } = this.calcCountdown()
-    const parts = []
-
-    if (days) parts.push(this.timeLabel(days, 'd'))
-    if (hours) parts.push(this.timeLabel(hours, 'h'))
-    parts.push(this.timeLabel(this.zeroPad(minutes), 'm'))
-    parts.push(this.timeLabel(this.zeroPad(seconds), 's'))
-
-    return parts.join('')
   }
 
   timeLabel (time: number | string, label: string) {

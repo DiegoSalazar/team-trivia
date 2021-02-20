@@ -11,8 +11,8 @@ describe Trivium, type: :model do
     let(:active) { described_class.active }
 
     context 'no trivia exist coming up this quarter' do
-      it 'is an empty relation' do
-        expect(active).to be_empty
+      it 'is nil' do
+        expect(active).to be nil
       end
     end
 

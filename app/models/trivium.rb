@@ -13,10 +13,13 @@ class Trivium < ApplicationRecord
   validate :starts_before_it_ends
 
   scope :past, -> { recent.where 'game_ends_at < ?', Time.zone.now }
-  scope :recent, -> { order(game_ends_at: :desc) }
+  scope :recent, -> { order game_ends_at: :desc }
   scope :series, -> { order :game_starts_at }
   scope :upcoming, -> { series.where 'game_starts_at > ?', Time.zone.now }
-  scope :active, -> { upcoming.first }
+
+  def self.active
+    upcoming.first
+  end
 
   def seconds_apart
     game_ends_at.to_i - game_starts_at.to_i

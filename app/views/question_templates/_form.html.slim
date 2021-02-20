@@ -9,7 +9,7 @@
     .col-md-8
       .form-group.row
         = f.label 'Question'
-        = f.text_field :body, class: 'form-control'
+        = f.text_field :body, class: 'form-control', autofocus: true
       .form-group.row
         = f.label 'Correct Answer'
         = f.text_field :correct_answer, class: 'form-control'

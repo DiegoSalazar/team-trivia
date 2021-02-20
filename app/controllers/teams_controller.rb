@@ -7,7 +7,13 @@ class TeamsController < ApplicationController
 
   def play
     @current_trivium = Trivium.active
-    @current_question ||= current_trivium.question_templates.first
+
+    if @current_trivium.nil?
+      redirect_to new_trivium_path, notice: 'No upcoming trivia. Create one!'
+      return
+    end
+
+    @current_question ||= @current_trivium.question_templates.first
     @current_guess = @current_question.guesses.new
     @team_messages = current_team.team_messages
     @title = current_team.chat_title

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -10,7 +11,7 @@
 ActiveRecord::Base.transaction do
   puts 'Seeding the database!'
   player = Player.where(email: ENV['TEAM_TRIVIA_TEST_EM']).first
-  team = Team.find_or_create_by!(name: 'Test Team')
+  team = Team.find_or_create_by!(name: 'Alpha')
 
   if player.nil?
     player = Player.new
@@ -22,15 +23,20 @@ ActiveRecord::Base.transaction do
 
   (ENV['n'] || 10).times do |i|
     starts_at = ((i + 1) * 10).minutes
-    trivium = FactoryBot.create :trivium, {
-      title: Faker::Marketing.buzzwords,
+    trivium = FactoryBot.create \
+      :trivium,
+      title: Faker::Marketing.buzzwords.capitalize,
       body: Faker::Fantasy::Tolkien.poem,
       game_starts_at: starts_at.from_now,
       game_ends_at: (starts_at + 15.minutes).from_now,
       question_count: 10
-    }
     trivium.question_templates.each do |question|
       question.update! body: Faker::Fantasy::Tolkien.poem
     end
+
+    message = FactoryBot.create :team_message, trivium: trivium
   end
+
+rescue => e
+  puts "Seed aborted: #{e.message}"
 end

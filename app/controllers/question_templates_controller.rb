@@ -8,15 +8,12 @@ class QuestionTemplatesController < ApplicationController
     @pagy, @question_templates = pagy QuestionTemplate.recent.paginate page: params[:page]
   end
 
-  def new
-    @question_template = QuestionTemplate.new
-  end
+  def new; end
 
   def create
     question_template = QuestionTemplate.new(question_template_params)
-    binding.pry # debug
 
-    if question_template.save
+    if question_template.save!
       redirect_to action: :index
     else
       render action: :new

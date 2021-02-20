@@ -1,0 +1,20 @@
+- unless render_form?
+  = link_to 'Create ', '#', data: { reflex: 'click->QuestionTemplate#new', disable_with: 'Loading...' }, class: 'btn btn-primary btn-block mb-3'
+
+- if render_form?
+  .col.bg-light.border.shadow.mb-3.pt-2
+    h3 New Question Template
+
+    = form_for @question_template, data: { remote: true } do |f|
+      .form-group
+        = f.label :body
+        = f.text_field :body, class: 'form-control'
+      .form-group
+        = f.label :correct_answer
+        = f.text_field :correct_answer, class: 'form-control'
+      .form-group
+        .row
+          .col
+            = link_to 'Cancel', nil, data: { reflex: 'click->QuestionTemplate#cancel' }, class: 'btn btn-sm btn-secondary btn-block'
+          .col
+            = f.submit 'Add', class: 'btn btn-sm btn-success btn-block'

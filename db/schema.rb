@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_16_194843) do
+ActiveRecord::Schema.define(version: 2021_02_14_160107) do
 
   create_table "answer_templates", force: :cascade do |t|
     t.text "body"
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 2021_01_16_194843) do
     t.text "body"
     t.text "correct_answer"
     t.text "question_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "questions", force: :cascade do |t|
