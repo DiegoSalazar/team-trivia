@@ -10,18 +10,13 @@
 
 ActiveRecord::Base.transaction do
   puts 'Seeding the database!'
-  player = Player.where(email: ENV['TEAM_TRIVIA_TEST_EM']).first
-  team = Team.find_or_create_by!(name: 'Alpha')
+  player = FactoryBot.create :player, email: ENV['TEAM_TRIVIA_TEST_EM']
+  player.password = ENV['TEAM_TRIVIA_TEST_PW']
+  player.save!
+  team = FactoryBot.create :team_with_players
+  player.teams << team
 
-  if player.nil?
-    player = Player.new
-    player.email = ENV['TEAM_TRIVIA_TEST_EM']
-    player.password = ENV['TEAM_TRIVIA_TEST_PW']
-    player.teams << team
-    player.save!
-  end
-
-  (ENV['n'] || 10).times do |i|
+  (ENV['n'] || 10).to_i.times do |i|
     starts_at = ((i + 1) * 10).minutes
     trivium = FactoryBot.create \
       :trivium,
@@ -30,11 +25,19 @@ ActiveRecord::Base.transaction do
       game_starts_at: starts_at.from_now,
       game_ends_at: (starts_at + 15.minutes).from_now,
       question_count: 10
+
     trivium.question_templates.each do |question|
       question.update! body: Faker::Fantasy::Tolkien.poem
+
+      FactoryBot.create \
+        :guess,
+        question_template: question,
+        cached_votes_up: [0, 1].sample
     end
 
-    message = FactoryBot.create :team_message, trivium: trivium
+    team.players.each do |p|˝
+      FactoryBot.create :team_message, trivium: trivium, player: p, team: team
+    end
   end
 
 rescue => e

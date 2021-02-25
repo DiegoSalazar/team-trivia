@@ -1,6 +1,6 @@
 ul#question-list.list-group
   - @questions.each do |question|
     = button_tag class: button_class(question), data: { reflex: 'click->play#select_question', question_id: question.id } do
-      span.badge.badge-pill.badge-info.mr-2= @question_index
+      span.badge.badge-pill.badge-info.mr-2= question_index question
       = question.body
       = render QuestionStatusComponent.new question, active?(question)

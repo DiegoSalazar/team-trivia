@@ -5,13 +5,17 @@ class QuestionListComponent < ViewComponent::Base
     super
     @questions = questions
     @question = question
-    @question_index = trivium.question_index question
+    @trivium = trivium
   end
 
   def button_class(question)
     c = 'list-group-item list-group-item-action'
     c += ' active' if active? question
     c
+  end
+
+  def question_index(question)
+    @trivium.question_index question
   end
 
   private

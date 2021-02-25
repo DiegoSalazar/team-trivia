@@ -3,6 +3,7 @@ class TeamMessagesController < ApplicationController
   include CableReady::Broadcaster
 
   before_action :authenticate_player!
+  before_action :set_current_trivium, only: :create
 
   def index
     @pagy, @team_messages = pagy TeamMessage.recent

@@ -1,23 +1,13 @@
 - model_class = Trivium
 
-.jumbotron
-  .container
-    .row
-      .col
-        h1.display-4 Next Trivia
-      .col
-        .card
-          .card-body.p-0.pt-2.bg-dark.text-light
-            .card-title.text-center
-              h2 00:13:28s
-      .col
-        .row
-          .col
-            = link_to 'Play', current_play_path, class: 'btn btn-primary btn-block'
-            = link_to 'Join', teams_path, class: 'btn btn-primary btn-block' unless current_team
-          .col
-            = link_to 'Contribute', question_templates_path, class: 'btn btn-primary btn-block'
-            = link_to 'New Trivia', new_trivium_path, class: 'btn btn-primary btn-block'
+.row
+  .col-10
+    = render TriviumBannerComponent.new @current_trivium
+  .col
+    = link_to 'Play', current_play_path, class: 'btn btn-primary btn-block'
+    = link_to 'Join', teams_path, class: 'btn btn-primary btn-block' unless current_team
+    = link_to 'Contribute', question_templates_path, class: 'btn btn-primary btn-block'
+    = link_to 'New Trivia', new_trivium_path, class: 'btn btn-primary btn-block'
 
 .row
   .col
