@@ -2,10 +2,12 @@ export default class Countdown {
   el: Element
   startTimeMs: number
   intervalId: number | NodeJS.Timeout
+  onEnded: Function
 
   constructor (el: Element, startTime: Date) {
     this.el = el
     this.startTimeMs = startTime.getTime()
+    this.onEnded = () => {}
   }
 
   startCountdown () {
@@ -18,11 +20,20 @@ export default class Countdown {
   }
 
   updateClock () {
-    this.el.innerHTML = this.newClock()
+    const { days, hours, minutes, seconds } = this.calcCountdown()
+    this.el.innerHTML = this.newClock(days, hours, minutes, seconds)
+
+    if (this.ended(days, hours, minutes, seconds)) {
+      this.stopCountdown()
+      this.onEnded()
+    }
   }
 
-  newClock () {
-    const { days, hours, minutes, seconds } = this.calcCountdown()
+  ended (days: number, hours: number, minutes: number, seconds: number) {
+    return [days, hours, minutes, seconds].every(t => t <= 0)
+  }
+
+  newClock (days, hours, minutes, seconds) {
     const parts = []
 
     if (days) parts.push(this.timeLabel(days, 'd'))

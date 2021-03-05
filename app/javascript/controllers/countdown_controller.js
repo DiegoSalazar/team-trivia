@@ -19,16 +19,29 @@ export default class extends ApplicationController {
 
   connect () {
     super.connect()
-    const { startTime, endTime } = this.element.dataset
+    const { startTime, endTime, redirectTo } = this.element.dataset
 
     this.startTime = new Date(Date.parse(startTime))
     this.endTime = new Date(Date.parse(endTime))
+    this.redirectTo = redirectTo
+
     this.countdown = new Countdown(this.element, this.startTime)
     this.countdown.startCountdown()
+    this.countdown.onEnded = () => this.countdownEnd()
   }
 
   disconnect () {
     super.disconnect()
     this.countdown.stopCountdown()
+  }
+
+  countdownEnd () {
+    console.log('Redirecting to: ', this.redirectTo) // debug
+
+    setTimeout(() => {
+      if (confirm('Game ready! Go see the answer reveal?')) {
+        window.location = this.redirectTo
+      }
+    }, 1000);
   }
 }
