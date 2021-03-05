@@ -1,0 +1,6 @@
+.row
+  .col
+    = render TriviumBannerComponent.new @current_trivium, show_countdown: false
+
+.row
+  pre= @current_trivium.to_json
