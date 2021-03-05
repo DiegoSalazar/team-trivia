@@ -1,16 +1,13 @@
 # frozen_string_literal: true
 
 class TriviumBannerComponent < ViewComponent::Base
-  def initialize(trivium)
+  def initialize(trivium, title: trivium.title, hint: trivium.body, show_countdown: true)
     super
     @trivium = trivium
-    @title = trivium.title
-    @body = trivium.body
-    @start_time = l trivium.game_starts_at, format: :iso8601
-    @end_time = l trivium.game_ends_at, format: :iso8601
-  end
-
-  def starts_at
-    l @trivium.game_starts_at, format: :short
+    @title = title
+    @body = hint
+    @show_countdown = show_countdown
+    @start_time = trivium.game_starts_at
+    @end_time = trivium.game_ends_at
   end
 end

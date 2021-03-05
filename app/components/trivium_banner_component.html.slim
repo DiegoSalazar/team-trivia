@@ -5,11 +5,4 @@
         h1= @title
         p= @body
       .col
-        .card.align-middle
-          .card-body.p-0.pt-2.bg-dark.text-light
-            .card-title.text-center
-              h2 data-controller='countdown' data-start-time=@start_time data-end-time=@end_time
-                = starts_at
-
-        = form_for Submission.new, html: { class: 'form mt-3' } do |f|
-          = f.submit 'Submit', class: 'btn btn-sm btn-success float-right'
+        = render CountdownComponent.new @start_time, @end_time, redirect_to: reveal_trivium_path(@trivium), show: @show_countdown
