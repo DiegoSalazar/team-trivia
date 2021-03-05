@@ -3,4 +3,4 @@
     = render TriviumBannerComponent.new @current_trivium, show_countdown: false
 
 .row
-  pre= @current_trivium.to_json
+  pre= JSON.pretty_generate @current_trivium.as_json
