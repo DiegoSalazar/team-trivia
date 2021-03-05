@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   end
   resources :trivia do
     member do
+      get :reveal
       get :add_question
       post :create_question
       post :delete_question
