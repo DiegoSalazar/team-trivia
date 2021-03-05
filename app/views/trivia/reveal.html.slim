@@ -3,7 +3,9 @@
     = render TriviumBannerComponent.new @current_trivium, show_countdown: false
 
 .row
-  = render TriviumStatsComponent.new @current_trivium
+  .col
+    = render TriviumStatsComponent.new @current_trivium
 
 .row
-  = render TriviumRevealComponent.new @current_trivium
+  .col
+    = render TriviumRevealComponent.new @current_trivium

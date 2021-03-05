@@ -1,1 +1,6 @@
-div Add TriviumReveal template here
+h2 Questions
+
+ul.list-group.list-group-flush
+  - @questions.each do |question|
+    li.list-group-item.list-group-item-action
+      = render QuestionRevealComponent.new question, @trivium.question_index(question)
