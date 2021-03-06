@@ -5,7 +5,18 @@
 .guesses-chart {
   gap: 1rem;
 
-  .guess-bar {
+  .guess-bar-wrap {
     flex-grow: 1;
+    max-width: 34%;
+
+    .guess-bar {
+      height: 10rem;
+
+      .unit {
+        height: 10%;
+        line-height: 0.5rem;
+        text-shadow: 1px 1px 1px #b8b8b8;
+      }
+    }
   }
 }
