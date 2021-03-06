@@ -1,12 +1,15 @@
 div.border-bottom.shadow-sm
-  pre
-    | Guesses:
-    = @question.guesses.map &:value
-  pre
+  p
     | Correct Answer:
     = @question.correct_answer
 
   .guesses-chart.d-flex.justify-content-around
     - @question.aggregated_guesses.each do |guess|
-      .guess-bar.shadow-sm.border.bg-secondary.p-1.text-center.text-light
-        = guess.value
+      .guess-bar-wrap
+        .small.text-center
+          = percent_of_similar_guesses guess
+
+        .guess-bar.d-flex.flex-column.justify-content-end.shadow-sm.border.p-1.text-center.bg-light
+          - guess.similarity_ratio.times do |i|
+            .unit.bg-secondary.text-light class="unit-#{i}"
+              = value_for_middle_unit guess, i
