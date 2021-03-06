@@ -13,10 +13,14 @@ class Guess < ApplicationRecord
   scope :by_most_votes, -> { order cached_votes_up: :desc }
   scope :accepted, -> { where 'cached_votes_up > 0' }
 
+  def similarity_ratio
+    (same_count_percent_of(question_template.guesses.count) / 10.0).ceil
+  end
+
   def same_count_percent_of(num)
-    (self.same_count / num.to_f * 100).to_i
-  rescue NoMethodError => e
-    raise e, 'Can only use this method on an aggregated guess'
+    (same_count / num.to_f * 100).to_i
+  rescue NameError => e
+    raise e, 'Can only use this method on an aggregated_guess'
   end
 
   def accepted?
