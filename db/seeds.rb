@@ -42,8 +42,16 @@ ActiveRecord::Base.transaction do
   team = FactoryBot.create :team_with_players
   player.teams << team
 
+  player2 = FactoryBot.create :player, email: ENV['TEAM_TRIVIA_TEST_EM2']
+  player2.password = ENV['TEAM_TRIVIA_TEST_PW2']
+  player2.save!
+  player2.teams << team
+
   num = (ENV['n'] || 20).to_i
-  num.times { |i| create_trivia i, team }
+  num.times do |i|
+    create_trivia i, team
+    print ?.
+  end
 
 rescue RuntimeError => e
   $stderr.warn 'Seed aborted'
