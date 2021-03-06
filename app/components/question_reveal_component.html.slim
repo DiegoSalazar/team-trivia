@@ -1,4 +1,13 @@
 .d-flex.w-100.justify-content-between
-  small= @question_index
-  h3= @question.body
-  small 17 Answers
+  div
+    span.badge.badge-pill.badge-info.mt-2
+      = @question_index
+
+  h3.col-10
+    = @question.body
+
+  div.mt-2
+    = render QuestionStatusComponent.new @question
+
+div
+  | CHART OF ANSWERS
