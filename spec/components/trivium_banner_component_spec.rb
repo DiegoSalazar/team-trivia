@@ -6,17 +6,20 @@ RSpec.describe TriviumBannerComponent, type: :component do
   subject { described_class.new trivium }
   let(:trivium) { create :trivium }
 
+  it 'renders the trivium title' do
+    expect(render_inline(subject).to_html).to include trivium.title
+  end
+
   it 'renders the trivium body' do
     expect(render_inline(subject).to_html).to include trivium.body
   end
 
-  describe '#starts_at' do
-    it 'is a string' do
-      expect(subject.starts_at).to be_a String
-    end
+  it 'renders a countdown' do
+    expect(render_inline(subject).to_html).to include 'countdown'
+  end
 
-    it 'displays the trivium start time' do
-      expect(subject.starts_at).to eq I18n.l(trivium.game_starts_at, format: :short)
-    end
+  it 'allows to not render a countdown' do
+    subject = described_class.new trivium, show_countdown: false
+    expect(render_inline(subject).to_html).to_not include 'countdown'
   end
 end

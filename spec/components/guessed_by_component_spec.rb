@@ -15,10 +15,6 @@ RSpec.describe GuessedByComponent, type: :component do
     let(:message) { create :guess_message, player: other_player, trivium: trivium, guess: guess }
   end
 
-  it 'renders the message text' do
-    expect(render_inline(subject).to_html).to include message.body
-  end
-
   context 'question_badge' do
     it 'is a label with the question number' do
       expect(subject.question_badge).to eq 'Guess for Q #2'
@@ -27,7 +23,7 @@ RSpec.describe GuessedByComponent, type: :component do
 
   context 'question_title' do
     it 'has expected value' do
-      expect(subject.question_title).to eq "Question #2: MyText"
+      expect(subject.question_title).to eq "Question #2: #{question_template.body}"
     end
   end
 
