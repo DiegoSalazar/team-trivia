@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Guess, type: :model do
   subject! { create :guess, :with_owners, question_template: question }
-  let!(:question) { create :question_template }
+  let(:question) { create :question_template }
 
   describe '#same_count_percent_of' do
     let(:aggregated_guess) { question.aggregated_guesses.first }
