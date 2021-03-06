@@ -4,15 +4,16 @@ require 'rails_helper'
 
 RSpec.describe GuessedByComponent, type: :component do
   subject { described_class.new message, player, trivium }
+  let(:guess) { create :guess, question_template: question_template, player: player, team: team, trivium: trivium }
   let(:trivium) { create :trivium }
   let(:question_template) { trivium.question_templates.last }
-  let(:guess) { create :guess, question_template: question_template }
-  let(:message) { create :guess_message, player: player, trivium: trivium, guess: guess }
+  let(:message) { create :guess_message, guess: guess, question_template: question_template, player: player, trivium: trivium }
   let(:player) { create :player }
+  let(:team) { create :team }
 
   shared_context 'They are the sender' do
     let(:other_player) { create :player }
-    let(:message) { create :guess_message, player: other_player, trivium: trivium, guess: guess }
+    let(:message) { create :guess_message, question_template: question_template, player: other_player, team: team, trivium: trivium, guess: guess }
   end
 
   context 'question_badge' do
@@ -34,7 +35,7 @@ RSpec.describe GuessedByComponent, type: :component do
 
     context 'my guess was accepted' do
       let(:other_player) { create :player }
-      before { other_player.vote_up_for guess }
+      before { guess.vote_by voter: other_player }
 
       it 'is expected value' do
         expect(subject.badge_class).to start_with 'badge-light'

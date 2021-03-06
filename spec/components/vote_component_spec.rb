@@ -6,7 +6,8 @@ RSpec.describe VoteComponent, type: :component do
   subject { described_class.new player, guess }
   before { guess.liked_by player }
   let(:player) { create :player }
-  let(:guess) { create :guess }
+  let(:guess) { create :guess, :with_owners, question_template: question_template }
+  let(:question_template) { create :question_template }
 
   describe '#link_class' do
     it 'is a string' do

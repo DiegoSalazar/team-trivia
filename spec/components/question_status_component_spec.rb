@@ -4,7 +4,8 @@ require 'rails_helper'
 
 RSpec.describe QuestionStatusComponent, type: :component do
   subject { described_class.new guess.question_template, active }
-  let(:guess) { create :guess }
+  let(:guess) { create :guess, :with_owners, question_template: question_template }
+  let(:question_template) { create :question_template }
   let(:active) { true }
 
   it 'renders guess and vote counts' do
@@ -25,7 +26,7 @@ RSpec.describe QuestionStatusComponent, type: :component do
     end
 
     context 'when the question has no accepted guesses but is active' do
-      let(:guess) { create :guess, cached_votes_up: 0 }
+      let(:guess) { create :guess, :with_owners, question_template: question_template, cached_votes_up: 0 }
 
       it 'is the primary style' do
         expect(subject.css_class).to eq 'badge-light'
@@ -34,7 +35,7 @@ RSpec.describe QuestionStatusComponent, type: :component do
 
     context 'question has no votes and is not active' do
       let(:active){ false }
-      let(:guess) { create :guess, cached_votes_up: 0 }
+      let(:guess) { create :guess, :with_owners, question_template: question_template, cached_votes_up: 0 }
 
       it 'is the primary style' do
         expect(subject.css_class).to eq 'badge-primary'
@@ -48,7 +49,7 @@ RSpec.describe QuestionStatusComponent, type: :component do
     end
 
     context '1 guess and no votes' do
-      let(:guess) { create :guess, cached_votes_up: 0 }
+      let(:guess) { create :guess, :with_owners, question_template: question_template, cached_votes_up: 0 }
       subject { described_class.new guess.question_template, active }
 
       it 'is the number of guesses over the number of guesses with votes' do
