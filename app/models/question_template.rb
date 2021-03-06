@@ -6,9 +6,12 @@ class QuestionTemplate < ApplicationRecord
 
   scope :recent, -> { order created_at: :desc }
 
-  # attr_accessor :body
-  # attr_accessor :correct_answer
-  # attr_accessor :question_type
+  def aggregated_guesses
+    guesses
+      .select('COUNT(*) AS same_count, *')
+      .group('LOWER(value)')
+      .order 'LOWER(value)'
+  end
 
   def num_accepted_guesses
     guesses.accepted.count
