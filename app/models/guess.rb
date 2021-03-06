@@ -13,14 +13,19 @@ class Guess < ApplicationRecord
   scope :by_most_votes, -> { order cached_votes_up: :desc }
   scope :accepted, -> { where 'cached_votes_up > 0' }
 
+  def same_count_percent_of(num)
+    (self.same_count / num.to_f * 100).to_i
+  rescue NoMethodError => e
+    raise e, 'Can only use this method on an aggregated guess'
+  end
+
   def accepted?
-    cached_votes_total > 0
+    cached_votes_total.positive?
   end
 
   def question_number(trivium)
     i = trivium.question_template_ids.index(question_template_id)
-    return unless i
-    i + 1
+    i + 1 if i
   end
 
   def question_body
