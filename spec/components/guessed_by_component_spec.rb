@@ -18,7 +18,7 @@ RSpec.describe GuessedByComponent, type: :component do
 
   context 'question_badge' do
     it 'is a label with the question number' do
-      expect(subject.question_badge).to eq 'Guess for Q #2'
+      expect(subject.question_badge).to eq 'Q #2'
     end
   end
 
@@ -30,7 +30,7 @@ RSpec.describe GuessedByComponent, type: :component do
 
   context 'badge_class' do
     it 'has a default value' do
-      expect(subject.badge_class).to start_with 'badge-warning'
+      expect(subject.badge_class).to start_with 'badge-danger'
     end
 
     context 'my guess was accepted' do

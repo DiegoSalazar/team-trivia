@@ -3,4 +3,5 @@
     = f.label :value, 'Type your answer or guess', class: 'sr-only'
     = f.text_area :value, required: true, placeholder: 'Type your answer or guess', class: 'form-control'
     = f.hidden_field :question_template_id
+    = f.hidden_field :trivium_id
   = f.submit 'Submit', class: 'btn btn-success btn-block'

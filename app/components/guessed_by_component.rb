@@ -16,7 +16,7 @@ class GuessedByComponent < ViewComponent::Base
   end
 
   def question_badge
-    "Guess for Q ##@question_number"
+    "Q ##@question_number"
   end
 
   def question_title
@@ -24,7 +24,7 @@ class GuessedByComponent < ViewComponent::Base
   end
 
   def badge_class
-    klass = 'badge-warning'
+    klass = 'badge-danger'
     klass = 'badge-light' if my_guess_accepted?
     klass = 'badge-dark' if their_guess_accepted?
     klass += ' my-guess' if sender?

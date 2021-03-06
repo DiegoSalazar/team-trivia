@@ -28,10 +28,11 @@ class TeamMessageComponent < ViewComponent::Base
   end
 
   def body_class
-    alert_class = sender? ? 'secondary' : 'primary'
-    alert_class = 'success border shadow' if their_guess_accepted?
-    alert_class = 'dark border shadow' if my_guess_accepted?
-    "alert-#{alert_class}"
+    klass = sender? ? 'secondary' : 'primary'
+    klass = 'warning' if @guess.present?
+    klass = 'success border shadow' if their_guess_accepted?
+    klass = 'dark border shadow' if my_guess_accepted?
+    "alert-#{klass}"
   end
 
   def guessable

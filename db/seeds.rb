@@ -22,14 +22,24 @@ def create_trivia(i, team, offset = ENV['offset'])
   trivium.question_templates.each do |question|
     question.update! body: Faker::Fantasy::Tolkien.poem
 
-    FactoryBot.create \
-      :guess,
-      question_template: question,
-      cached_votes_up: [0, 1].sample
   end
 
-  team.players.each do |p|
-    FactoryBot.create :team_message, trivium: trivium, player: p, team: team
+  team.players.each do |player|
+    FactoryBot.create \
+      :guess_message,
+      question_template: trivium.question_templates.sample,
+      player: player,
+      team: team,
+      trivium: trivium,
+      cached_votes_up: [0, 1].sample
+
+    next if [true, false].sample
+
+    FactoryBot.create \
+      :team_message,
+      trivium: trivium,
+      player: player,
+      team: team
   end
 end
 
@@ -49,8 +59,8 @@ ActiveRecord::Base.transaction do
 
   num = (ENV['n'] || 20).to_i
   num.times do |i|
-    create_trivia i, team
     print ?.
+    create_trivia i, team
   end
 
 rescue RuntimeError => e

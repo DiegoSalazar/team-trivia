@@ -5,18 +5,18 @@ class GuessesReflex < ApplicationReflex
 
   def create
     @current_team = current_player.current_team
-    current_trivium = Trivium.active
-    guess = Guess.create! guess_params
+    guess = Guess.new guess_params
+    trivium = guess.trivium
     guess.player = current_player
     guess.team = @current_team
-    guess.trivium = current_trivium
+    guess.save!
     @current_question = guess.question_template
     # Create the Guess for this QuestionTemplate
 
     # Create a voteable Message for this Guess
     message = current_player.team_messages.create! \
       team: @current_team,
-      trivium: current_trivium,
+      trivium: trivium,
       guess: guess
 
     # Upvoted question status
@@ -34,7 +34,7 @@ class GuessesReflex < ApplicationReflex
         html: controller.render(TeamMessageComponent.new(
           message: message,
           player: player,
-          trivium: current_trivium
+          trivium: trivium
         ))
 
       # Update question status
@@ -51,7 +51,7 @@ class GuessesReflex < ApplicationReflex
       html: controller.render(TeamMessageComponent.new(
         message: message,
         player: current_player,
-        trivium: current_trivium
+        trivium: trivium
       ))
 
     # Clear the guess form
@@ -81,6 +81,6 @@ class GuessesReflex < ApplicationReflex
   private
 
   def guess_params
-    params.require(:guess).permit :value, :question_template_id
+    params.require(:guess).permit :value, :question_template_id, :trivium_id
   end
 end

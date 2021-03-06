@@ -6,6 +6,10 @@ class Team < ApplicationRecord
   has_many :team_messages
   has_many :guesses
 
+  def team_messages_from(trivium)
+    team_messages.where trivium: trivium
+  end
+
   def chat_room
     "team-#{id}"
   end
