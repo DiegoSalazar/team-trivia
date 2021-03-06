@@ -8,7 +8,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-def create_trivia(i, team, offset = ENV['offset'])
+def create_random_trivia(i, team, offset = ENV['offset'])
   offset = (offset || 20).to_i
   starts_at = (i.succ * offset).seconds
   trivium = FactoryBot.create \
@@ -21,7 +21,6 @@ def create_trivia(i, team, offset = ENV['offset'])
 
   trivium.question_templates.each do |question|
     question.update! body: Faker::Fantasy::Tolkien.poem
-
   end
 
   team.players.each do |player|
@@ -60,7 +59,7 @@ ActiveRecord::Base.transaction do
   num = (ENV['n'] || 20).to_i
   num.times do |i|
     print ?.
-    create_trivia i, team
+    create_random_trivia i, team
   end
 
 rescue RuntimeError => e
