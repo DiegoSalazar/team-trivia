@@ -52,8 +52,8 @@ RSpec.describe QuestionStatusComponent, type: :component do
       let(:guess) { create :guess, :with_owners, question_template: question_template, cached_votes_up: 0 }
       subject { described_class.new guess.question_template, active }
 
-      it 'is the number of guesses over the number of guesses with votes' do
-        expect(subject.status).to eq '1 / 0'
+      it 'is the number of accepted guesses over the total guesses' do
+        expect(subject.status).to eq '0 / 1'
       end
     end
 

@@ -6,7 +6,7 @@ class QuestionStatusComponent < ViewComponent::Base
   def initialize(question, active = false)
     @question = question
     @active = active
-    @title = 'Guesses / Votes'
+    @title = 'Accepted / Guesses'
   end
 
   def id
@@ -21,6 +21,6 @@ class QuestionStatusComponent < ViewComponent::Base
   end
 
   def status
-    "#{@question.guesses.count} / #{@question.num_accepted_guesses}"
+    "#{@question.num_accepted_guesses} / #{@question.guesses.count}"
   end
 end

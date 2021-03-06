@@ -32,6 +32,7 @@ class TeamMessageComponent < ViewComponent::Base
     klass = 'warning' if @guess.present?
     klass = 'success border shadow' if their_guess_accepted?
     klass = 'dark border shadow' if my_guess_accepted?
+
     "alert-#{klass}"
   end
 
