@@ -7,6 +7,9 @@ class GuessesReflex < ApplicationReflex
     @current_team = current_player.current_team
     current_trivium = Trivium.active
     guess = Guess.create! guess_params
+    guess.player = current_player
+    guess.team = @current_team
+    guess.trivium = current_trivium
     @current_question = guess.question_template
     # Create the Guess for this QuestionTemplate
 

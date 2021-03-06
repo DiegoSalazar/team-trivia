@@ -3,6 +3,7 @@
 class Trivium < ApplicationRecord
   has_many :trivium_questions
   has_many :question_templates, through: :trivium_questions
+  has_many :guesses
 
   validates :title, presence: true
   validates :body, presence: { message: 'should include a hint' }

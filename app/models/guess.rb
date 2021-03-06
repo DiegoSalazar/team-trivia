@@ -3,6 +3,9 @@
 class Guess < ApplicationRecord
   acts_as_votable
 
+  belongs_to :player
+  belongs_to :team
+  belongs_to :trivium
   belongs_to :question_template
   belongs_to :submission, optional: true
   has_one :team_message

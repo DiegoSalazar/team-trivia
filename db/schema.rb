@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_14_160107) do
+ActiveRecord::Schema.define(version: 2021_03_06_045253) do
 
   create_table "answer_templates", force: :cascade do |t|
     t.text "body"
@@ -32,6 +32,11 @@ ActiveRecord::Schema.define(version: 2021_02_14_160107) do
     t.integer "cached_weighted_score", default: 0
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
+    t.integer "player_id"
+    t.integer "team_id"
+    t.integer "trivium_id"
+    t.index ["trivium_id", "player_id"], name: "index_guesses_on_trivium_id_and_player_id"
+    t.index ["trivium_id", "team_id"], name: "index_guesses_on_trivium_id_and_team_id"
   end
 
   create_table "joins", force: :cascade do |t|

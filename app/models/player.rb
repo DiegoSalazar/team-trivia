@@ -10,6 +10,7 @@ class Player < ApplicationRecord
   has_many :joins
   has_many :teams, through: :joins
   has_many :team_messages
+  has_many :guesses
 
   def username
     email.split(?@).first

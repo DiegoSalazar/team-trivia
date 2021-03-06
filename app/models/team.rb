@@ -4,6 +4,7 @@ class Team < ApplicationRecord
   has_many :joins
   has_many :players, through: :joins
   has_many :team_messages
+  has_many :guesses
 
   def chat_room
     "team-#{id}"
