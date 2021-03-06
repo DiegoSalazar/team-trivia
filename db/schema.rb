@@ -18,16 +18,6 @@ ActiveRecord::Schema.define(version: 2021_02_14_160107) do
     t.index ["question_template_id"], name: "index_answer_templates_on_question_template_id"
   end
 
-  create_table "answers", force: :cascade do |t|
-    t.integer "submission_id"
-    t.integer "question_id"
-    t.integer "user_id"
-    t.integer "vote_count"
-    t.text "value"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "guesses", force: :cascade do |t|
     t.integer "submission_id"
     t.text "value"
@@ -78,15 +68,6 @@ ActiveRecord::Schema.define(version: 2021_02_14_160107) do
     t.text "question_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "questions", force: :cascade do |t|
-    t.integer "trivium_id"
-    t.text "body"
-    t.text "answer_type"
-    t.text "correct_value"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "submissions", force: :cascade do |t|
