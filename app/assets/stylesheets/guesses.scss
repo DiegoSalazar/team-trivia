@@ -1,3 +1,11 @@
 // Place all the styles related to the Guesses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.guesses-chart {
+  gap: 1rem;
+
+  .guess-bar {
+    flex-grow: 1;
+  }
+}

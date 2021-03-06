@@ -1,0 +1,12 @@
+div.border-bottom.shadow-sm
+  pre
+    | Guesses:
+    = @question.guesses.map &:value
+  pre
+    | Correct Answer:
+    = @question.correct_answer
+
+  .guesses-chart.d-flex.justify-content-around
+    - @question.aggregated_guesses.each do |guess|
+      .guess-bar.shadow-sm.border.bg-secondary.p-1.text-center.text-light
+        = guess.value
