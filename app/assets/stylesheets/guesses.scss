@@ -3,37 +3,7 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 #trivium-reveal {
-  .list-group-item, .list-group-item > div {
-    height: 0;
-    opacity: 0;
-    transition: 1s;
-  }
-  .list-group-item {
-    padding: 0;
 
-    &.revealed, &.revealed > div {
-      height: auto;
-      opacity: 1;
-    }
-
-    &.revealed {
-      padding: 0.75rem 1.25rem;
-    }
-  }
-
-  .list-group-item {
-    .unit {
-      background-color: grey;
-      color: #efefef;
-    }
-
-    &.active {
-      .unit {
-        background-color: #efefef;
-        color: grey;
-      }
-    }
-  }
 }
 
 .guesses-chart {
