@@ -1,7 +1,7 @@
-import CableReady from "cable_ready";
-import consumer from "./consumer"
+import CableReady from 'cable_ready'
+import consumer from './consumer'
 
-consumer.subscriptions.create("TeamMessagesChannel", {
+consumer.subscriptions.create('TeamMessagesChannel', {
   connected() {
     // Called when the subscription is ready for use on the server
     const messages = document.getElementById('team_messages')
