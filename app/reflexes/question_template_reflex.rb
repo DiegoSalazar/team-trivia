@@ -28,6 +28,7 @@ class QuestionTemplateReflex < ApplicationReflex
         name: klass
     end
 
+    # Deactivate previous question
     if @current_question_revealed
       cable_ready['trivium_reveal'].remove_css_class \
         selector: "#question_template_#{@current_question_revealed}",

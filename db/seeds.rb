@@ -61,8 +61,10 @@ ActiveRecord::Base.transaction do
     print ?.
     create_random_trivia i, team
   end
+  puts
 
 rescue RuntimeError => e
+  puts
   $stderr.warn 'Seed aborted'
   raise e
 end
