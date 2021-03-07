@@ -7,5 +7,5 @@
     = render TriviumStatsComponent.new @current_trivium
 
 .row
-  .col
-    = render TriviumRevealComponent.new @current_trivium
+  .col#trivium-reveal-wrap
+    = render TriviumRevealComponent.new @current_trivium, @reveal_status, @current_question_revealed
