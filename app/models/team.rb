@@ -5,6 +5,7 @@ class Team < ApplicationRecord
   has_many :players, through: :joins
   has_many :team_messages
   has_many :guesses
+  has_many :submissions
 
   def team_messages_from(trivium)
     team_messages.where trivium: trivium
