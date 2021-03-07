@@ -4,16 +4,16 @@ require 'rails_helper'
 
 RSpec.describe GuessedByComponent, type: :component do
   subject { described_class.new message, player, trivium }
-  let(:guess) { create :guess, question_template: question_template, player: player, team: team, trivium: trivium }
+  let(:guess) { create :guess, question: question, player: player, team: team, trivium: trivium }
   let(:trivium) { create :trivium }
-  let(:question_template) { trivium.question_templates.last }
-  let(:message) { create :guess_message, guess: guess, question_template: question_template, player: player, trivium: trivium }
+  let(:question) { trivium.questions.last }
+  let(:message) { create :guess_message, guess: guess, question: question, player: player, trivium: trivium }
   let(:player) { create :player }
   let(:team) { create :team }
 
   shared_context 'They are the sender' do
     let(:other_player) { create :player }
-    let(:message) { create :guess_message, question_template: question_template, player: other_player, team: team, trivium: trivium, guess: guess }
+    let(:message) { create :guess_message, question: question, player: other_player, team: team, trivium: trivium, guess: guess }
   end
 
   context 'question_badge' do
@@ -24,7 +24,7 @@ RSpec.describe GuessedByComponent, type: :component do
 
   context 'question_title' do
     it 'has expected value' do
-      expect(subject.question_title).to eq "Question #2: #{question_template.body}"
+      expect(subject.question_title).to eq "Question #2: #{question.body}"
     end
   end
 

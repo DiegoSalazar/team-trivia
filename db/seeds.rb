@@ -19,14 +19,14 @@ def create_random_trivia(i, team, offset = ENV['offset'])
     game_ends_at: (starts_at + 15.minutes).from_now,
     question_count: 10
 
-  trivium.question_templates.each do |question|
+  trivium.questions.each do |question|
     question.update! body: Faker::Fantasy::Tolkien.poem
   end
 
   team.players.each do |player|
     FactoryBot.create \
       :guess_message,
-      question_template: trivium.question_templates.sample,
+      question: trivium.questions.sample,
       player: player,
       team: team,
       trivium: trivium,

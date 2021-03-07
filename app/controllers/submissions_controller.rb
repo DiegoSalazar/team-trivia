@@ -29,11 +29,11 @@ class SubmissionsController < ApplicationController
     @submission = Submission.find_by(submission_params) || Submission.create(submission_params)
     # Init guesses with likes starts with 0
     if @submission.guesses.length == 0
-      @trivium.question_templates.each do |question_template|
-        question_template.answer_templates.each do |answer_template|
+      @trivium.questions.each do |question|
+        question.answer_templates.each do |answer_template|
           guess = Guess.create!(
             submission_id: @submission.id,
-            question_template_id: question_template.id,
+            question_id: question.id,
             value: answer_template.body
           )
         end
@@ -86,7 +86,7 @@ class SubmissionsController < ApplicationController
     if (params[:guess].present?)
       Guess.create!(
         submission_id: params[:submission_id],
-        question_template_id: params[:question_template_id],
+        question_id: params[:question_id],
         value: params[:guess]
       )
       redirect_back(fallback_location: root_path)

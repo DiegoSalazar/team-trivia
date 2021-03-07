@@ -1,4 +1,4 @@
-/ = javascript_include_tag 'question_template'
+/ = javascript_include_tag 'question'
 br
 h2 Create New Question
 = form_with url: "/trivia/#{@trivium.id}/create_question", method: :post do |f|
@@ -30,7 +30,7 @@ table.table.table-striped
       td
 
   tbody
-  - QuestionTemplate.all.each do |q|
+  - Question.all.each do |q|
     tr
       td
         = q.body
@@ -38,5 +38,5 @@ table.table.table-striped
         = q.correct_answer
       td
         = form_with(url: "/trivia/#{@trivium.id}/create_question", method: :post) do |f|
-          = f.hidden_field "question_template_id", value: q.id
+          = f.hidden_field "question_id", value: q.id
           = f.submit_tag "Select", class: 'btn btn-block btn-success'

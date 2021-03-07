@@ -38,15 +38,15 @@
           td
 
       tbody
-      - @trivium_questions&.each do |q|
+      - @questions&.each do |q|
         tr
           td
-            = q.question_template.body
+            = q.body
           td
-            = q.question_template.correct_answer
+            = q.correct_answer
           td
-            = q.question_template.question_type
+            = q.question_type
           td
             = form_with(url: "/trivia/#{@trivium.id}/delete_question", method: 'post') do |f|
-              = f.hidden_field "trivium_question_id", value: q.id
+              = f.hidden_field "question_id", value: q.id
               = f.submit_tag "Destroy", class: 'btn btn-block btn-success'

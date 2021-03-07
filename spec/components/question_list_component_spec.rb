@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe QuestionListComponent, type: :component do
   subject { described_class.new questions, question, trivium }
-  let(:questions) { create_list :question_template, 2 }
+  let(:questions) { create_list :question, 2 }
   let(:question) { questions.last }
   let(:trivium) { create :trivium }
 

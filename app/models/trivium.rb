@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class Trivium < ApplicationRecord
-  has_many :trivium_questions
-  has_many :question_templates, through: :trivium_questions
+  has_many :questions
   has_many :guesses
 
   validates :title, presence: true
@@ -27,7 +26,7 @@ class Trivium < ApplicationRecord
   end
 
   def question_index(question)
-    i = question_template_ids.index(question.id)
+    i = question_ids.index(question.id)
     i ? i + 1 : -1
   end
 

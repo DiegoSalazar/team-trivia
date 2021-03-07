@@ -7,7 +7,7 @@ class TeamsController < ApplicationController
   before_action :set_team, only: %i[show edit update destroy]
 
   def play
-    @current_question ||= current_trivium.question_templates.first
+    @current_question ||= current_trivium.questions.first
     @current_guess = @current_question.guesses.new trivium: current_trivium
     @team_messages = current_team.team_messages_from current_trivium
     @title = current_team.chat_title

@@ -3,14 +3,14 @@
 require 'rails_helper'
 
 describe Guess, type: :model do
-  subject! { create :guess, :with_owners, question_template: question }
-  let(:question) { create :question_template }
+  subject! { create :guess, :with_owners, question: question }
+  let(:question) { create :question }
   let(:aggregated_guess) { question.aggregated_guesses.first }
 
   shared_context 'Similar Guesses' do
     before do
       values.each do |v|
-        create :guess, :with_owners, value: v, question_template: question
+        create :guess, :with_owners, value: v, question: question
       end
     end
 

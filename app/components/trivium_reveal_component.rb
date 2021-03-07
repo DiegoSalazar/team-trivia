@@ -4,7 +4,7 @@ class TriviumRevealComponent < ViewComponent::Base
   def initialize(trivium, reveal_status, current_question_revealed)
     super
     @trivium = trivium
-    @questions = trivium.question_templates.recent
+    @questions = trivium.questions.recent
     @reveal_status = reveal_status
     @current_question_revealed = current_question_revealed
   end
@@ -16,7 +16,7 @@ class TriviumRevealComponent < ViewComponent::Base
       'Next Question',
       class: 'btn btn-success',
       data: {
-        reflex: 'click->QuestionTemplate#reveal',
+        reflex: 'click->Question#reveal',
         trivium_id: @trivium.id
       }
   end

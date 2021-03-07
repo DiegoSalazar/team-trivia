@@ -10,8 +10,8 @@ class GuessesReflex < ApplicationReflex
     guess.player = current_player
     guess.team = @current_team
     guess.save!
-    @current_question = guess.question_template
-    # Create the Guess for this QuestionTemplate
+    @current_question = guess.question
+    # Create the Guess for this Question
 
     # Create a voteable Message for this Guess
     message = current_player.team_messages.create! \
@@ -81,6 +81,6 @@ class GuessesReflex < ApplicationReflex
   private
 
   def guess_params
-    params.require(:guess).permit :value, :question_template_id, :trivium_id
+    params.require(:guess).permit :value, :question_id, :trivium_id
   end
 end

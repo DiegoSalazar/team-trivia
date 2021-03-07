@@ -10,20 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_06_045253) do
-
-  create_table "answer_templates", force: :cascade do |t|
-    t.text "body"
-    t.integer "question_template_id", null: false
-    t.index ["question_template_id"], name: "index_answer_templates_on_question_template_id"
-  end
+ActiveRecord::Schema.define(version: 2021_03_07_031135) do
 
   create_table "guesses", force: :cascade do |t|
     t.integer "submission_id"
+    t.integer "question_id"
     t.text "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "question_template_id", null: false
     t.integer "likes", default: 0
     t.integer "cached_votes_total", default: 0
     t.integer "cached_votes_score", default: 0
@@ -67,12 +61,13 @@ ActiveRecord::Schema.define(version: 2021_03_06_045253) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "question_templates", force: :cascade do |t|
+  create_table "questions", force: :cascade do |t|
     t.text "body"
     t.text "correct_answer"
     t.text "question_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer "trivium_id"
   end
 
   create_table "submissions", force: :cascade do |t|
@@ -110,13 +105,6 @@ ActiveRecord::Schema.define(version: 2021_03_06_045253) do
     t.integer "max_questions", default: 20, null: false
   end
 
-  create_table "trivium_questions", force: :cascade do |t|
-    t.integer "trivium_id", null: false
-    t.integer "question_template_id", null: false
-    t.index ["question_template_id"], name: "index_trivium_questions_on_question_template_id"
-    t.index ["trivium_id"], name: "index_trivium_questions_on_trivium_id"
-  end
-
   create_table "votes", force: :cascade do |t|
     t.string "votable_type"
     t.integer "votable_id"
@@ -133,7 +121,4 @@ ActiveRecord::Schema.define(version: 2021_03_06_045253) do
     t.index ["voter_type", "voter_id"], name: "index_votes_on_voter_type_and_voter_id"
   end
 
-  add_foreign_key "answer_templates", "question_templates"
-  add_foreign_key "trivium_questions", "question_templates"
-  add_foreign_key "trivium_questions", "trivia"
 end

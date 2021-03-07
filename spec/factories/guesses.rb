@@ -6,6 +6,7 @@ FactoryBot.define do
       end.sample
     end
     cached_votes_up { 1 }
+    question_id {}
 
     trait :with_owners do
       player

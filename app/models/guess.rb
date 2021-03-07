@@ -6,7 +6,7 @@ class Guess < ApplicationRecord
   belongs_to :player
   belongs_to :team
   belongs_to :trivium
-  belongs_to :question_template
+  belongs_to :question
   belongs_to :submission, optional: true
   has_one :team_message
 
@@ -14,7 +14,7 @@ class Guess < ApplicationRecord
   scope :accepted, -> { where 'cached_votes_up > 0' }
 
   def similarity_ratio
-    (same_count_percent_of(question_template.guesses.count) / 10.0).ceil
+    (same_count_percent_of(question.guesses.count) / 10.0).ceil
   end
 
   def same_count_percent_of(num)
@@ -28,11 +28,11 @@ class Guess < ApplicationRecord
   end
 
   def question_number(trivium)
-    i = trivium.question_template_ids.index(question_template_id)
+    i = trivium.question_ids.index(question_id)
     i + 1 if i
   end
 
   def question_body
-    question_template.body
+    question.body
   end
 end

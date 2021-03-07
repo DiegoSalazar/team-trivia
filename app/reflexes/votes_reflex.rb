@@ -25,7 +25,7 @@ class VotesReflex < ApplicationReflex
   def create
     @current_trivium = Trivium.find element.dataset.trivium_id
     @current_guess = Guess.find element.dataset.guess_id
-    @current_question = @current_guess.question_template
+    @current_question = @current_guess.question
     @current_team = current_player.current_team
     @title = @current_team.chat_title
     @team_messages = @current_team.team_messages

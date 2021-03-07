@@ -5,7 +5,7 @@ class Submission < ApplicationRecord
   belongs_to :team
   has_many :guesses
 
-  def guesses_of(question_template_id)
-    guesses.select { |guess| guess.question_template_id == question_template_id }
+  def guesses_of(question_id)
+    guesses.select { |guess| guess.question_id == question_id }
   end
 end

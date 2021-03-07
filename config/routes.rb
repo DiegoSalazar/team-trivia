@@ -31,7 +31,7 @@ Rails.application.routes.draw do
       resource :submission, only: [:edit, :show]
     end
   end
-  resources :question_templates do
+  resources :questions do
     get :add_answer
     resources :answer_templates
   end

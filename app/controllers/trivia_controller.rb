@@ -23,7 +23,7 @@ class TriviaController < ApplicationController
   # GET /trivia/1
   # GET /trivia/1.json
   def show
-    @trivium_questions = @trivium.trivium_questions
+    @questions = @trivium.questions
   end
 
   # GET /trivia/new
@@ -81,20 +81,19 @@ class TriviaController < ApplicationController
   end
 
   def add_question
-    @question_template = QuestionTemplate.new
+    @question = Question.new
     render 'trivia/add_question'
   end
 
   def create_question
-    question = params[:question_template_id].present? ? QuestionTemplate.find(params[:question_template_id]) : QuestionTemplate.create(body: params[:body], correct_answer: params[:correct_answer])
-    TriviumQuestion.create(trivium: @trivium, question_template: question)
+    question = params[:question_id].present? ? Question.find(params[:question_id]) : Question.create(body: params[:body], correct_answer: params[:correct_answer])
+    TriviumQuestion.create(trivium: @trivium, question: question)
 
     redirect_to @trivium
   end
 
   def delete_question
-    TriviumQuestion.find(params[:trivium_question_id]).destroy!
-
+    Question.find(params[:question_id]).destroy!
     redirect_to @trivium
   end
 
@@ -113,7 +112,7 @@ class TriviaController < ApplicationController
   def init_reveal_status
     return if session[:reveal_status].present?
 
-    ids = @current_trivium.question_template_ids
+    ids = @current_trivium.question_ids
     session[:reveal_status] = ids.zip([false] * ids.size).to_h
     session[:current_question_revealed] = nil
   end

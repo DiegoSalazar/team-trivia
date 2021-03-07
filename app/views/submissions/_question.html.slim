@@ -8,7 +8,7 @@
   = form_with url: "/submissions/#{submission.id}/add_guess", method: :post do |f|
     = f.label 'Add a guess'
     = f.text_field :guess
-    = hidden_field_tag(:question_template_id, question.id)
+    = hidden_field_tag(:question_id, question.id)
     = f.submit 'Submit'
   ul.list-group
     - submission.guesses_of(question.id).each do |guess|

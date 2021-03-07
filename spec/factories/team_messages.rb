@@ -9,19 +9,20 @@ FactoryBot.define do
 
     factory :guess_message do
       transient do
-        question_template {}
+        question {}
         cached_votes_up {}
       end
 
       after(:create) do |guess_message, evaluator|
-        guess_message.guess = evaluator.guess || create(
+        guess = evaluator.guess || create(
           :guess,
-          question_template: evaluator.question_template,
+          question: evaluator.question,
           player: evaluator.player,
           team: evaluator.team,
           trivium: evaluator.trivium,
           cached_votes_up: evaluator.cached_votes_up
         )
+        guess_message.guess = guess
         guess_message.save!
       end
     end
