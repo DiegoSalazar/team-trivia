@@ -1,6 +1,7 @@
-h2 Questions
+.d-flex.justify-content-between
+  h2 Questions
+  = reveal_next_question_btn
 
-ul.list-group.list-group-flush
+ul#trivium-reveal.list-group.list-group-flush
   - @questions.each do |question|
-    li.list-group-item.list-group-item-action
-      = render QuestionRevealComponent.new question, @trivium.question_index(question)
+    = render QuestionRevealComponent.new question, @trivium.question_index(question), @reveal_status, @current_question_revealed

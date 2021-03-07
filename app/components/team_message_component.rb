@@ -45,7 +45,7 @@ class TeamMessageComponent < ViewComponent::Base
   def votable
     return if sender? || @guess.blank?
 
-    controller.render VoteComponent.new @player, @guess
+    controller.render VoteComponent.new @player, @guess, @trivium
   end
 
   def acceptable
