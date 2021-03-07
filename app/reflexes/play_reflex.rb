@@ -23,6 +23,7 @@ class PlayReflex < ApplicationReflex
   # Learn more at: https://docs.stimulusreflex.com
 
   def select_question
-    @current_question = Trivium.active.question_templates.find element.dataset.question_id
+    @current_trivium = Trivium.find element.dataset.trivium_id
+    @current_question = @current_trivium.question_templates.find element.dataset.question_id
   end
 end
