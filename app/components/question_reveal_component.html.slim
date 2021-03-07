@@ -1,12 +1,13 @@
-.d-flex.w-100.justify-content-between
-  div
-    span.badge.badge-pill.badge-info.mt-2
-      = @question_index
+li.list-group-item.list-group-item-action id= dom_id(@question) class= reveal_status(@question)
+  .d-flex.w-100.justify-content-between
+    div
+      span.badge.badge-pill.badge-info.mt-2
+        = @question_index
 
-  h3.col-11
-    = @question.body
+    h3.col-11
+      = @question.body
 
-  div.mt-2
-    = render QuestionStatusComponent.new @question
+    div.mt-2
+      = render QuestionStatusComponent.new @question
 
-= render GuessesChartComponent.new @question
+  = render GuessesChartComponent.new @question, active?(@question)
