@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class AnswerTemplate < ApplicationRecord
+class Answer < ApplicationRecord
   belongs_to :question
 end

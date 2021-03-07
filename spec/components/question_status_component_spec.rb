@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe QuestionStatusComponent, type: :component do
   subject { described_class.new guess.question, active }
   let(:guess) { create :guess, :with_owners, question: question }
-  let(:question) { create :question }
+  let(:question) { create :question, :with_trivium }
   let(:active) { true }
 
   it 'renders guess and vote counts' do

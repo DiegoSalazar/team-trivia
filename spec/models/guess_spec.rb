@@ -4,8 +4,10 @@ require 'rails_helper'
 
 describe Guess, type: :model do
   subject! { create :guess, :with_owners, question: question }
-  let(:question) { create :question }
+  let(:question) { create :question, :with_trivium }
   let(:aggregated_guess) { question.aggregated_guesses.first }
+
+  after { Guess.delete_all }
 
   shared_context 'Similar Guesses' do
     before do

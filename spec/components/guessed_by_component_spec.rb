@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe GuessedByComponent, type: :component do
   subject { described_class.new message, player, trivium }
   let(:guess) { create :guess, question: question, player: player, team: team, trivium: trivium }
-  let(:trivium) { create :trivium }
+  let(:trivium) { create :trivium, :with_messages }
   let(:question) { trivium.questions.last }
   let(:message) { create :guess_message, guess: guess, question: question, player: player, trivium: trivium }
   let(:player) { create :player }

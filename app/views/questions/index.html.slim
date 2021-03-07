@@ -1,0 +1,27 @@
+#new-question.row
+  = render CreateQuestionComponent.new nil
+
+.row.justify-content-end
+  = pagy_bootstrap_nav(@pagy).html_safe
+
+.row
+  table.table.table-striped.table-hover
+    thead
+      tr
+        td Question
+        td Correct Answer
+        td Question Type
+        td
+
+    tbody
+    - @questions.each do |template|
+      tr
+        td= template.body
+        td= template.correct_answer
+        td= template.question_type
+        td
+          = form_for(template, method: 'delete') do |f|
+            = f.submit_tag "Destroy", data: { confirm: 'Are you sure you want to permanently delete question' }, class: 'btn btn-block btn-danger'
+
+.row.justify-content-end
+  = pagy_bootstrap_nav(@pagy).html_safe
