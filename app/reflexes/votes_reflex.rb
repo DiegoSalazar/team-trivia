@@ -23,7 +23,7 @@ class VotesReflex < ApplicationReflex
   # Learn more at: https://docs.stimulusreflex.com
 
   def create
-    @current_trivium = Trivium.active
+    @current_trivium = Trivium.find element.dataset.trivium_id
     @current_guess = Guess.find element.dataset.guess_id
     @current_question = @current_guess.question_template
     @current_team = current_player.current_team
