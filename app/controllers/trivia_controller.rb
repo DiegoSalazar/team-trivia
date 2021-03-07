@@ -3,12 +3,15 @@
 class TriviaController < ApplicationController
   include Pagy::Backend
 
+  before_action :authenticate_player!, except: :index
   before_action :set_current_trivium, only: :index
   before_action :set_trivium, only: %i[reveal show edit update destroy add_question create_question delete_question]
-  before_action :authenticate_player!, except: :index
 
   def reveal
     @current_trivium = @trivium
+    init_reveal_status
+    @reveal_status = session[:reveal_status]
+    @current_question_revealed = session[:current_question_revealed]
   end
 
   # GET /trivia
@@ -105,5 +108,13 @@ class TriviaController < ApplicationController
   # Only allow a list of trusted parameters through.
   def trivium_params
     params.require(:trivium).permit(:title, :body, :game_starts_at, :game_ends_at)
+  end
+
+  def init_reveal_status
+    return if session[:reveal_status].present?
+
+    ids = @current_trivium.question_template_ids
+    session[:reveal_status] = ids.zip([false] * ids.size).to_h
+    session[:current_question_revealed] = nil
   end
 end
