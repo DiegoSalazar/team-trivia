@@ -43,7 +43,7 @@ def create_random_trivia(i, team, offset = ENV['offset'])
 end
 
 ActiveRecord::Base.transaction do
-  puts 'Seeding the database!'
+  puts 'Creating randomized Trivia...'
 
   player = FactoryBot.create :player, email: ENV['TEAM_TRIVIA_TEST_EM']
   player.password = ENV['TEAM_TRIVIA_TEST_PW']
