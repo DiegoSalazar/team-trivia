@@ -13,7 +13,7 @@ FactoryBot.define do
       game_starts_at { 3.hours.ago }
     end
 
-    trait :with_messages do
+    trait :populated do
       transient do
         team_messages_count { 2 }
         guess_messages_count { 2 }

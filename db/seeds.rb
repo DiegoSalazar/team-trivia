@@ -13,6 +13,7 @@ def create_random_trivia(i, team, offset = ENV['offset'])
   starts_at = (i.succ * offset).seconds
   trivium = FactoryBot.create \
     :trivium,
+    :populated,
     title: Faker::Marketing.buzzwords.capitalize,
     body: Faker::Fantasy::Tolkien.poem,
     game_starts_at: starts_at.from_now,
