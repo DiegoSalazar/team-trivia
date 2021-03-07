@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class VoteComponent < ViewComponent::Base
-  attr_reader :player, :guess, :reflex_root
-
-  def initialize(player, guess, reflex_root: '#chat')
+  def initialize(player, guess, trivium, reflex_root: '#chat')
     @player = player
     @guess = guess
+    @trivium = trivium
     @reflex_root = reflex_root
   end
 
