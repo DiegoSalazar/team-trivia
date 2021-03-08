@@ -1,9 +1,12 @@
 #trivium-reveal {
-  .list-group-item, .list-group-item > div {
+  .list-group-item,
+  .list-group-item > div,
+  .list-group-item .guess-bar {
     height: 0;
     opacity: 0;
     transition: 1s;
   }
+
   .list-group-item {
     padding: 0;
 
@@ -15,6 +18,17 @@
     &.revealed {
       padding: 0.75rem 1.25rem;
       margin-bottom: 2rem;
+    }
+  }
+
+  .revealed {
+    .guesses-chart {
+      .guess-bar-wrap {
+        .guess-bar {
+          height: 10rem;
+          opacity: 1;
+        }
+      }
     }
   }
 
@@ -32,6 +46,33 @@
       .unit {
         background-color: #efefef;
         color: grey;
+      }
+    }
+  }
+
+  .guesses-chart {
+    gap: 1rem;
+
+    .guess-bar-wrap {
+      flex-grow: 1;
+      max-width: 34%;
+    }
+  }
+
+  .guess-bar {
+    height: 10rem;
+    font-size: 0.8rem;
+
+    .unit {
+      height: 10%;
+      line-height: 0.8rem;
+      text-shadow: 1px 1px 1px #b8b8b8;
+    }
+
+    &.correct {
+      .unit {
+        background-color: var(--success);
+        color: var(--light)
       }
     }
   }
