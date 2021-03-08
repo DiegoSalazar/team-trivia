@@ -1,13 +1,15 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-RSpec.describe TriviumRevealComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+require 'rails_helper'
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+describe TriviumRevealComponent, type: :component do
+  subject { described_class.new trivium, reveal_status, current_question_revealed }
+  let(:trivium) { create :trivium, :populated }
+  let(:reveal_status) { {} }
+  let(:current_question_revealed) { nil }
+  let(:question) { trivium.questions.sample }
+
+  it 'renders the questions' do
+    expect(render_inline(subject).to_html).to include question.body
+  end
 end

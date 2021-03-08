@@ -1,13 +1,16 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-RSpec.describe QuestionRevealComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+require 'rails_helper'
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+describe QuestionRevealComponent, type: :component do
+  subject { described_class.new question, question_index, reveal_status, current_question_revealed }
+  let(:question) { create :question, trivium: trivium }
+  let(:trivium) { create :trivium, :populated }
+  let(:question_index) { 0 }
+  let(:reveal_status) { {} }
+  let(:current_question_revealed) { }
+
+  it 'renders guesses' do
+    expect(render_inline(subject).to_html).to eq ''
+  end
 end

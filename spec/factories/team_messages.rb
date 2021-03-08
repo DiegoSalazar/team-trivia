@@ -4,8 +4,11 @@ FactoryBot.define do
   factory :team_message do
     player
     team
-    trivium_id {}
     body { Faker::Hacker.say_something_smart }
+
+    trait :with_trivium do
+      trivium
+    end
 
     factory :guess_message do
       transient do

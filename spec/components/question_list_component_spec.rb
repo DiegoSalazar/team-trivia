@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe QuestionListComponent, type: :component do
+describe QuestionListComponent, type: :component do
   subject { described_class.new questions, question, trivium }
   let(:questions) { create_list :question, 2, trivium: trivium }
   let(:question) { questions.last }
