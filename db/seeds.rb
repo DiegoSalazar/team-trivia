@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Usage:
+#   rake db:seed t=TEAM_COUNT s=START_OFFSET_IN_MINS e=END_OFFSET_IN_MINS
+
 def create_realistic_trivium(questions, team_count, starts_at, ends_at)
   puts 'Creating Trivia'
   trivium = FactoryBot.create :trivium, title: 'Mixed Trivia', body: 'A mysterious hint'
@@ -72,11 +75,11 @@ ActiveRecord::Base.transaction do
   player2.save!
   player2.teams << team
 
-  starts_at = 20.seconds.from_now
-  ends_at = starts_at + (ENV['e'] || 1.1).minutes
+  starts_at = 1.minute.from_now
   starts_at = ENV['s'].to_i.minutes.from_now if ENV['mins'].present?
+  ends_at = starts_at + (ENV['e'] || 1.2).minutes
   questions = JSON.parse File.read 'db/questions.json'
-  team_count = (ENV['teams'] || 5).to_i
+  team_count = (ENV['t'] || 3).to_i
 
   create_realistic_trivium questions, team_count, starts_at, ends_at
   puts 'Done'
