@@ -12,9 +12,9 @@ class QuestionReflex < ApplicationReflex
   end
 
   def reveal
-    @reveal_status = session[:reveal_status]
     @current_question_revealed = session[:current_question_revealed]
-    next_question_id, _ = @reveal_status.detect { |_, v| !v }
+    @reveal_status = session[:reveal_status]
+    next_question_id, _ = @reveal_status&.detect { |_, revealed| !revealed }
     return if next_question_id.nil?
 
     @reveal_status[next_question_id] = true
