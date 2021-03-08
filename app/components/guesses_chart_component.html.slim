@@ -1,7 +1,7 @@
 div
   p
     | Correct Answer:
-    = @question.correct_answer
+    = ' ' + @question.answers.first.value
 
   .guesses-chart.d-flex.justify-content-around
     - @question.aggregated_guesses.each do |guess|

@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :team do
     name { Faker::Superhero.name.pluralize }
 
-    factory :team_with_players do
+    trait :with_players do
       transient do
         player_count { 5 }
       end
