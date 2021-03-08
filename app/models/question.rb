@@ -21,4 +21,8 @@ class Question < ApplicationRecord
   def accepted_guess
     guesses.by_most_votes.first
   end
+
+  def correct?(guess)
+    guess.question.answers.any? { |answer| guess === answer }
+  end
 end

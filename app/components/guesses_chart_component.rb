@@ -15,4 +15,8 @@ class GuessesChartComponent < ViewComponent::Base
   def value_for_middle_unit(guess, i)
     guess.value if i == guess.similarity_ratio / 2
   end
+
+  def answer_status(guess)
+    'correct' if @question.correct? guess
+  end
 end

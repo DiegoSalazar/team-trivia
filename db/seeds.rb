@@ -40,6 +40,8 @@ def create_realistic_trivium(questions, team_count, starts_at, ends_at)
 
     puts "\nVoting on Guesses for Team #{t}"
     team.players.each do |player|
+      next if rand > 0.7
+
       team.guesses.each do |guess|
         next if rand > 0.7
 
@@ -55,21 +57,21 @@ def create_realistic_trivium(questions, team_count, starts_at, ends_at)
 end
 
 def create_guess_for(player, question, team, trivium)
-  attributes = { player: player, question: question, team: team, trivium: trivium }
-  attributes[:value] = question.answers.first.value if rand > 0.3
+  attributes = { player: player, question: question, team: team, trivium: trivium, cached_votes_up: 0 }
+  attributes[:value] = question.answers.first.value if rand > 0.5
   FactoryBot.create :guess, attributes
 end
 
 ActiveRecord::Base.transaction do
-  puts 'Creating Player 1'
+  puts 'Creating Player 0'
   player = FactoryBot.create :player, email: ENV['TEAM_TRIVIA_TEST_EM']
   player.password = ENV['TEAM_TRIVIA_TEST_PW']
   player.save!
-  puts 'Creating Team 1'
+  puts 'Creating Team 0'
   team = FactoryBot.create :team, :with_players
   player.teams << team
 
-  puts 'Creating Player 2'
+  puts 'Creating Player 1'
   player2 = FactoryBot.create :player, email: ENV['TEAM_TRIVIA_TEST_EM2']
   player2.password = ENV['TEAM_TRIVIA_TEST_PW2']
   player2.save!

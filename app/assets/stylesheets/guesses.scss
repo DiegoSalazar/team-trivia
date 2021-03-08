@@ -3,23 +3,29 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 #trivium-reveal {
+  .guesses-chart {
+    gap: 1rem;
 
-}
+    .guess-bar-wrap {
+      flex-grow: 1;
+      max-width: 34%;
 
-.guesses-chart {
-  gap: 1rem;
+      .guess-bar {
+        height: 10rem;
+        font-size: 0.8rem;
 
-  .guess-bar-wrap {
-    flex-grow: 1;
-    max-width: 34%;
+        .unit {
+          height: 10%;
+          line-height: 0.8rem;
+          text-shadow: 1px 1px 1px #b8b8b8;
+        }
 
-    .guess-bar {
-      height: 10rem;
-
-      .unit {
-        height: 10%;
-        line-height: 0.5rem;
-        text-shadow: 1px 1px 1px #b8b8b8;
+        &.correct {
+          .unit {
+            background-color: var(--success);
+            color: var(--light)
+          }
+        }
       }
     }
   }
