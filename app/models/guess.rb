@@ -31,6 +31,10 @@ class Guess < ApplicationRecord
     cached_votes_total.positive?
   end
 
+  def correct?
+    question.correct? self
+  end
+
   def question_number(trivium)
     i = trivium.question_ids.index(question_id)
     i + 1 if i
