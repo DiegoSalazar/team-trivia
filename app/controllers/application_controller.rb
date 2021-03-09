@@ -17,10 +17,6 @@ class ApplicationController < ActionController::Base
 
   def set_current_trivium
     @current_trivium = Trivium.active
-
-    if @current_trivium.nil?
-      redirect_to new_trivium_path, notice: 'No upcoming trivia. Create one!'
-    end
   end
 
   private

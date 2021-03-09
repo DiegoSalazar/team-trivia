@@ -18,6 +18,11 @@ class TriviaController < ApplicationController
   # GET /trivia
   # GET /trivia.json
   def index
+    if current_trivium.nil?
+      redirect_to new_trivium_path, notice: 'No upcoming trivia. Create one!'
+      return
+    end
+
     @pagy, @trivia = pagy Trivium.recent
   end
 
