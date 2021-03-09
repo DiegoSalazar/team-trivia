@@ -71,19 +71,21 @@ def create_guess_for(player, question, team, trivium)
 end
 
 ActiveRecord::Base.transaction do
-  puts 'Creating Player 0'
-  player = FactoryBot.create :player, email: ENV['TEAM_TRIVIA_TEST_EM']
-  player.password = ENV['TEAM_TRIVIA_TEST_PW']
-  player.save!
-  puts 'Creating Team 0'
-  team = FactoryBot.create :team, :with_players
-  player.teams << team
+  if Player.count.zero?
+    puts 'Creating Player 0'
+    player = FactoryBot.create :player, email: ENV['TEAM_TRIVIA_TEST_EM']
+    player.password = ENV['TEAM_TRIVIA_TEST_PW']
+    player.save!
+    puts 'Creating Team 0'
+    team = FactoryBot.create :team, :with_players
+    player.teams << team
 
-  puts 'Creating Player 1'
-  player2 = FactoryBot.create :player, email: ENV['TEAM_TRIVIA_TEST_EM2']
-  player2.password = ENV['TEAM_TRIVIA_TEST_PW2']
-  player2.save!
-  player2.teams << team
+    puts 'Creating Player 1'
+    player2 = FactoryBot.create :player, email: ENV['TEAM_TRIVIA_TEST_EM2']
+    player2.password = ENV['TEAM_TRIVIA_TEST_PW2']
+    player2.save!
+    player2.teams << team
+  end
 
   questions = JSON.parse File.read 'db/questions.json'
   starts_at = 1.minute.from_now
