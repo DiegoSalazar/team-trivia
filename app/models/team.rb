@@ -18,4 +18,15 @@ class Team < ApplicationRecord
   def chat_title
     "Team #{name.titleize} Chat"
   end
+
+  def top_guesses_for_all(questions)
+    questions.map { |q| top_guess_for q }.compact
+  end
+
+  def top_guess_for(question)
+    guesses
+      .where(question_id: question.id)
+      .order(cached_votes_up: :desc)
+      .last
+  end
 end
