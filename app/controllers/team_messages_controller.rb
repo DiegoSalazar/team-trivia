@@ -41,8 +41,9 @@ class TeamMessagesController < ApplicationController
       focus_selector: '#team_message_body',
       html: render_to_string(partial: 'team_messages/form')
 
+    # Trigger explicit team message event so we can scroll the chat
     cable_ready[current_player.chat_channel].dispatch_event(
-      name: 'new-team-message',
+      name: 'team-message',
       selector: '#team_messages'
     )
 
