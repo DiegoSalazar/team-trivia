@@ -43,6 +43,10 @@ class Trivium < ApplicationRecord
     questions.all?(&:answer_revealed?)
   end
 
+  def ended?
+    Time.zone.now.to_datetime >= game_ends_at.in_time_zone(Time.zone)
+  end
+
   private
 
   def starts_before_it_ends
