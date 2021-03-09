@@ -84,8 +84,7 @@ ActiveRecord::Schema.define(version: 2021_03_09_053336) do
     t.integer "team_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "correct_count", default: 0
-    t.integer "total", default: 0
+    t.integer "score", default: 0
   end
 
   create_table "team_messages", force: :cascade do |t|

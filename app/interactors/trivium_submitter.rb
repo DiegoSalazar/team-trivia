@@ -17,11 +17,10 @@ class TriviumSubmitter
     guesses = @trivium.guesses.includes :team, question: :answers
     teams = guesses.map(&:team).uniq
 
-    teams.each do |team|
-      team.submissions.create! \
-        correct_count: score(team),
-        total: @trivium.questions.count,
-        trivium: @trivium
+    Team.transaction do
+      teams.each do |team|
+        team.submissions.create! score: score(team), trivium: @trivium
+      end
     end
   end
 
