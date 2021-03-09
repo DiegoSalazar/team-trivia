@@ -21,18 +21,19 @@ class QuestionReflex < ApplicationReflex
     if next_question && active_question.nil?
       reveal_and_mark_active! next_question
 
-    elsif active_question&.question_revealed?
+    elsif active_question.question_revealed?
       cable_ready['trivium_reveal'].add_css_class \
         selector: "#question_#{active_question.id} [data-guess-value='#{active_question.answer}']",
         name: 'correct'
       active_question.answer_revealed!
-      set_next_button 'Next Question', ['btn-success', 'btn-danger']
 
       if trivium.all_questions_revealed?
-        set_next_button 'Done', ['btn-warning', 'btn-success']
+        set_next_button 'Done', %w[btn-warning btn-danger]
+      else
+        set_next_button 'Next Question', %w[btn-success btn-danger]
       end
 
-    elsif next_question && active_question&.answer_revealed?
+    elsif active_question.answer_revealed?
       cable_ready['trivium_reveal'].remove_css_class \
         selector: "#question_#{active_question.id}",
         name: 'active'
@@ -55,7 +56,7 @@ class QuestionReflex < ApplicationReflex
 
     question.question_revealed!
     question.update! active: true
-    set_next_button 'Reveal Answer', ['btn-danger', 'btn-success']
+    set_next_button 'Reveal Answer', %w[btn-danger btn-success]
   end
 
   def set_next_button(text, (add_class, remove_class))
