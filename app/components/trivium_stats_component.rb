@@ -13,8 +13,8 @@ class TriviumStatsComponent < ViewComponent::Base
       { label: 'Guesses', value: guess_count },
       { label: 'Votes', value: vote_count },
       { label: 'Correct', value: correct_count },
-      { label: 'Top Score', value: top_score },
-      { label: 'Average Score', value: average_score }
+      { label: 'Average Score', value: average_score },
+      { label: 'Top Score', value: top_score }
     ]
   end
 
