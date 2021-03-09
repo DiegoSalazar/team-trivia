@@ -1,19 +1,18 @@
 # frozen_string_literal: true
 
 class TriviumRevealComponent < ViewComponent::Base
-  def initialize(trivium, reveal_status, current_question_revealed)
+  def initialize(trivium)
     super
     @trivium = trivium
     @questions = trivium.questions.recent
-    @reveal_status = reveal_status
-    @current_question_revealed = current_question_revealed
   end
 
   def reveal_next_question_btn
     return if all_questions_revealed?
 
     button_tag \
-      'Next Question',
+      button_text,
+      id: 'next-question-btn',
       class: 'btn btn-success',
       data: {
         reflex: 'click->Question#reveal',
@@ -22,6 +21,12 @@ class TriviumRevealComponent < ViewComponent::Base
   end
 
   def all_questions_revealed?
-    @reveal_status.all? { |_, v| v }
+    @trivium.all_questions_revealed?
+  end
+
+  def button_text
+    text = 'Next Question'
+    text = 'Reveal Answer' if @trivium.active_question&.question_revealed?
+    text
   end
 end

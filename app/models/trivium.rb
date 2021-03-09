@@ -31,6 +31,18 @@ class Trivium < ApplicationRecord
     i ? i + 1 : -1
   end
 
+  def first_unrevealed_question
+    questions.detect { |q| q.unrevealed? && !q.active? }
+  end
+
+  def active_question
+    questions.find &:active?
+  end
+
+  def all_questions_revealed?
+    questions.all?(&:answer_revealed?)
+  end
+
   private
 
   def starts_before_it_ends

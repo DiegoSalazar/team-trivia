@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class GuessesChartComponent < ViewComponent::Base
-  def initialize(question, active)
+  def initialize(question)
     super
     @question = question
-    @active = active
     @guesses_count = question.guesses.count
   end
 
@@ -17,6 +16,6 @@ class GuessesChartComponent < ViewComponent::Base
   end
 
   def answer_status(guess)
-    'correct' if @question.correct? guess
+    'correct' if @question.show_answer? && @question.correct?(guess)
   end
 end

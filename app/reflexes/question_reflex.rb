@@ -12,31 +12,58 @@ class QuestionReflex < ApplicationReflex
   end
 
   def reveal
-    @current_question_revealed = session[:current_question_revealed]
-    @reveal_status = session[:reveal_status]
-    next_question_id, _ = @reveal_status&.detect { |_, revealed| !revealed }
-    return if next_question_id.nil?
+    trivium = Trivium.find element.dataset.trivium_id
+    return if trivium.all_questions_revealed?
 
-    @reveal_status[next_question_id] = true
-    session[:reveal_status] = @reveal_status
-    session[:current_question_revealed] = next_question_id
+    next_question = trivium.first_unrevealed_question
+    active_question = trivium.active_question
 
-    # Reveal the next question
-    %w[revealed active].each do |klass|
+    if next_question && active_question.nil?
+      reveal_and_mark_active! next_question
+
+    elsif active_question&.question_revealed?
       cable_ready['trivium_reveal'].add_css_class \
-        selector: "#question_#{next_question_id}",
-        name: klass
-    end
+        selector: "#question_#{active_question.id} [data-guess-value='#{active_question.answer}']",
+        name: 'correct'
+      active_question.answer_revealed!
+      set_next_button 'Next Question', ['btn-success', 'btn-danger']
 
-    # Deactivate previous question
-    if @current_question_revealed
+    elsif next_question && active_question&.answer_revealed?
       cable_ready['trivium_reveal'].remove_css_class \
-        selector: "#question_#{@current_question_revealed}",
+        selector: "#question_#{active_question.id}",
         name: 'active'
+      active_question.update! active: false
+      reveal_and_mark_active! next_question
     end
 
     cable_ready.broadcast
     morph :nothing
+  end
+
+  private
+
+  def reveal_and_mark_active!(question)
+    %w[revealed active].each do |klass|
+      cable_ready['trivium_reveal'].add_css_class \
+        selector: "#question_#{question.id}",
+        name: klass
+    end
+
+    question.question_revealed!
+    question.update! active: true
+    set_next_button 'Reveal Answer', ['btn-danger', 'btn-success']
+  end
+
+  def set_next_button(text, (add_class, remove_class))
+    cable_ready['trivium_reveal'].text_content \
+      selector: '#next-question-btn',
+      text: text
+    cable_ready['trivium_reveal'].add_css_class \
+      selector: '#next-question-btn',
+      name: add_class
+    cable_ready['trivium_reveal'].remove_css_class \
+      selector: '#next-question-btn',
+      name: remove_class
   end
 
   def cancel

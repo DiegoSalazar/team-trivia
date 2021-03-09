@@ -7,6 +7,8 @@ class Question < ApplicationRecord
 
   scope :recent, -> { order created_at: :desc }
 
+  enum revealed: %i[unrevealed question_revealed answer_revealed]
+
   def aggregated_guesses
     guesses
       .select('COUNT(*) AS same_count, *')
@@ -24,5 +26,13 @@ class Question < ApplicationRecord
 
   def correct?(guess)
     guess.question.answers.any? { |answer| guess === answer }
+  end
+
+  def answer
+    answers.first&.value
+  end
+
+  def show_answer?
+    active? && answer_revealed?
   end
 end

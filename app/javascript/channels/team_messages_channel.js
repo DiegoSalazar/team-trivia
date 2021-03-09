@@ -10,8 +10,7 @@ consumer.subscriptions.create('TeamMessagesChannel', {
     })
   },
 
-  disconnected() {
-  },
+  disconnected() {},
 
   received (data) {
     if (data.cableReady) {

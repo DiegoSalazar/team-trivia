@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_07_070929) do
+ActiveRecord::Schema.define(version: 2021_03_09_053336) do
 
   create_table "answers", force: :cascade do |t|
     t.text "value"
@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(version: 2021_03_07_070929) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "trivium_id"
+    t.integer "revealed", default: 0
+    t.boolean "active", default: false
   end
 
   create_table "submissions", force: :cascade do |t|

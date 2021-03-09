@@ -64,6 +64,12 @@ class GuessesReflex < ApplicationReflex
       selector: "##{question_status.id}",
       html: question_status_html
 
+    # Trigger explicit team message event so we can scroll the chat
+    cable_ready[current_player.chat_channel].dispatch_event(
+      name: 'team-message',
+      selector: '#team_messages'
+    )
+
     cable_ready.broadcast
     morph :nothing
   end

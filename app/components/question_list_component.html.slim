@@ -3,4 +3,4 @@ ul#question-list.list-group
     = button_tag class: button_class(question), data: { reflex: 'click->play#select_question', question_id: question.id, trivium_id: @trivium.id } do
       span.badge.badge-pill.badge-info.mr-2= question_index question
       = question.body
-      = render QuestionStatusComponent.new question, active?(question)
+      = render QuestionStatusComponent.new question
