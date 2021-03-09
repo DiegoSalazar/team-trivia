@@ -2,6 +2,8 @@
 
 class TriviumSubmitter
   def self.ensure_submissions!(trivium)
+    # binding.pry # debug
+    # return unless trivium.ended?
     return if trivium.submissions.exists?
 
     new(trivium).create_submissions!
@@ -12,12 +14,12 @@ class TriviumSubmitter
   end
 
   def create_submissions!
-    guesses = @trivium.guesses.includes :team
+    guesses = @trivium.guesses.includes :team, question: :answers
     teams = guesses.map(&:team).uniq
 
     teams.each do |team|
       team.submissions.create! \
-        correct_count: score_guesses(team),
+        correct_count: score(team),
         total: @trivium.questions.count,
         trivium: @trivium
     end
@@ -25,9 +27,7 @@ class TriviumSubmitter
 
   private
 
-  def score_guesses(team)
-    team.guesses.count do  |guess|
-      guess.question.answers.any? { |answer| guess === answer }
-    end
+  def score(team)
+    team.top_guesses_for_all(@trivium.questions).count(&:correct?)
   end
 end
