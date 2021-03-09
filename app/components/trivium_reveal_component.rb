@@ -13,7 +13,7 @@ class TriviumRevealComponent < ViewComponent::Base
     button_tag \
       button_text,
       id: 'next-question-btn',
-      class: 'btn btn-success',
+      class: "btn btn-#{button_class}",
       data: {
         reflex: 'click->Question#reveal',
         trivium_id: @trivium.id
@@ -28,5 +28,11 @@ class TriviumRevealComponent < ViewComponent::Base
     text = 'Next Question'
     text = 'Reveal Answer' if @trivium.active_question&.question_revealed?
     text
+  end
+
+  def button_class
+    klass = 'success'
+    klass = 'danger' if @trivium.active_question&.question_revealed?
+    klass
   end
 end

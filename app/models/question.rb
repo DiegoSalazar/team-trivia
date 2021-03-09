@@ -31,8 +31,4 @@ class Question < ApplicationRecord
   def answer
     answers.first&.value
   end
-
-  def show_answer?
-    active? && answer_revealed?
-  end
 end

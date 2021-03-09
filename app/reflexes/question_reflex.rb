@@ -28,6 +28,10 @@ class QuestionReflex < ApplicationReflex
       active_question.answer_revealed!
       set_next_button 'Next Question', ['btn-success', 'btn-danger']
 
+      if trivium.all_questions_revealed?
+        set_next_button 'Done', ['btn-warning', 'btn-success']
+      end
+
     elsif next_question && active_question&.answer_revealed?
       cable_ready['trivium_reveal'].remove_css_class \
         selector: "#question_#{active_question.id}",

@@ -16,6 +16,6 @@ class GuessesChartComponent < ViewComponent::Base
   end
 
   def answer_status(guess)
-    'correct' if @question.show_answer? && @question.correct?(guess)
+    'correct' if @question.answer_revealed? && @question.correct?(guess)
   end
 end
