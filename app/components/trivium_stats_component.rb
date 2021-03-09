@@ -6,6 +6,18 @@ class TriviumStatsComponent < ViewComponent::Base
     @submissions = @trivium.submissions
   end
 
+  def stats
+    [
+      { label: 'Teams', value: team_count },
+      { label: 'Questions', value: question_count },
+      { label: 'Guesses', value: guess_count },
+      { label: 'Votes', value: vote_count },
+      { label: 'Correct', value: correct_count },
+      { label: 'Top Score', value: top_score },
+      { label: 'Average Score', value: average_score }
+    ]
+  end
+
   def team_count
     @submissions.count
   end
@@ -16,6 +28,10 @@ class TriviumStatsComponent < ViewComponent::Base
 
   def guess_count
     @trivium.guesses.count
+  end
+
+  def vote_count
+    Vote.where(votable_id: @trivium.guess_ids).count
   end
 
   def correct_count
