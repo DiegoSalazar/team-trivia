@@ -41,6 +41,11 @@ class TeamMessagesController < ApplicationController
       focus_selector: '#team_message_body',
       html: render_to_string(partial: 'team_messages/form')
 
+    cable_ready[current_player.chat_channel].dispatch_event(
+      name: 'new-team-message',
+      selector: '#team_messages'
+    )
+
     cable_ready.broadcast
   end
 
