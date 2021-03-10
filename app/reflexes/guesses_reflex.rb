@@ -20,7 +20,11 @@ class GuessesReflex < ApplicationReflex
       guess: guess
 
     # Upvoted question status
-    question_status = QuestionStatusComponent.new @current_question
+    question_status = QuestionStatusComponent.new \
+      @current_question,
+      num: @current_question.num_accepted_guesses,
+      denom: @current_question.guesses.count,
+      title: 'Accepted / Guesses'
     question_status_html = controller.render question_status
 
     # Broadcast to team

@@ -24,6 +24,10 @@ class Question < ApplicationRecord
     guesses.by_most_votes.first
   end
 
+  def correct_guesses
+    guesses.select(&:correct?)
+  end
+
   def correct?(guess)
     answers.any? { |answer| guess === answer }
   end

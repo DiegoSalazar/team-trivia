@@ -3,10 +3,13 @@
 class QuestionStatusComponent < ViewComponent::Base
   attr_reader :title
 
-  def initialize(question, active = false)
+  def initialize(question, num:, denom:, title:, active: false)
+    super
     @question = question
+    @num = num
+    @denom = denom
     @active = active
-    @title = 'Accepted / Guesses'
+    @title = title
   end
 
   def id
@@ -16,11 +19,11 @@ class QuestionStatusComponent < ViewComponent::Base
   def css_class
     c = 'badge-primary'
     c = 'badge-light' if @active
-    c = 'badge-success' if @question.num_accepted_guesses > 0
+    c = 'badge-success' if @question.num_accepted_guesses.positive?
     c
   end
 
   def status
-    "#{@question.num_accepted_guesses} / #{@question.guesses.count}"
+    "#{@num} / #{@denom}"
   end
 end

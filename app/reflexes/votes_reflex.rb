@@ -13,7 +13,11 @@ class VotesReflex < ApplicationReflex
     @current_guess.vote_by voter: current_player
 
     # Upvoted question status
-    question_status = QuestionStatusComponent.new @current_question
+    question_status = QuestionStatusComponent.new \
+      @current_question,
+      num: question.num_accepted_guesses,
+      denom: question.guesses.count,
+      title: 'Accepted / Guesses'
     question_status_html = controller.render question_status
 
     # Broadcast to team
