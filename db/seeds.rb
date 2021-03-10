@@ -51,7 +51,7 @@ def create_realistic_trivium(questions, team_count, question_count, guess_count,
       team.guesses.each do |guess|
         next if rand > 0.1
 
-        player.vote_up_for guess
+        guess.vote_by voter: player
         print ?.
       end
     end

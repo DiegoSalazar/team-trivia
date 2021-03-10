@@ -26,7 +26,7 @@ class Team < ApplicationRecord
   def top_guess_for(question)
     guesses
       .where(question_id: question.id)
-      .order(cached_votes_up: :desc)
+      .order(:cached_votes_up)
       .last
   end
 end

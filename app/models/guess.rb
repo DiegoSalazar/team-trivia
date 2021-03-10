@@ -35,6 +35,10 @@ class Guess < ApplicationRecord
     question.correct? self
   end
 
+  def points
+    question.points_for self
+  end
+
   def question_number(trivium)
     i = trivium.question_ids.index(question_id)
     i + 1 if i

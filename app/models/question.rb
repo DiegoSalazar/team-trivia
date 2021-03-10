@@ -25,10 +25,16 @@ class Question < ApplicationRecord
   end
 
   def correct?(guess)
-    guess.question.answers.any? { |answer| guess === answer }
+    answers.any? { |answer| guess === answer }
   end
 
-  def answer
+  def answer_value
     answers.first&.value
+  end
+
+  def points_for(guess)
+    return 0 unless correct? guess
+
+    answers.find { |a| a === guess }&.points
   end
 end

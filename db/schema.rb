@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_09_053336) do
+ActiveRecord::Schema.define(version: 2021_03_10_021305) do
 
   create_table "answers", force: :cascade do |t|
     t.text "value"
     t.integer "question_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "points"
   end
 
   create_table "guesses", force: :cascade do |t|

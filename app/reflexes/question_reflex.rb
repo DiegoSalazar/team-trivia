@@ -23,7 +23,7 @@ class QuestionReflex < ApplicationReflex
 
     elsif active_question.question_revealed?
       cable_ready['trivium_reveal'].add_css_class \
-        selector: "#question_#{active_question.id} [data-guess-value='#{active_question.answer}']",
+        selector: "#question_#{active_question.id} [data-guess-value='#{active_question.answer_value}']",
         name: 'correct'
       active_question.answer_revealed!
 
