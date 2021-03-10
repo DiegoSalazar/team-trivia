@@ -2,6 +2,7 @@
 
 class TriviumStatsComponent < ViewComponent::Base
   def initialize(trivium)
+    super
     @trivium = trivium
     @submissions = @trivium.submissions
   end
@@ -43,6 +44,6 @@ class TriviumStatsComponent < ViewComponent::Base
   end
 
   def average_score
-    @submissions.sum(&:score) / @submissions.count
+    (@submissions.sum(&:score) / @submissions.count.to_f).round 1
   end
 end
