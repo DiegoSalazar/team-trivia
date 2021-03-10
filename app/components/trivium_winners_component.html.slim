@@ -1,0 +1,4 @@
+.row.mb-3
+  .col.d-flex.flex-row.justify-content-around
+    - @winners.each_with_index do |team, i|
+      = render WinnerComponent.new i, team.name, score(team)

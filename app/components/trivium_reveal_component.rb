@@ -7,7 +7,7 @@ class TriviumRevealComponent < ViewComponent::Base
     @questions = trivium.questions.recent
   end
 
-  def reveal_next_question_btn
+  def reveal_button
     return if all_questions_revealed?
 
     button_tag \
@@ -18,6 +18,12 @@ class TriviumRevealComponent < ViewComponent::Base
         reflex: 'click->Question#reveal',
         trivium_id: @trivium.id
       }
+  end
+
+  def winners
+    return unless all_questions_revealed?
+
+    render TriviumWinnersComponent.new @trivium
   end
 
   def all_questions_revealed?

@@ -13,10 +13,13 @@ class QuestionReflex < ApplicationReflex
 
   def reveal
     trivium = Trivium.find element.dataset.trivium_id
-    return if trivium.all_questions_revealed?
-
     next_question = trivium.first_unrevealed_question
     active_question = trivium.active_question
+
+    if trivium.all_questions_revealed?
+      active_question.update! active: false
+      return
+    end
 
     if next_question && active_question.nil?
       reveal_and_mark_active! next_question
@@ -28,7 +31,7 @@ class QuestionReflex < ApplicationReflex
       active_question.answer_revealed!
 
       if trivium.all_questions_revealed?
-        set_next_button 'Done', %w[btn-warning btn-danger]
+        set_next_button 'Reveal Winners', %w[btn-info btn-danger]
       else
         set_next_button 'Next Question', %w[btn-success btn-danger]
       end

@@ -29,4 +29,8 @@ class Team < ApplicationRecord
       .order(:cached_votes_up)
       .last
   end
+
+  def submissions_for(trivium)
+    submissions.where trivium_id: trivium.id
+  end
 end

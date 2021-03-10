@@ -4,6 +4,9 @@ class Trivium < ApplicationRecord
   has_many :questions
   has_many :guesses
   has_many :submissions
+  has_many :winners, -> {
+    order(score: :desc).limit 3
+  }, through: :submissions, source: :team
 
   validates :title, presence: true
   validates :body, presence: { message: 'should include a hint' }
