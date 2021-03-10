@@ -4,7 +4,7 @@
   .list-group-item .guess-bar {
     height: 0;
     opacity: 0;
-    transition: 1s;
+    transition: all 0.3s ease-in;
   }
 
   .list-group-item {
@@ -67,6 +67,8 @@
       height: 10%;
       line-height: 0.8rem;
       text-shadow: 1px 1px 1px #b8b8b8;
+      background-color: inherit;
+      transition: 0.3s ease-in-out;
     }
 
     &.correct {
