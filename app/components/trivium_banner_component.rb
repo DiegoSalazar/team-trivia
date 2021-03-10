@@ -10,4 +10,14 @@ class TriviumBannerComponent < ViewComponent::Base
     @start_time = trivium.game_starts_at
     @end_time = trivium.game_ends_at
   end
+
+  def countdown
+    return if @trivium.new_record?
+
+    render CountdownComponent.new \
+      @start_time,
+      @end_time,
+      redirect_to: reveal_trivium_path(@trivium),
+      show: @show_countdown
+  end
 end

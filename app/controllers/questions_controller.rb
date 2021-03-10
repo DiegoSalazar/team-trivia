@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:destroy, :add_answer]
 
   def index
-    @pagy, @questions = pagy Question.recent.paginate page: params[:page]
+    @pagy, @questions = pagy Question.recent
   end
 
   def new; end
