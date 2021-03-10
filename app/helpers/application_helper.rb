@@ -5,8 +5,9 @@ module ApplicationHelper
 
   def current_play_path
     return teams_path if current_team.nil?
+    return new_trivium_path unless @current_trivium&.persisted?
 
-    play_team_path current_team
+    play_team_trivium_path current_team, @current_trivium
   end
 
   def icon(icon, options = {})

@@ -89,7 +89,7 @@ ActiveRecord::Base.transaction do
 
   starts_at = 40.seconds.from_now
   starts_at = ENV['s'].to_i.seconds.from_now if ENV['s'].present?
-  ends_at = starts_at + (ENV['e'] || 80).seconds
+  ends_at = starts_at + (ENV['e'] || 80).to_i.seconds
   team_count = (ENV['t'] || 3).to_i
   guess_count = (ENV['g'] || 3).to_i
   question_count = (ENV['q'] || 20).to_i

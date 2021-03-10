@@ -4,8 +4,19 @@ class TriviaController < ApplicationController
   include Pagy::Backend
 
   before_action :authenticate_player!, except: :index
-  before_action :set_current_trivium, only: :index
+  before_action :ensure_player_team!, only: %i[play]
+  before_action :set_current_trivium, only: %i[index]
   before_action :set_trivium, only: %i[reveal show edit update destroy add_question create_question delete_question]
+
+  def play
+    @current_trivium = Trivium.find params[:id]
+    @current_question ||= current_trivium.questions.first
+    @current_guess = @current_question.guesses.new trivium: current_trivium
+    @team_messages = current_team.team_messages_from current_trivium
+    @title = current_team.chat_title
+
+    render layout: 'side_chat'
+  end
 
   def reveal
     @current_trivium = @trivium

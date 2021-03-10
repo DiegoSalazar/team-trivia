@@ -2,7 +2,9 @@
 
 .row
   .col-10
-    = render TriviumBannerComponent.new @current_trivium, title: 'Next Trivia', hint: @current_trivium.title
+    = render TriviumBannerComponent.new @current_trivium, title: 'Next Trivia', hint: @current_trivium.title do
+      = render CountdownComponent.new @current_trivium.game_starts_at, @current_trivium.game_ends_at, redirect_to: current_play_path, show: @current_trivium.persisted?, redirect_msg: 'Ready to play!'
+
   .col
     = link_to 'Play', current_play_path, class: 'btn btn-primary btn-block'
     = link_to 'Join', teams_path, class: 'btn btn-primary btn-block' unless current_team

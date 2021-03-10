@@ -16,8 +16,10 @@ Rails.application.routes.draw do
     resources :players, only: :index do
       resource :joins, only: :create
     end
-    member do
-      get :play
+    resources :trivia, only: [] do
+      member do
+        get :play
+      end
     end
   end
   resources :trivia do

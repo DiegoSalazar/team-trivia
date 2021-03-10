@@ -5,7 +5,7 @@ namespace :trivium do
   task reset: :environment do
     starts_at = 40.seconds.from_now
     starts_at = ENV['s'].to_i.seconds.from_now if ENV['s'].present?
-    ends_at = starts_at + (ENV['e'] || 80).seconds
+    ends_at = starts_at + (ENV['e'] || 80).to_i.seconds
 
     trivium = Trivium.last
     puts "Resetting Trivium #{trivium.id} to start at #{starts_at}"
