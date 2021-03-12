@@ -52,20 +52,33 @@ class Trivium < ApplicationRecord
     questions.all?(&:answer_revealed?)
   end
 
+  def next_trivium
+    return if game_ends_at.blank?
+
+    Trivium
+      .series
+      .where('game_starts_at > ?', game_ends_at)
+      .first
+  end
+
   def upcoming?
-    return false if game_starts_at.nil?
+    return false if game_starts_at.blank?
 
     Time.zone.now.to_datetime <= game_starts_at.in_time_zone(Time.zone)
   end
 
   def started?
-    return false if game_starts_at.nil?
+    return false if game_starts_at.blank?
 
     Time.zone.now.to_datetime >= game_starts_at.in_time_zone(Time.zone)
   end
 
+  def active?
+    started? && !ended?
+  end
+
   def ended?
-    return false if game_ends_at.nil?
+    return false if game_ends_at.blank?
 
     Time.zone.now.to_datetime >= game_ends_at.in_time_zone(Time.zone)
   end
