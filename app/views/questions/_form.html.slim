@@ -1,6 +1,10 @@
-/ = javascript_include_tag 'question'
-
 = form_for @question do |f|
+  - if @errors.present?
+    span.alert.alert-danger
+      - @errors.map do |e|
+        = e
+        br/
+
   .row
     .col
       - if @errors.present?
@@ -13,15 +17,6 @@
       .form-group.row
         = f.label 'Correct Answer'
         = f.text_field :correct_answer, class: 'form-control'
-      / .form-group.row
-        / = f.label 'Question Type'
-        / = f.text_field :question_type, class: 'form-control'
-      / - f.fields_for :answer_templates do |builder|
-      /   = render 'answer_template_fields', :f => builder
-      / - @question.answer_templates.each do |a|
-      /   = a.body
-      / = link_to_add_fields 'Add Answer', f, :answer_templates
-
 
   .row
     .col-sm-8

@@ -2,8 +2,8 @@
   = link_to 'Create ', '#', data: { reflex: 'click->Question#new', disable_with: 'Loading...' }, class: 'btn btn-primary btn-block mb-3'
 
 - if render_form?
-  .col.bg-light.border.shadow.mb-3.pt-2
-    h3 New Question Template
+  .col.bg-light.border.shadow.mb-3.pt-1
+    h3 New Question
 
     = form_for @question, data: { remote: true } do |f|
       .form-group

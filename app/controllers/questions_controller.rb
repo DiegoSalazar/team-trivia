@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 class QuestionsController < ApplicationController
   include Pagy::Backend
 
   before_action :authenticate_player!
-  before_action :set_question, only: [:destroy, :add_answer]
+  before_action :set_current_trivium, only: :index
+  before_action :set_question, only: %i[destroy add_answer]
 
   def index
     @pagy, @questions = pagy Question.recent
@@ -11,11 +14,13 @@ class QuestionsController < ApplicationController
   def new; end
 
   def create
-    question = Question.new(question_params)
+    @question = Question.new(question_params)
 
-    if question.save!
+    if @question.save
       redirect_to action: :index
     else
+      @pagy, @questions = pagy Question.recent
+      @errors = @question.errors.full_messages
       render action: :new
     end
   end
