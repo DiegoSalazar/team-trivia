@@ -17,6 +17,8 @@ class ApplicationController < ActionController::Base
 
   def set_current_trivium
     @current_trivium = Trivium.active
+    @current_trivium ||= Trivium.upcoming.first
+    @current_trivium ||= Trivium.new title: 'Create the next Trivia!'
   end
 
   private
