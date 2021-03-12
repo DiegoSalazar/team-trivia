@@ -5,11 +5,17 @@ class TriviaController < ApplicationController
 
   before_action :authenticate_player!, except: :index
   before_action :ensure_player_team!, only: %i[play]
-  before_action :set_current_trivium, only: %i[index]
+  before_action :set_current_trivium, only: %i[index reveal]
   before_action :set_trivium, only: %i[reveal show edit update destroy add_question create_question delete_question]
 
   def play
     @current_trivium = Trivium.find params[:id]
+
+    unless @current_trivium.started?
+      redirect_to trivia_path, notice: 'HEY'
+      return
+    end
+
     @current_question ||= current_trivium.questions.first
     @current_guess = @current_question.guesses.new trivium: current_trivium
     @team_messages = current_team.team_messages_from current_trivium
@@ -19,7 +25,6 @@ class TriviaController < ApplicationController
   end
 
   def reveal
-    @current_trivium = @trivium
     init_reveal_status
     @reveal_status = session[:reveal_status]
     @current_question_revealed = session[:current_question_revealed]
@@ -29,10 +34,6 @@ class TriviaController < ApplicationController
   # GET /trivia
   # GET /trivia.json
   def index
-    if current_trivium.nil?
-      @current_trivium = Trivium.new title: 'Click New Trivia and create the next Trivia!'
-    end
-
     @pagy, @trivia = pagy Trivium.recent
   end
 

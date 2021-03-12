@@ -16,12 +16,18 @@ class Trivium < ApplicationRecord
   }
   validate :starts_before_it_ends
 
-  scope :past, -> { recent.where 'game_ends_at < ?', Time.zone.now }
+  scope :past, -> { recent.where 'game_ends_at < ?', Time.now }
   scope :recent, -> { order game_ends_at: :desc }
   scope :series, -> { order :game_starts_at }
-  scope :upcoming, -> { series.where 'game_starts_at > ?', Time.zone.now }
+  scope :started, -> { series.where 'game_starts_at < ?', Time.now }
+  scope :happening, -> { started.where 'game_ends_at > ?', Time.now }
+  scope :upcoming, -> { series.where 'game_starts_at > ?', Time.now }
 
   def self.active
+    happening.first
+  end
+
+  def self.up_next
     upcoming.first
   end
 
@@ -46,8 +52,26 @@ class Trivium < ApplicationRecord
     questions.all?(&:answer_revealed?)
   end
 
+  def upcoming?
+    return false if game_starts_at.nil?
+
+    Time.zone.now.to_datetime <= game_starts_at.in_time_zone(Time.zone)
+  end
+
+  def started?
+    return false if game_starts_at.nil?
+
+    Time.zone.now.to_datetime >= game_starts_at.in_time_zone(Time.zone)
+  end
+
   def ended?
+    return false if game_ends_at.nil?
+
     Time.zone.now.to_datetime >= game_ends_at.in_time_zone(Time.zone)
+  end
+
+  def full?
+    questions.count >= max_questions
   end
 
   private
