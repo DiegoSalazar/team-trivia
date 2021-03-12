@@ -2,11 +2,10 @@
 
 .row
   .col-10
-    = render TriviumBannerComponent.new @current_trivium, title: 'Next Trivia', hint: @current_trivium.title do
-      = render CountdownComponent.new @current_trivium.game_starts_at, @current_trivium.game_ends_at, redirect_to: current_play_path, show: @current_trivium.persisted?, redirect_msg: 'Ready to play!'
+    = render TriviaHomeBannerComponent.new @current_trivium, current_team
 
-  .col
-    = link_to 'Play', current_play_path, class: 'btn btn-primary btn-block'
+  .col.pt-2
+    = link_to 'Play', current_play_path, class: 'btn btn-primary btn-block' if @current_trivium.persisted?
     = link_to 'Join', teams_path, class: 'btn btn-primary btn-block' unless current_team
     = link_to 'Contribute', new_contribution_path, class: 'btn btn-primary btn-block'
 
@@ -24,6 +23,6 @@
                   td= trivium.body
                   td= l trivium.game_starts_at, format: :short
                   td= l trivium.game_ends_at, format: :short
-                  td= link_to 'Edit', trivium_path(trivium), class: 'btn btn-info btn-sm btn-block'
+                  td= link_to 'Reveal', reveal_trivium_path(trivium), class: 'btn btn-info btn-sm btn-block' if trivium.ended?
 .row.mt-4
   .col= pagy_bootstrap_nav(@pagy).html_safe
