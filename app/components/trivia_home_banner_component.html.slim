@@ -1,0 +1,3 @@
+= render TriviumBannerComponent.new @trivium, title: @title, hint: @hint do |component|
+  = component.with(:right) { countdown }
+  = component.with(:footer) { footer }

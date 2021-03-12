@@ -23,7 +23,7 @@ class Player::SessionsController < Devise::SessionsController
   def set_flash_message!(*) end
 
   def after_sign_in_path_for(player)
-    return play_team_path player.current_team if player.current_team.present?
+    return trivia_path if player.current_team.present?
 
     teams_path
   end

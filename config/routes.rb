@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: 'trivia#index'
 
   resources :team_messages, only: %i[index create]
+  resources :contributions, only: :new
   resources :joins
   resources :players
   resources :answers

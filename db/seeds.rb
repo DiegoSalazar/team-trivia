@@ -7,9 +7,9 @@
 #     s=START_OFFSET_IN_MINS
 #     e=END_OFFSET_IN_MINS
 
-def create_realistic_trivium(questions, team_count, question_count, guess_count, starts_at, ends_at)
-  puts 'Creating Trivia'
-  trivium = FactoryBot.create :trivium, title: 'Mixed Trivia', body: 'A mysterious hint'
+def create_realistic_trivium(questions, team_count, question_count, guess_count, starts_at, ends_at, i)
+  puts "Creating Trivia #{i.succ}"
+  trivium = FactoryBot.create :trivium, title: "Mixed Trivia #{i.succ}", body: 'A mysterious hint'
 
   print "Creating Questions and Answers"
   questions.each do |q|
@@ -55,6 +55,7 @@ def create_realistic_trivium(questions, team_count, question_count, guess_count,
         print ?.
       end
     end
+    puts
   end
 
   trivium.game_starts_at = starts_at
@@ -90,13 +91,26 @@ ActiveRecord::Base.transaction do
   starts_at = 40.seconds.from_now
   starts_at = ENV['s'].to_i.seconds.from_now if ENV['s'].present?
   ends_at = starts_at + (ENV['e'] || 80).to_i.seconds
+  trivia_count = (ENV['n'] || 1).to_i
   team_count = (ENV['t'] || 3).to_i
   guess_count = (ENV['g'] || 3).to_i
   question_count = (ENV['q'] || 20).to_i
   questions = JSON.parse File.read 'db/questions.json'
   questions = questions.take question_count
 
-  create_realistic_trivium questions, team_count, question_count, guess_count, starts_at, ends_at
+  print "\nCreating #{trivia_count} Trivia"
+
+  trivia_count.times do |i|
+    create_realistic_trivium \
+      questions,
+      team_count,
+      question_count,
+      guess_count,
+      starts_at,
+      ends_at,
+      i
+    print ?.
+  end
   puts "\nDone."
 
 rescue RuntimeError => e
