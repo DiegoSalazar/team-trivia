@@ -40,7 +40,7 @@ class TriviumStatsComponent < ViewComponent::Base
   end
 
   def top_score
-    @submissions.max_by(&:score).score
+    @submissions.max_by(&:score)&.score || 0
   end
 
   def average_score
