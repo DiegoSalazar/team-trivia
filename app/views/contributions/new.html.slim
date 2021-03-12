@@ -1,4 +1,12 @@
-h1 Contributions#new
-p Find me in app/views/contributions/new.html.slim
+.row
+  .col
+    = render ContributionsBannerComponent.new @current_trivium, current_team
 
-pre= JSON.pretty_generate @upcoming_trivia.as_json
+.row
+  .col
+    h2 New Question Form
+
+.row
+  .col
+    h2 Upcoming Trivia
+    pre= JSON.pretty_generate @upcoming_trivia.as_json
