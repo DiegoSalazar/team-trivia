@@ -26,11 +26,11 @@ nav.navbar.navbar-expand-md.navbar-dark.bg-dark
             span.sr-only
               = '(current)' if current_page? teams_path
 
-      li.nav-item class="#{'active' if current_page? new_contribution_path}"
-        a.nav-link[href=new_contribution_path]
+      li.nav-item class="#{'active' if current_page? trivium_contribution_path}"
+        a.nav-link[href=trivium_contribution_path]
           | Contribute
           span.sr-only
-            = '(current)' if current_page? new_contribution_path
+            = '(current)' if current_page? trivium_contribution_path
 
   div
     - if player_signed_in?

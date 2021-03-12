@@ -2,13 +2,14 @@
 
 class QuestionReflex < ApplicationReflex
   def new
-    form = controller.render CreateQuestionComponent.new Question.new
-    cable_ready[current_player.chat_channel].inner_html \
-      selector: '#new-question',
-      focus_selector: '#question_body',
-      html: form
-    cable_ready.broadcast
-    morph :nothing
+    # form = controller.render CreateQuestionComponent.new Question.new
+    # cable_ready[current_player.chat_channel].inner_html \
+    #   selector: '#new-question',
+    #   focus_selector: '#question_body',
+    #   html: form
+    # cable_ready.broadcast
+    # morph :nothing
+    @question = Question.new
   end
 
   def reveal
@@ -48,6 +49,10 @@ class QuestionReflex < ApplicationReflex
     morph :nothing
   end
 
+  def cancel
+    @question = nil
+  end
+
   private
 
   def reveal_and_mark_active!(question)
@@ -72,9 +77,5 @@ class QuestionReflex < ApplicationReflex
     cable_ready['trivium_reveal'].remove_css_class \
       selector: '#next-question-btn',
       name: remove_class
-  end
-
-  def cancel
-    @question = nil
   end
 end

@@ -1,10 +1,10 @@
 .row
   .col
-    = render ContributionsBannerComponent.new @current_trivium, current_team
+    = render ContributionsBannerComponent.new @trivium, current_team
 
 .row
   .col
-    h2 New Question Form
+    #new-question= render CreateQuestionComponent.new @question
 
 .row
   .col

@@ -7,7 +7,7 @@
   .col.pt-2
     = link_to 'Play', current_play_path, class: 'btn btn-primary btn-block' if @current_trivium.persisted?
     = link_to 'Join', teams_path, class: 'btn btn-primary btn-block' unless current_team
-    = link_to 'Contribute', new_contribution_path, class: 'btn btn-primary btn-block'
+    = link_to 'Contribute', trivium_contribution_path, class: 'btn btn-primary btn-block'
 
 .row
   .col
