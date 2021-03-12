@@ -1,5 +1,5 @@
 = render TriviaHomeBannerComponent.new @trivium, @team do |component|
   = component.with :footer do
     .d-flex.justify-content-between
-      strong= status_text&.html_safe
-      strong= call_to_action&.html_safe
+      strong= status_text.html_safe
+      strong= call_to_action.html_safe

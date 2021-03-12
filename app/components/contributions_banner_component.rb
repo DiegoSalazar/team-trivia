@@ -8,13 +8,13 @@ class ContributionsBannerComponent < ViewComponent::Base
   end
 
   def status_text
-    return if @trivium.new_record?
+    return '' if @trivium.new_record?
 
     @trivium.full? ? "#{trivium_status} questions" : "Only #{trivium_status} questions"
   end
 
   def call_to_action
-    return if @trivium.new_record?
+    return '' if @trivium.new_record?
     return 'Ready to Play!' if @trivium.full?
 
     "Create up to #{badge q_count_diff, 'badge-dark'} more!"
