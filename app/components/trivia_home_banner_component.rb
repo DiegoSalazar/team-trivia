@@ -14,8 +14,11 @@ class TriviaHomeBannerComponent < ViewComponent::Base
     if @trivium.upcoming?
       @title = 'Trivia starts in...'
       @hint = @trivium.title
-    elsif @trivium.started?
+    elsif @trivium.active?
       @title = 'Playing now! Ends in...'
+      @hint = @trivium.title
+    elsif @trivium.ended?
+      @title = 'Trivia Ended'
       @hint = @trivium.title
     else
       @title = 'Create new Trivia!'
