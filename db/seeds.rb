@@ -7,20 +7,31 @@
 #     s=START_OFFSET_IN_MINS
 #     e=END_OFFSET_IN_MINS
 
-def create_realistic_trivium(questions, team_count, question_count, guess_count, starts_at, ends_at, i)
-  puts "Creating Trivia #{i.succ}"
-  trivium = FactoryBot.create :trivium, title: "Mixed Trivia #{i.succ}", body: 'A mysterious hint'
+def create_realistic_trivium(questions, team_count, guess_count, starts_at, ends_at, i)
+  puts "\nCreating Trivia #{i.succ}"
+  trivium = FactoryBot.create \
+    :trivium,
+    title: "Mixed Trivia #{i.succ}",
+    body: 'A mysterious hint'
 
-  print "Creating Questions and Answers"
-  questions.each do |q|
-    question = FactoryBot.create :question, body: q['body'], trivium: trivium
-    FactoryBot.create(:answer, question: question, value: q['answer'])
-    print ?.
+  if i.zero? # only create teams once
+    print "\nCreating Teams" if team_count.positive?
+    team_count.times do
+      FactoryBot.create :team, :with_players
+      print ?.
+    end
   end
 
-  print "\nCreating Teams" if team_count.positive?
-  team_count.times do |i|
-    FactoryBot.create :team, :with_players
+  print "\nCreating Questions and Answers"
+  questions.each do |q|
+    question = FactoryBot.create \
+      :question,
+      body: q['body'],
+      trivium: trivium
+    FactoryBot.create \
+      :answer,
+      question: question,
+      value: q['answer']
     print ?.
   end
 
@@ -29,7 +40,11 @@ def create_realistic_trivium(questions, team_count, question_count, guess_count,
     team.players.each_with_index do |player, p|
       print "\n  Creating data for Player #{p}"
       if rand > 0.5
-        FactoryBot.create :team_message, player: player, team: team, trivium: trivium
+        FactoryBot.create \
+          :team_message,
+          player: player,
+          team: team,
+          trivium: trivium
         print ?.
       end
 
@@ -37,8 +52,13 @@ def create_realistic_trivium(questions, team_count, question_count, guess_count,
         trivium.questions.each do |question|
           next if rand > 0.1
 
-          guess = create_guess_for player, question.reload, team, trivium
-          FactoryBot.create :guess_message, player: player, team: team, trivium: trivium, question: question, guess: guess
+          FactoryBot.create \
+            :guess_message,
+            player: player,
+            team: team,
+            trivium: trivium,
+            question: question,
+            guess: create_guess_for(player, question.reload, team, trivium)
           print ?.
         end
       end
@@ -104,7 +124,6 @@ ActiveRecord::Base.transaction do
     create_realistic_trivium \
       questions,
       team_count,
-      question_count,
       guess_count,
       starts_at,
       ends_at,
