@@ -1,7 +1,8 @@
 .row
   .col-sm-8
-    = render TriviumBannerComponent.new @current_trivium do
-      = render CountdownComponent.new @current_trivium.game_ends_at, @current_trivium.game_ends_at, redirect_to: reveal_trivium_path(@current_trivium), redirect_msg: 'Game ready! Go see the answer reveal?'
+    = render TriviumBannerComponent.new @current_trivium do |component|
+      = component.with :right do
+        = render CountdownComponent.new @current_trivium.game_ends_at, @current_trivium.game_ends_at, redirect_to: reveal_trivium_path(@current_trivium), redirect_msg: 'Game ready! Go see the answer reveal?'
 
     #questions.row
       .col-sm-7

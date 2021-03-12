@@ -1,11 +1,11 @@
 .row
   .col
-    = render TriviumBannerComponent.new @current_trivium
+    = render TriviumBannerComponent.new @trivium
 
 .row
   .col
-    = render TriviumStatsComponent.new @current_trivium
+    = render TriviumStatsComponent.new @trivium
 
 .row
   .col#trivium-reveal-wrap
-    = render TriviumRevealComponent.new @current_trivium
+    = render TriviumRevealComponent.new @trivium
