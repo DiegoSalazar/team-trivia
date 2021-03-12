@@ -25,15 +25,24 @@ export default class extends ApplicationController {
     this.endTime = new Date(Date.parse(endTime))
     this.redirectTo = redirectTo
     this.redirectMsg = redirectMsg
+    this.checkStart()
+  }
+
+  disconnect () {
+    super.disconnect()
+    this.countdown.stopCountdown()
+  }
+
+  checkStart () {
+    if (this.expired()) return
 
     this.countdown = new Countdown(this.element, this.startTime)
     this.countdown.startCountdown()
     this.countdown.onEnded = () => this.countdownEnd()
   }
 
-  disconnect () {
-    super.disconnect()
-    this.countdown.stopCountdown()
+  expired () {
+    return this.endTime.getTime() < new Date().getTime()
   }
 
   countdownEnd () {
@@ -42,6 +51,8 @@ export default class extends ApplicationController {
     setTimeout(() => {
       if (confirm(this.redirectMsg)) {
         window.location = this.redirectTo
+      } else {
+        window.location.reload()
       }
     }, 1000);
   }
