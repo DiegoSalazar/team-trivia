@@ -1,1 +1,16 @@
-= render 'questions/form'
+.row
+  .col
+    = render ContributionsBannerComponent.new @trivium, current_team
+
+.row
+  .col
+    = render CreateQuestionComponent.new @trivium, @question, @notice, @errors
+
+.row.mb-3
+  .col
+    = render PlayerQuestionsListComponent.new @trivium, @player_questions
+
+.row.mb-3
+  .col
+
+    = render TriviaListComponent.new @upcoming_trivia
