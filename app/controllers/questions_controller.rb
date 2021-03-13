@@ -5,24 +5,24 @@ class QuestionsController < ApplicationController
 
   before_action :authenticate_player!
   before_action :set_current_trivium, only: :index
-  before_action :set_question, only: %i[destroy add_answer]
+  before_action :set_trivium, only: :new
+  before_action :set_question, only: :destroy
+  before_action :set_questions, only: :index
 
-  def index
-    @pagy, @questions = pagy Question.recent
+  def index; end
+
+  def new
+    @player_questions = @trivium.questions_by(current_player).recent
+    @upcoming_trivia = @trivium.following_trivia
+    @notice = flash[:notice]
   end
 
-  def new; end
-
   def create
-    @question = Question.new(question_params)
+    @question = current_player.questions.build question_params
+    @question.save!
 
-    if @question.save
-      redirect_to action: :index
-    else
-      @pagy, @questions = pagy Question.recent
-      @errors = @question.errors.full_messages
-      render action: :new
-    end
+    flash[:notice] = 'Thank you for contributing a Question!'
+    redirect_to action: :new
   end
 
   def destroy
@@ -32,13 +32,23 @@ class QuestionsController < ApplicationController
 
   private
 
+  def set_trivium
+    @trivium = Trivium.find params[:id]
+  end
+
   def set_question
-    @question = Question.find(params[:id])
+    @question = Question.find params[:id]
+  end
+
+  def set_questions
+    @pagy, @questions = pagy Question.recent
   end
 
   def question_params
-    params.require(:question).permit(:body, :correct_answer, :question_type)
+    params.require(:question).permit \
+      :body,
+      :trivium_id,
+      :question_type,
+      answers_attributes: %i[value]
   end
-
-
 end

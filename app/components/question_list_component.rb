@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class QuestionListComponent < ViewComponent::Base
+  include TriviumQuestions
+
   def initialize(questions, question, trivium)
     super
     @questions = questions
@@ -12,10 +14,6 @@ class QuestionListComponent < ViewComponent::Base
     c = 'list-group-item list-group-item-action'
     c += ' active' if active? question
     c
-  end
-
-  def question_index(question)
-    @trivium.question_index question
   end
 
   private

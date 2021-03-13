@@ -1,0 +1,13 @@
+h3 My Questions
+
+ul.list-group
+  - @questions.each do |question|
+    .list-group-item.list-group-item-action
+      .d-flex.justify-content-between
+        div
+          span.badge.badge-pill.badge-info.mr-2
+            = question_index question
+          = question.body
+
+        strong.badge.badge-dark.border.shadow-sm
+          = question.answers.first&.value

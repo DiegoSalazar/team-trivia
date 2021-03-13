@@ -1,0 +1,9 @@
+h3 Upcoming Trivia
+
+ul.list-group
+  - @trivia.each do |trivium|
+    .list-group-item.list-group-item-action
+      .d-flex.w-100.justify-content-between
+        h4.mb-1= trivium.title
+        small= l trivium.game_starts_at, format: :long
+      p.mb-1= trivium.body
