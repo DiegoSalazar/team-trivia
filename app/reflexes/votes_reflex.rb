@@ -15,8 +15,8 @@ class VotesReflex < ApplicationReflex
     # Upvoted question status
     question_status = QuestionStatusComponent.new \
       @current_question,
-      num: question.num_accepted_guesses,
-      denom: question.guesses.count,
+      num: @current_question.num_accepted_guesses,
+      denom: @current_question.guesses.count,
       title: 'Accepted / Guesses'
     question_status_html = controller.render question_status
 
