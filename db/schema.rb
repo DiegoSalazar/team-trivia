@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_10_021305) do
+ActiveRecord::Schema.define(version: 2021_03_13_062651) do
 
   create_table "answers", force: :cascade do |t|
     t.text "value"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2021_03_10_021305) do
     t.integer "trivium_id"
     t.integer "revealed", default: 0
     t.boolean "active", default: false
+    t.integer "player_id"
   end
 
   create_table "submissions", force: :cascade do |t|
