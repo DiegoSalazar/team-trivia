@@ -7,7 +7,7 @@
 #     s=START_OFFSET_IN_MINS
 #     e=END_OFFSET_IN_MINS
 
-def create_realistic_trivium(questions, team_count, guess_count, starts_at, ends_at, i)
+def create_realistic_trivium(player, questions, team_count, guess_count, starts_at, ends_at, i)
   puts "\nCreating Trivia #{i.succ}"
   trivium = FactoryBot.create \
     :trivium,
@@ -27,7 +27,8 @@ def create_realistic_trivium(questions, team_count, guess_count, starts_at, ends
     question = FactoryBot.create \
       :question,
       body: q['body'],
-      trivium: trivium
+      trivium: trivium,
+      player: player
     FactoryBot.create \
       :answer,
       question: question,
@@ -122,6 +123,7 @@ ActiveRecord::Base.transaction do
 
   trivia_count.times do |i|
     create_realistic_trivium \
+      player,
       questions,
       team_count,
       guess_count,
