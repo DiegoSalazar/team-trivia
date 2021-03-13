@@ -30,7 +30,7 @@ export default class extends ApplicationController {
 
   disconnect () {
     super.disconnect()
-    this.countdown.stopCountdown()
+    this.countdown?.stopCountdown()
   }
 
   checkStart () {
