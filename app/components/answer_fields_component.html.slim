@@ -1,12 +1,15 @@
-label Possible Answers
+.d-flex.justify-content-between
+  label Possible Answers
+  = add_question_button
 
 div
-  - @answers.each do |answer|
-    .form-group
-      - @question_form.fields_for :answers, answer do |answer_fields|
-        = answer_fields.text_field :value, class: 'form-control', placeholder: 'Type an answer. Enter to add', required: true, autofocus: true
+  - @answers.each_with_index do |answer, i|
+    - @question_form.fields_for :answers, answer do |answer_fields|
+      .form-row
+        .form-group.col-9
+          = answer_fields.text_field :value, class: 'form-control', placeholder: 'Type an answer', required: true, autofocus: true, tabindex: i + @tab
+        .form-group.col
+          = answer_fields.number_field :points, in: (0..5).to_a, class: 'form-control', placeholder: 'Points', tabindex: i + @tab
 
-.d-flex.justify-content-between
-  = add_question_button
   - if @answers.any?
     small.form-text.text-muted Answers are case insensitive

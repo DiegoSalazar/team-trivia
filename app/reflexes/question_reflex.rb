@@ -41,6 +41,7 @@ class QuestionReflex < ApplicationReflex
   def new
     @trivium = Trivium.find element.dataset.trivium_id
     @question = @trivium.questions.build
+    @question.answers.build
   end
 
   def add_answer

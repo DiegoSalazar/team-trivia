@@ -7,9 +7,11 @@ class Question < ApplicationRecord
   has_many :answers
   accepts_nested_attributes_for :answers
 
-  scope :recent, -> { order created_at: :desc }
-  enum revealed: %i[unrevealed question_revealed answer_revealed]
   validates :body, presence: true
+  scope :recent, -> { order created_at: :desc }
+
+  enum question_type: %i[free_text multiple_choice]
+  enum revealed: %i[unrevealed question_revealed answer_revealed]
 
   def aggregated_guesses
     guesses
@@ -35,7 +37,11 @@ class Question < ApplicationRecord
   end
 
   def answer_value
-    answers.first&.value
+    best_answer&.value
+  end
+
+  def best_answer
+    answers.order(:points).last
   end
 
   def points_for(guess)

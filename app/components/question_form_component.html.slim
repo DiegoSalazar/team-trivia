@@ -1,17 +1,24 @@
 = form_for @question, data: { remote: true }, html: { class: 'bg-light border shadow mb-3 px-3 py-2' } do |f|
-  h3 New Question
+  .d-flex.justify-content-between
+    h3 New Question
+
+    div
+      - Question.question_types.keys.each_with_index do |type|
+        .form-check.form-check-inline
+          = f.radio_button :question_type, type, class: 'form-check-input', role: 'button', tabindex: @question.answers.size + 3
+          = f.label :question_type, type.titleize, value: type, class: 'form-check-label', role: 'button'
 
   .row.form-group
     .col
       = f.label :body
-      = f.text_area :body, class: 'form-control', placeholder: 'Type a Question...', required: true, autofocus: true
-    .col-4
-      = render AnswerFieldsComponent.new @question.answers, f
+      = f.text_area :body, class: 'form-control', placeholder: 'Type a Question...', required: true, autofocus: true, tabindex: 1
+    .col-5
+      = render AnswerFieldsComponent.new @question.answers, f, 2
 
-  .row.form-group
+  .row.mb-2
     .col
-      = link_to 'Cancel', nil, data: { reflex: 'click->Question#cancel' }, class: 'btn btn-sm btn-secondary btn-block'
+      = link_to 'Cancel', nil, data: { reflex: 'click->Question#cancel' }, class: 'btn btn-sm btn-secondary btn-block', tabindex: @question.answers.size + 5
     .col-sm-10
-      = f.submit 'Create Question', class: 'btn btn-sm btn-success btn-block'
+      = f.submit 'Create Question', class: 'btn btn-sm btn-success btn-block', tabindex: @question.answers.size + 4
 
   = f.hidden_field :trivium_id
