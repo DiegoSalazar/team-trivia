@@ -2,12 +2,14 @@
 
 class Question < ApplicationRecord
   belongs_to :trivium
-  has_many :answers
+  belongs_to :player
   has_many :guesses
+  has_many :answers
+  accepts_nested_attributes_for :answers
 
   scope :recent, -> { order created_at: :desc }
-
   enum revealed: %i[unrevealed question_revealed answer_revealed]
+  validates :body, presence: true
 
   def aggregated_guesses
     guesses
