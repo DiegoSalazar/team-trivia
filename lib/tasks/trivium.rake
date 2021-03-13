@@ -1,10 +1,30 @@
 # frozen_string_literal: true
 
 namespace :trivium do
+  desc 'Delete and everything and re-seed'
+  task reseed: :environment do
+    # Force models to load
+    Dir[Rails.root.join('app/models/**/*.rb')].map { |f| require f }
+
+    ActiveRecord::Base.transaction do
+      ActiveRecord::Base.descendants.each do |model_class|
+        model_class.delete_all
+        puts "Deleted #{model_class.name}"
+      rescue ActiveRecord::StatementInvalid => e
+        # ignore
+      end
+    end
+
+    puts nil, 'Seeding...'
+    Rake::Task['db:seed'].invoke
+  end
+
   desc 'reset game start time of first trivium'
   task reset: :environment do
     Trivium.transaction do
-      Trivium.find_each.with_index { |trivium, i| reset_trivium trivium, i }
+      Trivium.find_each.with_index do |trivium, i|
+        reset_trivium trivium, i
+      end
     end
   end
 

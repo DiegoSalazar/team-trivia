@@ -16,13 +16,10 @@ def create_realistic_trivium(player, questions, team_count, guess_count, starts_
 
   if i.zero? # only create teams once
     print "\nCreating Teams" if team_count.positive?
-    team_count.times do
-      FactoryBot.create :team, :with_players
-      print ?.
-    end
+    FactoryBot.create_list :team, team_count, :with_players
   end
 
-  print "\nCreating Questions and Answers"
+  print "\n#{i.succ}: Creating Questions and Answers"
   questions.each do |q|
     question = FactoryBot.create \
       :question,
@@ -32,14 +29,15 @@ def create_realistic_trivium(player, questions, team_count, guess_count, starts_
     FactoryBot.create \
       :answer,
       question: question,
-      value: q['answer']
+      value: q['answer'],
+      points: 1
     print ?.
   end
 
   Team.all.each_with_index do |team, t|
-    print "\nGenerating data for Team #{t}"
+    print "\n#{i.succ}: Team #{t} -> "
     team.players.each_with_index do |player, p|
-      print "\n  Creating data for Player #{p}"
+      print "Player #{p}"
       if rand > 0.5
         FactoryBot.create \
           :team_message,
@@ -63,9 +61,10 @@ def create_realistic_trivium(player, questions, team_count, guess_count, starts_
           print ?.
         end
       end
+      print ' '
     end
 
-    print "\nVoting on Guesses for Team #{t}"
+    print "\n#{i.succ}: Voting Team #{t}"
     team.players.each do |player|
       next if rand > 0.3
 

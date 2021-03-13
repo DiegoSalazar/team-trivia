@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_13_062651) do
+ActiveRecord::Schema.define(version: 2021_03_13_203508) do
 
   create_table "answers", force: :cascade do |t|
     t.text "value"
     t.integer "question_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "points"
+    t.integer "points", default: 0
   end
 
   create_table "guesses", force: :cascade do |t|
@@ -71,8 +71,7 @@ ActiveRecord::Schema.define(version: 2021_03_13_062651) do
 
   create_table "questions", force: :cascade do |t|
     t.text "body"
-    t.text "correct_answer"
-    t.text "question_type"
+    t.integer "question_type", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "trivium_id"
