@@ -61,6 +61,13 @@ class Trivium < ApplicationRecord
       .first
   end
 
+  def following_trivia
+    scope = self.class.series.limit 10
+    return scope if game_ends_at.blank?
+
+    scope.where 'game_starts_at > ?', game_ends_at
+  end
+
   def upcoming?
     return false if game_starts_at.blank?
 
@@ -85,6 +92,10 @@ class Trivium < ApplicationRecord
 
   def full?
     questions.count >= max_questions
+  end
+
+  def questions_by(player)
+    questions.where player_id: player.id
   end
 
   private
