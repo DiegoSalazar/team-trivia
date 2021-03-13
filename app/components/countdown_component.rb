@@ -25,6 +25,6 @@ class CountdownComponent < ViewComponent::Base
   end
 
   def starts_at
-    l @start_time, format: :short
+    l @start_time, format: :long
   end
 end
