@@ -6,12 +6,7 @@ Rails.application.routes.draw do
   resources :team_messages, only: %i[index create]
   resources :joins
   resources :players
-  resources :answers
-  resources :questions
-  resources :guesses
-  resources :submissions do
-    post :add_guess
-  end
+  resources :guesses, only: :index
   resources :teams do
     resources :players, only: :index do
       resource :joins, only: :create
@@ -25,19 +20,11 @@ Rails.application.routes.draw do
   resources :trivia do
     member do
       get :reveal
-      get :add_question
-      post :create_question
-      post :delete_question
-
-      resources :contributions, only: :new
+      # get :add_question
+      # post :create_question
+      # post :delete_question
+      resources :questions
     end
-    resources :teams, only: [] do
-      resource :submission, only: [:edit, :show]
-    end
-  end
-  resources :questions do
-    get :add_answer
-    resources :answer_templates
   end
 
   devise_for :player, controllers: { sessions: 'player/sessions' }
