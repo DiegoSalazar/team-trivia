@@ -14,7 +14,7 @@ class ContributionsBannerComponent < ViewComponent::Base
   end
 
   def call_to_action
-    return '' if @trivium.new_record?
+    return '' if @trivium.new_record? || @trivium.ended?
     return 'Ready to Play!' if @trivium.full?
 
     "Create up to #{badge q_count_diff, 'badge-dark'} more!"
@@ -37,6 +37,6 @@ class ContributionsBannerComponent < ViewComponent::Base
   end
 
   def q_count_diff
-    @trivium.max_questions = @trivium.questions.count
+    @trivium.max_questions - @trivium.questions.count
   end
 end
