@@ -1,0 +1,12 @@
+label Possible Answers
+
+div
+  - @answers.each do |answer|
+    .form-group
+      - @question_form.fields_for :answers, answer do |answer_fields|
+        = answer_fields.text_field :value, class: 'form-control', placeholder: 'Type an answer. Enter to add', required: true, autofocus: true
+
+.d-flex.justify-content-between
+  = add_question_button
+  - if @answers.any?
+    small.form-text.text-muted Answers are case insensitive
