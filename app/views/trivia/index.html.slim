@@ -24,7 +24,7 @@
                   td= l trivium.game_ends_at, format: :long
                   td.text-right
                     .btn-group role="group" aria-label="Past Trivia options"
-                      = link_to 'Team Chat', play_team_trivium_path(current_team, trivium), class: "btn btn-sm btn-warning"
+                      = link_to 'Team Chat', play_team_trivium_path(current_team, trivium), class: "btn btn-sm btn-warning" if current_team.present?
                       = link_to 'Reveal', reveal_trivium_path(trivium), class: "btn btn-sm btn-info"
 .row.mt-4
   .col= pagy_bootstrap_nav(@pagy).html_safe

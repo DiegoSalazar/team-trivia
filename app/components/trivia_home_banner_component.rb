@@ -11,17 +11,16 @@ class TriviaHomeBannerComponent < ViewComponent::Base
   end
 
   def set_title_and_hint
+    @title = 'Create new Trivia!'
+    @hint = @trivium.title
+
     if @trivium.upcoming?
       @title = 'Trivia starts in...'
-      @hint = @trivium.title
     elsif @trivium.active?
       @title = 'Playing now! Ends in...'
-      @hint = @trivium.title
     elsif @trivium.ended?
       @title = 'Trivia Ended'
-      @hint = @trivium.title
     else
-      @title = 'Create new Trivia!'
       @hint = 'Contribute questions to upcoming Trivia!'
     end
   end
