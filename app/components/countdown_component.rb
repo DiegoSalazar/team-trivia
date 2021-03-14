@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CountdownComponent < ViewComponent::Base
-  def initialize(start_time, end_time, redirect_to: new_trivium_path, redirect_msg: '', show: true)
+  def initialize(start_time, end_time, redirect_to: nil, redirect_msg: nil, show: true)
     super
     @start_time = start_time
     @end_time = end_time
