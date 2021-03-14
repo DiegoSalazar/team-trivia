@@ -12,13 +12,18 @@ class Guess < ApplicationRecord
 
   scope :by_most_votes, -> { order cached_votes_up: :desc }
   scope :accepted, -> { where 'cached_votes_up > 0' }
+  scope :with_same_count, -> do
+    select('COUNT(*) AS same_count, *')
+      .group('LOWER(value)')
+      .order 'LOWER(value)'
+  end
 
   def ===(answer)
     value.downcase == answer.value.downcase
   end
 
   def similarity_ratio
-    (same_count_percent_of(question.guesses.count) / 10.0).ceil
+    same_count_percent_of(question.guesses.count).ceil
   end
 
   def same_count_percent_of(num)
