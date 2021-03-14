@@ -26,3 +26,8 @@
     width: 65px;
   }
  }
+
+ // Bootstrap alerts weren't showing on their own (JS init issue?)
+.fade:not(.show) {
+  opacity: 1;
+}

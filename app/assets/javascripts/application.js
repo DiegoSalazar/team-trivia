@@ -5,5 +5,4 @@
 // the compiled file.
 //
 //= require twitter/bootstrap
-//= require bootstrap-datepicker
 //= require_tree .
