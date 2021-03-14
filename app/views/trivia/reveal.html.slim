@@ -1,6 +1,8 @@
 .row
   .col
-    = render TriviumBannerComponent.new @trivium
+    = render TriviumBannerComponent.new @trivium do |component|
+      = component.with :right do
+        = render CountdownComponent.new @trivium.game_ends_at, @trivium.game_ends_at
 
 .row
   .col
