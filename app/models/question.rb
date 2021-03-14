@@ -13,11 +13,18 @@ class Question < ApplicationRecord
   enum question_type: %i[free_text multiple_choice]
   enum revealed: %i[unrevealed question_revealed answer_revealed]
 
+  CorrectAnswer = Struct.new :value, :same_count do
+    def same_count_percent_of(*) 10 end
+    def similarity_ratio; 10 end
+  end
+
   def aggregated_guesses
-    guesses
-      .select('COUNT(*) AS same_count, *')
-      .group('LOWER(value)')
-      .order 'LOWER(value)'
+    aggregate = guesses.with_same_count
+
+    if aggregate.none?(&:correct?)
+      aggregate += [CorrectAnswer.new(best_answer.value, 0)]
+    end
+    aggregate
   end
 
   def num_accepted_guesses
