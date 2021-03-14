@@ -1,5 +1,6 @@
 import ApplicationController from './application_controller'
 import Countdown from '../components/countdown.ts'
+import Turbolinks from 'turbolinks'
 
 /* This is the custom StimulusReflex controller for the Countdown Reflex.
  * Learn more at: https://docs.stimulusreflex.com
@@ -50,9 +51,9 @@ export default class extends ApplicationController {
 
     setTimeout(() => {
       if (confirm(this.redirectMsg)) {
-        window.location = this.redirectTo
+        Turbolinks.visit(this.redirectTo)
       } else {
-        window.location.reload()
+        Turbolinks.visit(window.location)
       }
     }, 1000);
   }
