@@ -28,13 +28,14 @@ class TriviaController < ApplicationController
     init_reveal_status
     @reveal_status = session[:reveal_status]
     @current_question_revealed = session[:current_question_revealed]
+
     TriviumSubmitter.ensure_submissions! @trivium
   end
 
   # GET /trivia
   # GET /trivia.json
   def index
-    @pagy, @trivia = pagy Trivium.recent
+    @pagy, @trivia = pagy Trivium.past
   end
 
   # GET /trivia/1
