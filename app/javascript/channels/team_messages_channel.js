@@ -5,12 +5,14 @@ consumer.subscriptions.create('TeamMessagesChannel', {
   connected() {
     this.scrollChatDown()
 
-    document.addEventListener('team-message', () => {
-      this.scrollChatDown()
-    })
+    document.addEventListener('team-message', this.scrollChatDown.bind(this))
+    document.addEventListener('turbolinks:load', this.scrollChatDown.bind(this))
   },
 
-  disconnected() {},
+  disconnected() {
+    document.removeEventListener('team-message', this.scrollChatDown.bind(this))
+    document.removeEventListener('turbolinks:load', this.scrollChatDown.bind(this))
+  },
 
   received (data) {
     if (data.cableReady) {
