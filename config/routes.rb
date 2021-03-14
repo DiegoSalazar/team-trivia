@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :trivia do
+  resources :trivia, except: :show do
     member do
       get :reveal
       # get :add_question
