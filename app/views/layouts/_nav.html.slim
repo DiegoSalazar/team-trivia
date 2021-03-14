@@ -6,11 +6,11 @@ nav.navbar.navbar-expand-md.navbar-dark.bg-dark
 
   #links.collapse.navbar-collapse
     ul.navbar-nav.mr-auto
-      li.nav-item class="#{'active' if current_page? '/'}"
+      li.nav-item class="#{'active' if current_page?('/') || current_page?('/trivia')}"
         a.nav-link[href='/']
           | Home
           span.sr-only
-            = '(current)' if current_page? '/'
+            = '(current)' if current_page?('/') || current_page?('/trivia')
 
       - if current_team.present?
         li.nav-item class="#{'active' if current_page? current_play_path}"

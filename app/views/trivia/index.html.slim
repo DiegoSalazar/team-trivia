@@ -5,7 +5,7 @@
     = render TriviaHomeBannerComponent.new @current_trivium, current_team
 
   .col.pt-2
-    = link_to 'Play', current_play_path, class: 'btn btn-primary btn-block' if @current_trivium.persisted?
+    = link_to 'Play', current_play_path, class: 'btn btn-primary btn-block' if @current_trivium.active?
     = link_to 'Join', teams_path, class: 'btn btn-primary btn-block' unless current_team
     = link_to 'Contribute', trivium_contribution_path, class: 'btn btn-primary btn-block'
 
@@ -25,6 +25,6 @@
                   td.text-right
                     .btn-group role="group" aria-label="Past Trivia options"
                       = link_to 'Team Chat', play_team_trivium_path(current_team, trivium), class: "btn btn-sm btn-warning"
-                      = link_to 'Reveal', reveal_trivium_path(trivium), class: "btn btn-sm btn-#{trivium.all_questions_revealed? ? 'default' : 'info'}"
+                      = link_to 'Reveal', reveal_trivium_path(trivium), class: "btn btn-sm btn-info"
 .row.mt-4
   .col= pagy_bootstrap_nav(@pagy).html_safe

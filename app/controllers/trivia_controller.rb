@@ -10,7 +10,7 @@ class TriviaController < ApplicationController
 
   def play
     unless @trivium.started?
-      redirect_to trivia_path, notice: "That game hasn't started yet."
+      redirect_to trivia_path, alert: "That game hasn't started yet."
       return
     end
 
@@ -36,12 +36,6 @@ class TriviaController < ApplicationController
     @pagy, @trivia = pagy Trivium.past
   end
 
-  # GET /trivia/1
-  # GET /trivia/1.json
-  def show
-    @questions = @trivium.questions
-  end
-
   # GET /trivia/new
   def new
     @trivium = Trivium.new
@@ -53,11 +47,13 @@ class TriviaController < ApplicationController
   # POST /trivia
   # POST /trivia.json
   def create
-    @trivium = Trivium.new(trivium_params)
+    @trivium = Trivium.new trivium_params
 
     respond_to do |format|
       if @trivium.save
-        format.html { redirect_to @trivium, notice: 'Trivium was successfully created.' }
+        format.html do
+          redirect_to new_question_path(@trivium), notice: 'Trivium was successfully created.'
+        end
         format.json { render :show, status: :created, location: @trivium }
       else
         format.html do

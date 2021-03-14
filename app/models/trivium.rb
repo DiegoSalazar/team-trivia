@@ -31,10 +31,6 @@ class Trivium < ApplicationRecord
     upcoming.first
   end
 
-  def seconds_apart
-    game_ends_at.to_i - game_starts_at.to_i
-  end
-
   def question_index(question)
     i = question_ids.index(question.id)
     i ? i + 1 : -1
@@ -101,8 +97,12 @@ class Trivium < ApplicationRecord
   private
 
   def starts_before_it_ends
-    return true if seconds_apart > 60
+    return true if seconds_apart >= 60
 
-    errors.add :base, 'game must start at least a minute before it ends'
+    errors.add :base, 'game must end at least a minute after it starts'
+  end
+
+  def seconds_apart
+    game_ends_at.to_i - game_starts_at.to_i
   end
 end
