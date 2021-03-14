@@ -1,17 +1,14 @@
 .row
   .col-sm-8
-    = render TriviumBannerComponent.new @current_trivium do |component|
+    = render TriviumBannerComponent.new @trivium do |component|
       = component.with :right do
-        = render CountdownComponent.new @current_trivium.game_ends_at, @current_trivium.game_ends_at, redirect_to: reveal_trivium_path(@current_trivium), redirect_msg: 'Game ready! Go see the answer reveal?'
+        = render CountdownComponent.new @trivium.game_ends_at, @trivium.game_ends_at, redirect_to: reveal_trivium_path(@trivium), redirect_msg: 'Game ready! Go see the answer reveal?'
+        = link_to 'Reveal', reveal_trivium_path(@trivium), class: 'btn btn-sm btn-info float-right mt-2' if @trivium.ended?
 
     #questions.row
-      .col-sm-7
-        = render QuestionListComponent.new @current_trivium.questions, @current_question, @current_trivium
-
-      .col-sm-5
-        .card
-          #guess_form.card-body
-            = render partial: 'teams/guess_form', locals: { guess: @current_guess, reflex_root: '#questions' }
+      .col
+        = render QuestionListComponent.new @trivium.questions, @current_question, @trivium
+      = render GuessFormComponent.new @current_guess, show: !@trivium.ended?
 
   .col-sm-4
-    = render ChatComponent.new @title, @team_messages, current_player, @current_trivium
+    = render ChatComponent.new @title, @team_messages, current_player, @trivium
