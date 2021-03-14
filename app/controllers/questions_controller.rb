@@ -12,6 +12,7 @@ class QuestionsController < ApplicationController
   def index; end
 
   def new
+    @current_trivium = @trivium
     @player_questions = @trivium.questions_by(current_player).recent
     @upcoming_trivia = @trivium.following_trivia
     @notice = flash[:notice]

@@ -6,19 +6,17 @@ class TriviaController < ApplicationController
   before_action :authenticate_player!, except: :index
   before_action :ensure_player_team!, only: %i[play]
   before_action :set_current_trivium, only: %i[index reveal]
-  before_action :set_trivium, only: %i[reveal show edit update destroy add_question create_question delete_question]
+  before_action :set_trivium, only: %i[play reveal show edit update destroy add_question create_question delete_question]
 
   def play
-    @current_trivium = Trivium.find params[:id]
-
-    unless @current_trivium.started?
-      redirect_to trivia_path, notice: 'HEY'
+    unless @trivium.started?
+      redirect_to trivia_path, notice: "That game hasn't started yet."
       return
     end
 
-    @current_question ||= current_trivium.questions.first
-    @current_guess = @current_question.guesses.new trivium: current_trivium
-    @team_messages = current_team.team_messages_from current_trivium
+    @current_question ||= @trivium.questions.first
+    @current_guess = @current_question.guesses.new trivium: @trivium
+    @team_messages = current_team.team_messages_from @trivium
     @title = current_team.chat_title
 
     render layout: 'side_chat'
