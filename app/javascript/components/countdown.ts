@@ -41,7 +41,7 @@ export default class Countdown {
     parts.push(this.timeLabel(this.zeroPad(minutes), 'm'))
     parts.push(this.timeLabel(this.zeroPad(seconds), 's'))
 
-    return parts.join('')
+    return parts.map(p => `<span>${p}</span>`).join('')
   }
 
   calcCountdown () {
