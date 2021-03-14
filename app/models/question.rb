@@ -47,6 +47,10 @@ class Question < ApplicationRecord
     best_answer&.value
   end
 
+  def answer_points
+    best_answer&.points
+  end
+
   def best_answer
     answers.order(:points).last
   end

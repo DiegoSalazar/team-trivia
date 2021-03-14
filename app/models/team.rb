@@ -33,4 +33,8 @@ class Team < ApplicationRecord
   def submissions_for(trivium)
     submissions.where trivium_id: trivium.id
   end
+
+  def guesses_for(trivium)
+    guesses.where trivium_id: trivium.id
+  end
 end
