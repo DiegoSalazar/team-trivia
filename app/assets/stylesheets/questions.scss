@@ -34,8 +34,8 @@
 
   .list-group-item {
     .unit {
-      background-color: grey;
-      color: #efefef;
+      background-color: var(--dark);
+      color: var(--light);
     }
 
     &.active {
@@ -44,8 +44,8 @@
       border-color: 2px solid var(--secondary);
 
       .unit {
-        background-color: #efefef;
-        color: grey;
+        background-color: var(--light);
+        color: var(--dark);
       }
     }
   }
