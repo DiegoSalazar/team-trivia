@@ -16,9 +16,19 @@ class QuestionListComponent < ViewComponent::Base
     c
   end
 
+  def button_data(question)
+    return {} if @trivium.ended?
+
+    {
+      reflex: 'click->play#select_question',
+      question_id: question.id,
+      trivium_id: @trivium.id
+    }
+  end
+
   private
 
   def active?(question)
-    question.id == @question.id
+    !@trivium.ended? && question.id == @question.id
   end
 end
