@@ -23,6 +23,8 @@ namespace :trivium do
   task reset: :environment do
     Trivium.transaction do
       Trivium.find_each.with_index do |trivium, i|
+        next if i < 2 # leave some in the past
+
         reset_trivium trivium, i
       end
     end
