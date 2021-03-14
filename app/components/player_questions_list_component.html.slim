@@ -9,5 +9,5 @@ ul.list-group
             = question_index question
           = question.body
 
-        strong.badge.badge-dark.border.shadow-sm
+        strong.badge.badge-dark.border.shadow-sm title= helpers.pluralize(question.answer_points, 'point')
           = question.answer_value
