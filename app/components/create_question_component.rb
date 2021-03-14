@@ -9,6 +9,10 @@ class CreateQuestionComponent < ViewComponent::Base
     @errors = errors
   end
 
+  def render?
+    @trivium.upcoming? && !@trivium.full?
+  end
+
   def notice
     return unless @notice
 
@@ -16,7 +20,7 @@ class CreateQuestionComponent < ViewComponent::Base
   end
 
   def new_question_button
-    return if @question.present? || @trivium.full?
+    return if @question.present?
 
     button_tag \
       'New Question',
