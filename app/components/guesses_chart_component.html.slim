@@ -1,6 +1,6 @@
 .guesses-chart.d-flex.justify-content-around
   - @question.aggregated_guesses.each do |guess|
-    .guess-bar-wrap
+    .guess-bar-wrap title= guess.value
       .small.text-center
         = percent_of_similar_guesses guess
 
