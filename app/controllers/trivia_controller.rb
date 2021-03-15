@@ -4,7 +4,6 @@ class TriviaController < ApplicationController
   include Pagy::Backend
 
   before_action :authenticate_player!, except: :index
-  before_action :ensure_player_team!, only: %i[play]
   before_action :set_current_trivium, only: %i[index reveal]
   before_action :set_trivium, only: %i[play reveal show edit update destroy add_question create_question delete_question]
 
