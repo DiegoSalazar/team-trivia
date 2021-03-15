@@ -7,4 +7,4 @@
       = render TeamMessageComponent.new message: message, player: @player, trivium: @trivium
 
   .flex-shrink-1
-    = render 'team_messages/form'
+    = render 'team_messages/form' if @show_message_form
