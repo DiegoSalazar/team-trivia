@@ -15,7 +15,7 @@ class TriviaController < ApplicationController
     end
 
     @current_question ||= @trivium.questions.first
-    @current_guess = @current_question.guesses.new trivium: @trivium
+    @current_guess = @current_question.guesses.new trivium: @trivium if @current_question
     @team_messages = current_team.team_messages_from @trivium
     @title = current_team.chat_title
 

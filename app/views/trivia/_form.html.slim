@@ -5,9 +5,11 @@
         .alert.alert-danger= errors.to_sentence
   .form-row
     .col.form-group
+      = f.label :title, class: 'sr-only'
       = f.text_field :title, class: 'form-control', placeholder: 'Trivia Title'
   .form-row
     .col.form-group
+      = f.label :body, 'Hint', class: 'sr-only'
       = f.text_field :body, class: 'form-control', placeholder: 'Hint'
 
   .form-row

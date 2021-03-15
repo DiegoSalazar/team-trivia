@@ -22,7 +22,7 @@ class Question < ApplicationRecord
     aggregate = guesses.with_same_count
 
     if aggregate.none?(&:correct?)
-      aggregate += [CorrectAnswer.new(best_answer.value, 0)]
+      aggregate += [CorrectAnswer.new(answer_value, 0)]
     end
     aggregate
   end
