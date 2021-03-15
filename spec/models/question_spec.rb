@@ -12,10 +12,6 @@ describe Question, type: :model do
     end
     let(:values) { %w[a B b C c c] }
 
-    it 'is a relation' do
-      expect(subject.aggregated_guesses).to be_a ActiveRecord::AssociationRelation
-    end
-
     it 'adds same_count attribute to each instance' do
       expect(subject.aggregated_guesses.first.same_count).to be_an Integer
     end

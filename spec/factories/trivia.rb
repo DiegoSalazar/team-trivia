@@ -13,6 +13,10 @@ FactoryBot.define do
       game_starts_at { 3.hours.ago }
     end
 
+    trait :active do
+      game_starts_at { 1.second.ago }
+    end
+
     trait :populated do
       transient do
         team_messages_count { 2 }

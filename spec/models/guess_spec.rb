@@ -24,7 +24,7 @@ describe Guess, type: :model do
     include_context 'Similar Guesses'
 
     it 'is the rounded up ratio of 2 to 6' do
-      expect(aggregated_guess.similarity_ratio).to be 4
+      expect(aggregated_guess.similarity_ratio).to be 33
     end
   end
 

@@ -18,7 +18,7 @@ describe Trivium, type: :model do
 
     context 'active trivia' do
       subject { described_class.active }
-      let!(:active) { create :trivium }
+      let!(:active) { create :trivium, game_starts_at: Time.now }
       let!(:far_future) { create :trivium, :far_future }
       let!(:expired) { create :trivium, :expired }
 
@@ -27,7 +27,7 @@ describe Trivium, type: :model do
       end
 
       it 'is has a start time in the future' do
-        expect(subject.game_starts_at).to be > Time.now
+        expect(subject.game_starts_at).to be > 1.second.ago
       end
     end
   end
