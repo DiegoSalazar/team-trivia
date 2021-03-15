@@ -7,8 +7,7 @@ class Player < ApplicationRecord
 
   acts_as_voter
 
-  has_many :joins
-  has_many :teams, through: :joins
+  belongs_to :team
   has_many :team_messages
   has_many :guesses
   has_many :questions
@@ -22,14 +21,24 @@ class Player < ApplicationRecord
   end
 
   def current_team
-    teams.first
+    team || create_self_team!
   end
 
   def team_name
-    current_team&.name || username
+    current_team&.name
   end
 
   def joined_team?(team)
-    team_ids.include? team.id
+    team_id == team.id
+  end
+
+  def in_self_team?
+    team&.name == username
+  end
+
+  private
+
+  def create_self_team!
+    create_team! name: username
   end
 end
