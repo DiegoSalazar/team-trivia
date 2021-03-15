@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_13_203508) do
+ActiveRecord::Schema.define(version: 2021_03_15_054053) do
 
   create_table "answers", force: :cascade do |t|
     t.text "value"
@@ -41,13 +41,6 @@ ActiveRecord::Schema.define(version: 2021_03_13_203508) do
     t.index ["trivium_id", "team_id"], name: "index_guesses_on_trivium_id_and_team_id"
   end
 
-  create_table "joins", force: :cascade do |t|
-    t.integer "player_id"
-    t.integer "team_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "players", force: :cascade do |t|
     t.string "username"
     t.datetime "created_at", precision: 6, null: false
@@ -57,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_03_13_203508) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "team_id"
     t.index ["email"], name: "index_players_on_email", unique: true
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true
   end

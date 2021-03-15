@@ -10,11 +10,7 @@ FactoryBot.define do
       end
 
       after :create do |team, evaluator|
-        players = create_list :player, evaluator.player_count
-
-        players.each do |player|
-          create :join, player: player, team: team
-        end
+        team.players = create_list :player, evaluator.player_count
       end
     end
   end

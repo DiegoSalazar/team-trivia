@@ -10,5 +10,5 @@
         = render QuestionListComponent.new @trivium.questions, @current_question, @trivium
       = render GuessFormComponent.new @current_guess, show: !@trivium.ended?
 
-  .col-sm-4
+  .col
     = render ChatComponent.new @title, @team_messages, current_player, @trivium
