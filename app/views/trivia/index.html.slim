@@ -15,7 +15,7 @@
       .card-body
         h3.card-title Past Games
         .card-text
-          table.table.table-hover
+          table.table.table-hover.mb-0
             tbody
               - @trivia.each do |trivium|
                 tr
@@ -26,5 +26,9 @@
                     .btn-group role="group" aria-label="Past Trivia options"
                       = link_to 'Team Chat', play_team_trivium_path(current_team, trivium), class: "btn btn-sm btn-warning" if current_team.present?
                       = link_to 'Reveal', reveal_trivium_path(trivium), class: "btn btn-sm btn-info"
+
+              - if @trivia.empty?
+                .alert.alert-warning.mb-0
+                  | No Trivia have been played yet.
 .row.mt-4
   .col= pagy_bootstrap_nav(@pagy).html_safe

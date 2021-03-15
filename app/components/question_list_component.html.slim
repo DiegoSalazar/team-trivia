@@ -8,3 +8,7 @@ ul#question-list.list-group
         .flex-grow-1= question.body
 
         = render QuestionStatusComponent.new question, num: question.num_accepted_guesses, denom: question.guesses.count, title: 'Accepted / Guesses'
+
+  - if @questions.empty?
+    .alert.alert-warning
+      | This Trivia has no Questions.
