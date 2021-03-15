@@ -93,22 +93,9 @@ def create_guess_for(player, question, team, trivium)
 end
 
 ActiveRecord::Base.transaction do
-  if Player.count.zero?
-    puts 'Creating Player 0'
-    player = FactoryBot.create :player, email: ENV['TEAM_TRIVIA_TEST_EM']
-    player.password = ENV['TEAM_TRIVIA_TEST_PW']
-    player.save!
-    puts 'Creating Team 0'
-    team = FactoryBot.create :team, :with_players
-    player.teams << team
+  Rake::Task['trivium:create_first_team'].invoke if Player.count.zero?
 
-    puts 'Creating Player 1'
-    player2 = FactoryBot.create :player, email: ENV['TEAM_TRIVIA_TEST_EM2']
-    player2.password = ENV['TEAM_TRIVIA_TEST_PW2']
-    player2.save!
-    player2.teams << team
-  end
-
+  player = Player.first
   trivia_count = (ENV['n'] || 1).to_i
   team_count = (ENV['t'] || 3).to_i
   guess_count = (ENV['g'] || 3).to_i
@@ -130,7 +117,8 @@ ActiveRecord::Base.transaction do
   end
 
   trivia.each_with_index do |trivium, i|
-    starts_at = Time.now
+    starts_at = Time.now + i * 60
+    starts_at += 20.seconds if i > 0
     starts_at = (ENV['s'].to_i + i * 60).seconds.from_now if ENV['s'].present?
     ends_at = starts_at + (ENV['e'] || 80).to_i.seconds
 

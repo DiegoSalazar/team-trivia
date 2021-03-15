@@ -2,7 +2,16 @@
 
 namespace :trivium do
   desc 'Delete and everything and re-seed'
-  task reseed: :environment do
+  task reseed: :delete_all do
+    puts nil, 'Seeding...'
+    Rake::Task['db:seed'].invoke
+  end
+
+  desc 'delete everything and start with Player and Team 0'
+  task fresh_start: %i[delete_all create_first_team]
+
+  desc 'Call delete_all and every model class'
+  task delete_all: :environment do
     # Force models to load
     Dir[Rails.root.join('app/models/**/*.rb')].map { |f| require f }
 
@@ -14,9 +23,25 @@ namespace :trivium do
         # ignore
       end
     end
+  end
 
-    puts nil, 'Seeding...'
-    Rake::Task['db:seed'].invoke
+  desc 'Create Player 0, 1, and the first Team'
+  task create_first_team: :environment do
+    raise KeyError, 'missing env var TEAM_TRIVIA_TEST_EM' if ENV['TEAM_TRIVIA_TEST_EM'].blank?
+
+    puts 'Creating Player 0'
+    player = FactoryBot.create :player, email: ENV['TEAM_TRIVIA_TEST_EM']
+    player.password = ENV['TEAM_TRIVIA_TEST_PW']
+    player.save!
+    puts 'Creating Team 0'
+    team = FactoryBot.create :team, :with_players
+    player.teams << team
+
+    puts 'Creating Player 1'
+    player2 = FactoryBot.create :player, email: ENV['TEAM_TRIVIA_TEST_EM2']
+    player2.password = ENV['TEAM_TRIVIA_TEST_PW2']
+    player2.save!
+    player2.teams << team
   end
 
   desc 'reset game start time of first trivium'
