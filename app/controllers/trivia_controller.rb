@@ -10,11 +10,12 @@ class TriviaController < ApplicationController
 
   def play
     unless @trivium.started?
-      redirect_to trivia_path, alert: "That game hasn't started yet."
+      redirect_to root_path, alert: "That game hasn't started yet."
       return
     end
 
     @current_question ||= @trivium.questions.first
+    @current_guess = :guess
     @current_guess = @current_question.guesses.new trivium: @trivium if @current_question
     @team_messages = current_team.team_messages_from @trivium
     @title = current_team.chat_title
