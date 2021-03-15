@@ -30,7 +30,7 @@ feature 'Contribute', type: :feature do
 
       it "takes you to the Trivia's Contribute page on success" do
         create_trivium
-        expect(page.current_url).to include new_question_path(Trivium.last)
+        expect(page.current_path).to eq new_question_path(Trivium.last)
       end
 
       context 'Invalid' do
