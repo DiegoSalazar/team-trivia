@@ -27,5 +27,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/I/dont/need/a/team', to: 'no_team#index'
+  get '/Im/a/badass', to: 'no_team#show'
+
   devise_for :player, controllers: { sessions: 'player/sessions' }
 end

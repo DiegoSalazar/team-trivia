@@ -3,6 +3,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.assets.check_precompiled_asset = false
   # config.logger = ActiveSupport::Logger.new STDOUT
 
   config.action_mailer.default_url_options = { host: 'localhost', port: ENV.fetch('PORT', 3002).to_i }
