@@ -7,7 +7,7 @@ class QuestionReflex < ApplicationReflex
     active_question = trivium.active_question
 
     if trivium.all_questions_revealed?
-      active_question.update! active: false
+      active_question.inactive!
       return
     end
 
@@ -30,7 +30,7 @@ class QuestionReflex < ApplicationReflex
       cable_ready['trivium_reveal'].remove_css_class \
         selector: "#question_#{active_question.id}",
         name: 'active'
-      active_question.update! active: false
+      active_question.inactive!
       reveal_and_mark_active! next_question
     end
 
@@ -64,7 +64,7 @@ class QuestionReflex < ApplicationReflex
     end
 
     question.question_revealed!
-    question.update! active: true
+    question.active!
     set_next_button 'Reveal Answer', %w[btn-danger btn-success]
   end
 
