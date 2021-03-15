@@ -11,10 +11,6 @@ class ApplicationController < ActionController::Base
     current_player&.current_team
   end
 
-  def ensure_player_team!
-    redirect_to teams_path if current_team.nil?
-  end
-
   def set_current_trivium
     @current_trivium = Trivium.active
     @current_trivium ||= Trivium.upcoming.first
