@@ -14,12 +14,8 @@ RSpec.describe TriviumBannerComponent, type: :component do
     expect(render_inline(subject).to_html).to include trivium.body
   end
 
-  it 'renders a countdown' do
-    expect(render_inline(subject).to_html).to include 'countdown'
-  end
-
   it 'allows to not render a countdown' do
-    subject = described_class.new trivium, show_countdown: false
+    subject = described_class.new trivium
     expect(render_inline(subject).to_html).to_not include 'countdown'
   end
 end
