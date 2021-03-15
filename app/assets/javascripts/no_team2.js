@@ -1,1 +1,1 @@
-setTimeout(() => Turbolinks.visit('/'), 1000)
+setTimeout(() => Turbolinks.visit('/'), 1500)
