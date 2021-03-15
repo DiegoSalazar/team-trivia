@@ -14,7 +14,8 @@ class GuessesChartComponent < ViewComponent::Base
   end
 
   def height_percent(guess)
-    "height: #{guess.similarity_ratio}%;"
+    percent = [10, guess.similarity_ratio].max
+    "height: #{percent}%;"
   end
 
   def answer_status(guess)
