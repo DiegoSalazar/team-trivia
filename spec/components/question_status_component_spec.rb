@@ -3,9 +3,18 @@
 require 'rails_helper'
 
 RSpec.describe QuestionStatusComponent, type: :component do
-  subject { described_class.new guess.question, active }
+  subject do
+    described_class.new \
+      guess.question,
+      num: num,
+      denom: denom,
+      title: '',
+      active: active
+  end
   let(:guess) { create :guess, :with_owners, question: question }
   let(:question) { create :question, :with_trivium }
+  let(:num) { 1 }
+  let(:denom) { 1 }
   let(:active) { true }
 
   it 'renders guess and vote counts' do
@@ -50,7 +59,9 @@ RSpec.describe QuestionStatusComponent, type: :component do
 
     context '1 guess and no votes' do
       let(:guess) { create :guess, :with_owners, question: question, cached_votes_up: 0 }
-      subject { described_class.new guess.question, active }
+      subject do
+        described_class.new guess.question, num: 0, denom: 1, title: '', active: active
+      end
 
       it 'is the number of accepted guesses over the total guesses' do
         expect(subject.status).to eq '0 / 1'
@@ -58,7 +69,9 @@ RSpec.describe QuestionStatusComponent, type: :component do
     end
 
     context 'no guesses or votes' do
-      subject { described_class.new Question.new, active }
+      subject do
+        described_class.new Question.new, num: 0, denom: 0, title: '', active: active
+      end
 
       it 'is the number of guesses over the number of guesses with votes' do
         expect(subject.status).to eq '0 / 0'
