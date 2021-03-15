@@ -39,6 +39,14 @@ class Question < ApplicationRecord
     guesses.select(&:correct?)
   end
 
+  def active!
+    update active: true
+  end
+
+  def inactive!
+    update active: false
+  end
+
   def correct?(guess)
     answers.any? { |answer| guess === answer }
   end
