@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class Team < ApplicationRecord
-  has_many :joins
-  has_many :players, through: :joins
+  has_many :players
   has_many :team_messages
   has_many :guesses
   has_many :submissions
