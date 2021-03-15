@@ -4,7 +4,6 @@ class TeamsController < ApplicationController
   include Pagy::Backend
 
   before_action :authenticate_player!
-  before_action :ensure_player_team!, only: %i[update]
   before_action :set_team, only: %i[show edit update destroy]
 
   # GET /teams
