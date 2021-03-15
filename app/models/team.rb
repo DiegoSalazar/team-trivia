@@ -7,6 +7,8 @@ class Team < ApplicationRecord
   has_many :guesses
   has_many :submissions
 
+  scope :recent, -> { order created_at: :desc }
+
   def team_messages_from(trivium)
     team_messages.where trivium: trivium
   end

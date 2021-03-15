@@ -1,9 +1,9 @@
-.row
+.row.mt-2
   .col
     .row
       .col-sm-2
         h1 Create
-      .col
+      .col.pt-1
         = link_to 'New Team', new_team_path, class: 'btn btn-primary btn-block'
     .row
       .col
@@ -17,3 +17,9 @@
                 td=l team.created_at
                 td.text-right
                   = link_to 'Join', team_player_joins_path(team, current_player), method: :post, class: 'btn btn-success btn-block' unless current_player.joined_team? team
+
+    .row
+      .col
+        = pagy_bootstrap_nav(@pagy).html_safe
+      .col
+        = link_to "I don't need a team", '/I/dont/need/a/team', class: 'btn btn-dark btn-block'

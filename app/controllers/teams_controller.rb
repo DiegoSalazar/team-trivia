@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class TeamsController < ApplicationController
+  include Pagy::Backend
+
   before_action :authenticate_player!
   before_action :ensure_player_team!, only: %i[update]
   before_action :set_team, only: %i[show edit update destroy]
@@ -8,7 +10,7 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    @pagy, @teams = pagy Team.recent
     @team_count = @teams.count
   end
 
