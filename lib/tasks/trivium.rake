@@ -50,7 +50,7 @@ namespace :trivium do
       Trivium.find_each.with_index do |trivium, i|
         next if i < 2 # leave some in the past
 
-        reset_trivium trivium, i
+        reset_trivium trivium, i - 2
       end
     end
   end
