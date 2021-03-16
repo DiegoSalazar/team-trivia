@@ -26,9 +26,13 @@
     display: inline-block;
     width: 65px;
   }
+  & > div {
+    display: inline-block;
+    padding-right: 0.5rem;
+  }
  }
 
- // Bootstrap alerts weren't showing on their own (JS init issue?)
+ // Bootstrap alerts weren't showing on their own (JS plugin issue?)
 .fade:not(.show) {
   opacity: 1;
 }

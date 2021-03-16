@@ -34,14 +34,14 @@ export default class Countdown {
   }
 
   newClock (days, hours, minutes, seconds) {
-    const parts = []
+    let html = ''
 
-    if (days) parts.push(this.timeLabel(days, 'd'))
-    if (hours) parts.push(this.timeLabel(hours, 'h'))
-    parts.push(this.timeLabel(this.zeroPad(minutes), 'm'))
-    parts.push(this.timeLabel(this.zeroPad(seconds), 's'))
+    if (days) html += `<div>${this.timeLabel(days, 'd')}</div>`
+    if (hours) html += `<div>${this.timeLabel(hours, 'h')}</div>`
+    html += `<span>${this.timeLabel(this.zeroPad(minutes), 'm')}</span>`
+    html += `<span>${this.timeLabel(this.zeroPad(seconds), 's')}</span>`
 
-    return parts.map(p => `<span>${p}</span>`).join('')
+    return html
   }
 
   calcCountdown () {
