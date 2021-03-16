@@ -41,7 +41,7 @@ class Guess < ApplicationRecord
   end
 
   def points
-    question.points_for self
+    question&.points_for(self) || 0
   end
 
   def question_number(trivium)

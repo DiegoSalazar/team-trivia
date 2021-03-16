@@ -2,6 +2,7 @@
 
 class PlayersController < ApplicationController
   before_action :authenticate_player!
+  before_action :ensure_current_player!, only: %i[edit update destroy]
   before_action :set_player, only: %i[show edit update destroy]
 
   # GET /players
@@ -20,7 +21,9 @@ class PlayersController < ApplicationController
   end
 
   # GET /players/1/edit
-  def edit; end
+  def edit
+    @teams = Team.all
+  end
 
   # POST /players
   # POST /players.json
@@ -64,13 +67,17 @@ class PlayersController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_player
     @player = Player.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def player_params
-    params.require(:player).permit(:username, :team_id)
+    params.require(:player).permit :username, :email, :team_id
+  end
+
+  def ensure_current_player!
+    return unless params[:id] && params[:id].to_i != current_player.id
+
+    redirect_to player_path(current_player), alert: 'Not Allowed'
   end
 end

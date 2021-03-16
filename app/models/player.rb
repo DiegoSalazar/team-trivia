@@ -12,10 +12,6 @@ class Player < ApplicationRecord
   has_many :guesses
   has_many :questions
 
-  def username
-    email.split(?@).first
-  end
-
   def chat_channel
     "#{current_team.chat_room}-player-#{id}"
   end

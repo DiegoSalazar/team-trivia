@@ -1,20 +1,26 @@
 .row
-  .col-sm-3
-  .col-sm-6
-    .card
-      .card-body
-        .card-title
-          h1
-            | Player:&nbsp;
-            = @player.username
-          h2
-            | Team:&nbsp;
-            = @player.team_name
+  .col
+    .d-flex.flex-column.align-items-center
+      .display-3
+        = icon 'person-circle'
 
-        .card-text
-          = link_to t('.back', :default => t("helpers.links.back")), players_path, :class => 'btn btn-default'
-          '
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_player_path(@player), :class => 'btn btn-default'
-          '
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), player_path(@player), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
-  .col-sm-3
+      h1.display-3
+        = @player.username
+
+      p.mb-4
+        = @player.email
+
+      h2.my-4
+        .badge.badge-secondary.mr-1
+          | Team
+        .badge.badge-light
+          = link_to @player.team_name, team_path(@player.team), class: 'text-dark'
+
+    .d-flex.justify-content-around.my-4
+      = render PlayerStatsComponent.new @player
+
+    .d-flex.justify-content-around.mt-5
+      .btn-group
+        = link_to 'Back', root_path, class: 'btn btn-light'
+        = link_to 'Edit', edit_player_path(@player), class: 'btn btn-info'
+        = link_to 'Destroy', player_path(@player), data: { method: :delete, confirm: 'Are you sure?' }, class: 'btn btn-danger'
