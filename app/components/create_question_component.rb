@@ -14,7 +14,7 @@ class CreateQuestionComponent < ViewComponent::Base
   end
 
   def notice
-    return if !render? || @notice.blank?
+    return if @question.nil? || @notice.blank?
 
     content_tag :div, @notice, class: 'alert alert-success'
   end
