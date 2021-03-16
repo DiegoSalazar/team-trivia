@@ -6,7 +6,7 @@ require 'rails_helper'
 feature 'Contribute', type: :feature do
   before do
     login_player_one!
-    click_link 'Contribute'
+    within('main') { click_link 'Contribute' }
   end
 
   let(:trivia_title) { "Trivia Title #{rand}" }
