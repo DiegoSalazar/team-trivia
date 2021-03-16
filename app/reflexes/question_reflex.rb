@@ -44,17 +44,65 @@ class QuestionReflex < ApplicationReflex
     @question.answers.build
   end
 
+  def edit
+    @trivium = Trivium.find element.dataset.trivium_id
+    @question = @trivium.questions.find element.dataset.id
+  end
+
   def add_answer
     @question = Question.new question_params
     @trivium = @question.trivium
     @question.answers.build
   end
 
-  def cancel
-    @question = nil
+  def remove_answer
+    answer_index = element.dataset.answer_index
+
+    if element.dataset.id.blank?
+      @question = Question.new
+      remove_answer_at answer_index
+
+      cable_ready.broadcast
+      morph :nothing
+      return
+    end
+
+    @question = current_player.questions.find element.dataset.id
+
+    if element.dataset.answer_id.blank?
+      remove_answer_at answer_index
+
+      cable_ready.broadcast
+      morph :nothing
+      return
+    end
+
+    answer = @question.answers.find element.dataset.answer_id
+    return morph :nothing if answer.nil?
+
+    replace_answer_with_delete_field answer_index
+    cable_ready.broadcast
+    morph :nothing
   end
 
   private
+
+  def remove_answer_at(index)
+    cable_ready[current_player.chat_channel].remove \
+      selector: "[data-answer-index='#{index}']"
+  end
+
+  def replace_answer_with_delete_field(index)
+    cable_ready[current_player.chat_channel].outer_html \
+      selector: "[data-answer-index='#{index}']",
+      html: <<-HTML.strip_heredoc
+        <input
+          name="question[answers_attributes][#{index}][_destroy]"
+          value="1"
+          type="hidden"
+        />
+      HTML
+  end
 
   def reveal_and_mark_active!(question)
     %w[revealed active].each do |klass|

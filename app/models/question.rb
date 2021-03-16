@@ -5,7 +5,7 @@ class Question < ApplicationRecord
   belongs_to :player
   has_many :guesses
   has_many :answers
-  accepts_nested_attributes_for :answers
+  accepts_nested_attributes_for :answers, allow_destroy: true
 
   validates :body, presence: true
   scope :recent, -> { order created_at: :desc }
@@ -67,5 +67,9 @@ class Question < ApplicationRecord
     return 0 unless correct? guess
 
     answers.find { |a| a === guess }&.points
+  end
+
+  def question_index
+    trivium.question_index self
   end
 end
