@@ -55,14 +55,6 @@ ActiveRecord::Schema.define(version: 2021_03_15_054053) do
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true
   end
 
-  create_table "plays", force: :cascade do |t|
-    t.integer "trivium_id"
-    t.integer "team_id"
-    t.integer "submission_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "questions", force: :cascade do |t|
     t.text "body"
     t.integer "question_type", default: 0
