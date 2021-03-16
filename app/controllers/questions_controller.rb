@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
   def index; end
 
   def new
-    @current_trivium = @trivium
+    @current_trivium = @trivium || Trivium.new
     @player_questions = @trivium.questions_by(current_player).recent
     @upcoming_trivia = @trivium.following_trivia
     @notice = flash[:notice]
@@ -26,15 +26,23 @@ class QuestionsController < ApplicationController
     redirect_to action: :new
   end
 
+  def update
+    @question = current_player.questions.find params[:id]
+    @question.update! question_params
+
+    flash[:notice] = "Question #{@question.question_index} updated."
+    redirect_to action: :new
+  end
+
   def destroy
     @question.destroy!
-    redirect_to action: :index
+    redirect_to action: :new
   end
 
   private
 
   def set_trivium
-    @trivium = Trivium.find params[:id]
+    @trivium ||= Trivium.find params[:trivium_id]
   end
 
   def set_question
@@ -50,6 +58,7 @@ class QuestionsController < ApplicationController
       :body,
       :trivium_id,
       :question_type,
-      answers_attributes: %i[value points]
+      :max_questions,
+      answers_attributes: %i[id value points _destroy]
   end
 end

@@ -1,6 +1,6 @@
-= form_for @question, data: { remote: true }, html: { class: 'bg-light border shadow mb-3 px-3 py-2' } do |f|
+= form_for [@trivium, @question], data: { remote: true }, html: { class: 'bg-light border shadow mb-3 px-3 py-2' } do |f|
   .d-flex.justify-content-between
-    h3 New Question
+    h3= title
 
     div
       - Question.question_types.keys.each_with_index do |type|
@@ -15,10 +15,9 @@
     .col-5
       = render AnswerFieldsComponent.new @question.answers, f, 2
 
-  .row.mb-2
-    .col
-      = link_to 'Cancel', nil, data: { reflex: 'click->Question#cancel' }, class: 'btn btn-sm btn-secondary btn-block', tabindex: @question.answers.size + 5
-    .col-sm-10
-      = f.submit 'Create Question', class: 'btn btn-sm btn-success btn-block', tabindex: @question.answers.size + 4
+  .btn-group.w-100
+    = delete_button
+    = link_to 'Cancel', new_trivium_question_path(@trivium), class: 'btn btn-sm btn-secondary', tabindex: @question.answers.size + 5
+    = f.submit submit_button_text, class: 'btn btn-sm btn-success btn-block flex-grow-1', tabindex: @question.answers.size + 4
 
   = f.hidden_field :trivium_id

@@ -9,5 +9,8 @@ ul.list-group
             = question_index question
           = question.body
 
-        strong.badge.badge-dark.border.shadow-sm title= helpers.pluralize(question.answer_points, 'point')
-          = question.answer_value
+        .d-flex.justify-content-between.align-items-center
+          strong.badge.badge-info.border.shadow-sm title= helpers.pluralize(question.answer_points, 'point')
+            = question.answer_value
+
+          = edit_question_button question

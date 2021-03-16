@@ -14,9 +14,9 @@ module ApplicationHelper
     if @current_trivium.nil? || @current_trivium.new_record?
       new_trivium_path
     elsif @current_trivium.started? && @current_trivium.next_trivium.present?
-      new_question_path @current_trivium.next_trivium
+      new_trivium_question_path @current_trivium.next_trivium
     else
-      new_question_path @current_trivium
+      new_trivium_question_path @current_trivium
     end
   end
 

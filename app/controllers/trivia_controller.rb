@@ -52,7 +52,7 @@ class TriviaController < ApplicationController
     respond_to do |format|
       if @trivium.save
         format.html do
-          redirect_to new_question_path(@trivium), notice: 'Trivium was successfully created.'
+          redirect_to new_trivium_question_path(@trivium), notice: 'Trivium was successfully created.'
         end
         format.json { render :show, status: :created, location: @trivium }
       else
