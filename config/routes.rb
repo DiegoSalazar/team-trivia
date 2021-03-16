@@ -7,9 +7,6 @@ Rails.application.routes.draw do
   resources :players
   resources :guesses, only: :index
   resources :teams do
-    resources :players, only: :index do
-      resource :joins, only: :create
-    end
     resources :trivia, only: [] do
       member do
         get :play
@@ -19,11 +16,8 @@ Rails.application.routes.draw do
   resources :trivia, except: :show do
     member do
       get :reveal
-      # get :add_question
-      # post :create_question
-      # post :delete_question
-      resources :questions
     end
+    resources :questions
   end
 
   get '/I/dont/need/a/team', to: 'no_team#index'
