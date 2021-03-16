@@ -30,7 +30,7 @@ feature 'Contribute', type: :feature do
 
       it "takes you to the Trivia's Contribute page on success" do
         create_trivium
-        expect(page.current_path).to eq new_question_path(Trivium.last)
+        expect(page.current_path).to eq new_trivium_question_path(Trivium.last)
       end
 
       context 'Invalid' do
@@ -52,7 +52,7 @@ feature 'Contribute', type: :feature do
     before do
       create_trivium
       upcoming_trivium
-      visit new_question_path trivium
+      visit new_trivium_question_path trivium
     end
     let(:starts_at) { 1.minute.from_now }
     let(:upcoming_trivium) { create_list :trivium, 2, :far_future }
@@ -83,7 +83,7 @@ feature 'Contribute', type: :feature do
       create_list :question, 2, trivium: trivium, player: current_player
     end
     let(:trivium) { create :trivium, :far_future }
-    before { visit new_question_path trivium }
+    before { visit new_trivium_question_path trivium }
 
     it 'shows list of My Questions' do
       expect(page).to have_content 'My Questions'
