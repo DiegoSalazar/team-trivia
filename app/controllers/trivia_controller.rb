@@ -5,7 +5,8 @@ class TriviaController < ApplicationController
 
   before_action :authenticate_player!, except: :index
   before_action :set_current_trivium, only: %i[index reveal]
-  before_action :set_trivium, only: %i[play reveal show edit update destroy add_question create_question delete_question]
+  before_action :set_trivium, only: %i[play reveal]
+  before_action :set_my_trivium, only: %i[edit update destroy]
 
   def play
     unless @trivium.started?
@@ -23,10 +24,6 @@ class TriviaController < ApplicationController
   end
 
   def reveal
-    init_reveal_status
-    @reveal_status = session[:reveal_status]
-    @current_question_revealed = session[:current_question_revealed]
-
     TriviumSubmitter.ensure_submissions! @trivium
   end
 
@@ -47,14 +44,14 @@ class TriviaController < ApplicationController
   # POST /trivia
   # POST /trivia.json
   def create
-    @trivium = Trivium.new trivium_params
+    @trivium = current_player.trivia.build trivium_params
 
     respond_to do |format|
       if @trivium.save
         format.html do
           redirect_to new_trivium_question_path(@trivium), notice: 'Trivium was successfully created.'
         end
-        format.json { render :show, status: :created, location: @trivium }
+        format.json { render json: @trivium }
       else
         format.html do
           @errors = @trivium.errors.full_messages
@@ -85,47 +82,25 @@ class TriviaController < ApplicationController
   # DELETE /trivia/1
   # DELETE /trivia/1.json
   def destroy
-    @trivium.destroy
+    @trivium.destroy!
+
     respond_to do |format|
       format.html { redirect_to trivia_url, notice: 'Trivium was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
-  def add_question
-    @question = Question.new
-    render 'trivia/add_question'
-  end
-
-  def create_question
-    question = params[:question_id].present? ? Question.find(params[:question_id]) : Question.create(body: params[:body], correct_answer: params[:correct_answer])
-    TriviumQuestion.create(trivium: @trivium, question: question)
-
-    redirect_to @trivium
-  end
-
-  def delete_question
-    Question.find(params[:question_id]).destroy!
-    redirect_to @trivium
-  end
-
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_trivium
-    @trivium = Trivium.find(params[:id])
+    @trivium = Trivium.find params[:id]
   end
 
-  # Only allow a list of trusted parameters through.
+  def set_my_trivium
+    @trivium = current_player.trivia.find params[:id]
+  end
+
   def trivium_params
-    params.require(:trivium).permit(:title, :body, :game_starts_at, :game_ends_at)
-  end
-
-  def init_reveal_status
-    return if session[:reveal_status].present?
-
-    ids = @current_trivium.question_ids
-    session[:reveal_status] = ids.zip([false] * ids.size).to_h
-    session[:current_question_revealed] = nil
+    params.require(:trivium).permit :title, :body, :game_starts_at, :game_ends_at
   end
 end

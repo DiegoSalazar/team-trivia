@@ -35,13 +35,13 @@ namespace :trivium do
     player.save!
     puts 'Creating Team 0'
     team = FactoryBot.create :team, :with_players
-    player.teams << team
+    player.team = team
 
     puts 'Creating Player 1'
     player2 = FactoryBot.create :player, email: ENV['TEAM_TRIVIA_TEST_EM2']
     player2.password = ENV['TEAM_TRIVIA_TEST_PW2']
     player2.save!
-    player2.teams << team
+    player2.team = team
   end
 
   desc 'reset game start time of first trivium'

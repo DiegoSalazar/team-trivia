@@ -11,6 +11,7 @@ def create_realistic_trivium(player, questions, team_count, guess_count, i)
   puts "\nCreating Trivia #{i.succ}"
   trivium = FactoryBot.create \
     :trivium,
+    player: player,
     title: "Mixed Trivia #{i.succ}",
     body: 'A mysterious hint'
 

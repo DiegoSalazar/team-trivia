@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_15_054053) do
+ActiveRecord::Schema.define(version: 2021_03_17_010427) do
 
   create_table "answers", force: :cascade do |t|
     t.text "value"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 2021_03_15_054053) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "max_questions", default: 20, null: false
+    t.integer "player_id"
   end
 
   create_table "votes", force: :cascade do |t|

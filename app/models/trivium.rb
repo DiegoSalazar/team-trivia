@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Trivium < ApplicationRecord
+  belongs_to :player
   has_many :questions
   has_many :guesses
   has_many :submissions
@@ -31,7 +32,7 @@ class Trivium < ApplicationRecord
     upcoming.first
   end
 
-  def question_index(question)
+  def question_number(question)
     i = question_ids.index(question.id)
     i ? i + 1 : -1
   end
@@ -61,7 +62,7 @@ class Trivium < ApplicationRecord
     scope = self.class.series.limit 10
     return scope if game_ends_at.blank?
 
-    scope.where 'game_starts_at > ?', game_ends_at
+    scope.where 'game_starts_at > ?', game_ends_at.in_time_zone(Time.zone)
   end
 
   def upcoming?

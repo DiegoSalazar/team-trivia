@@ -8,6 +8,7 @@ class Player < ApplicationRecord
   acts_as_voter
 
   belongs_to :team
+  has_many :trivia
   has_many :team_messages
   has_many :guesses
   has_many :questions

@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :trivium do
+    player
     title { Faker::Hacker.phrases.sample }
     body { Faker::Hacker.say_something_smart }
     game_starts_at { 3.hours.from_now }
