@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class TriviaListComponent < ViewComponent::Base
-  def initialize(trivia)
+  include Pagy::Frontend
+
+  def initialize(trivia, pagy)
     super
     @trivia = trivia
+    @pagy = pagy
   end
 
   def render?

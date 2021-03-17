@@ -3,10 +3,11 @@
 class PlayerQuestionsListComponent < ViewComponent::Base
   include TriviumQuestions
 
-  def initialize(trivium, questions)
+  def initialize(trivium, questions, pagy)
     super
     @trivium = trivium
     @questions = questions
+    @pagy = pagy
   end
 
   def render?
@@ -14,7 +15,7 @@ class PlayerQuestionsListComponent < ViewComponent::Base
   end
 
   def edit_question_button(question)
-    return unless @trivium.upcoming?
+    return if @trivium.started?
 
     button_tag \
       helpers.icon('pencil'),

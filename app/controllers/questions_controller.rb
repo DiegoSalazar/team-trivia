@@ -13,8 +13,8 @@ class QuestionsController < ApplicationController
 
   def new
     @current_trivium = @trivium || Trivium.new
-    @player_questions = @trivium.questions_by(current_player).recent
-    @upcoming_trivia = @trivium.following_trivia
+    @questions_pagy, @player_questions = pagy @trivium.questions_by(current_player).recent
+    @trivia_pagy, @upcoming_trivia = pagy @trivium.following_trivia
     @notice = flash[:notice]
   end
 
@@ -30,7 +30,7 @@ class QuestionsController < ApplicationController
     @question = current_player.questions.find params[:id]
     @question.update! question_params
 
-    flash[:notice] = "Question #{@question.question_index} updated."
+    flash[:notice] = "Question #{@question.question_number} updated."
     redirect_to action: :new
   end
 
