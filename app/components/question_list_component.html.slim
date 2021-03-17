@@ -3,7 +3,7 @@ ul#question-list.list-group
     = button_tag class: button_class(question), data: button_data(question) do
       .d-flex.justify-content-between.align-items-center
         span.badge.badge-pill.badge-info.mr-2
-          = question_index question
+          = question_number question
 
         .flex-grow-1= question.body
 

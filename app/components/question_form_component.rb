@@ -29,7 +29,7 @@ class QuestionFormComponent < ViewComponent::Base
   private
 
   def edit_question_title
-    "Question #{badge @question.question_index}".html_safe
+    "Question #{badge @question.question_number}".html_safe
   end
 
   def badge(text, style = 'info')

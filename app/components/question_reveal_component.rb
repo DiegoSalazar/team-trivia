@@ -3,10 +3,10 @@
 class QuestionRevealComponent < ViewComponent::Base
   include QuestionHelper
 
-  def initialize(question, question_index)
+  def initialize(question, question_number)
     super
     @question = question
-    @question_index = question_index
+    @question_number = question_number
   end
 
   def reveal_status(question)

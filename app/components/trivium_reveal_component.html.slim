@@ -6,4 +6,4 @@
 
 ul#trivium-reveal.list-group.list-group-flush
   - @questions.each do |question|
-    = render QuestionRevealComponent.new question, @trivium.question_index(question)
+    = render QuestionRevealComponent.new question, @trivium.question_number(question)

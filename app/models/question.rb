@@ -69,7 +69,7 @@ class Question < ApplicationRecord
     answers.find { |a| a === guess }&.points
   end
 
-  def question_index
-    trivium.question_index self
+  def question_number
+    trivium.question_number self
   end
 end
