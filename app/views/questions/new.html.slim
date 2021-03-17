@@ -8,8 +8,8 @@
 
 .row.mb-3
   .col
-    = render PlayerQuestionsListComponent.new @trivium, @player_questions
+    = render PlayerQuestionsListComponent.new @trivium, @player_questions, @questions_pagy
 
 .row.mb-3
   .col
-    = render TriviaListComponent.new @upcoming_trivia
+    = render TriviaListComponent.new @upcoming_trivia, @trivia_pagy

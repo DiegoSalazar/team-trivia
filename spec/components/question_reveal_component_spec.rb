@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 describe QuestionRevealComponent, type: :component do
-  subject { described_class.new question, question_index }
+  subject { described_class.new question, question_number }
   let(:question) { create :question, trivium: trivium }
   let(:guess) { create :guess, player: player, team: team, trivium: trivium, question: question }
   let(:player) { team.players.first }
   let(:team) { create :team, :with_players, player_count: 1 }
   let(:trivium) { create :trivium, :populated }
-  let(:question_index) { 0 }
+  let(:question_number) { 0 }
   let(:component) { render_inline(subject).to_html }
   before { player.vote_up_for guess }
 
