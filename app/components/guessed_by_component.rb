@@ -20,7 +20,7 @@ class GuessedByComponent < ViewComponent::Base
   end
 
   def question_title
-    "Question ##@question_number: #@question_body"
+    "Question ##{@question_number}: #{@question_body}"
   end
 
   def badge_class
