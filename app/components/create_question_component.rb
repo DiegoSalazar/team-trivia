@@ -10,7 +10,7 @@ class CreateQuestionComponent < ViewComponent::Base
   end
 
   def render?
-    @trivium.upcoming? && !@trivium.full?
+    !@trivium.started? && !@trivium.full?
   end
 
   def notice
