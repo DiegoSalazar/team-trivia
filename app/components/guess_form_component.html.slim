@@ -1,5 +1,5 @@
 = form_for @guess, data: { reflex: 'submit->guesses#create' } do |f|
-  = render ModalComponent.new :guess, modal_params do |component|
+  = render ModalComponent.new :guess_modal, modal_params do |component|
     = component.with(:title) { @guess.question.body }
 
     .form-group= render GuessFieldsComponent.new @guess.question, f

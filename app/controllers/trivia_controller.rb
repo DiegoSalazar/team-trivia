@@ -93,7 +93,7 @@ class TriviaController < ApplicationController
   private
 
   def set_trivium
-    @trivium = Trivium.find params[:id]
+    @trivium ||= Trivium.find params[:id]
   end
 
   def set_my_trivium
