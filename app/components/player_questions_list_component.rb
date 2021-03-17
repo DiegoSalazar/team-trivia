@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PlayerQuestionsListComponent < ViewComponent::Base
+  include Pagy::Frontend
   include TriviumQuestions
 
   def initialize(trivium, questions, pagy)

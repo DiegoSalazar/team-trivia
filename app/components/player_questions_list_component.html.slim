@@ -14,3 +14,5 @@ ul.list-group
             = question.answer_value
 
           = edit_question_button question
+
+  .mt-3= pagy_bootstrap_nav(@pagy).html_safe if @questions.present?

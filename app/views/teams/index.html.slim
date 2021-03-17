@@ -25,6 +25,6 @@
 
     .row
       .col
-        = pagy_bootstrap_nav(@pagy).html_safe
+        = pagy_bootstrap_nav(@pagy).html_safe if @teams.present?
       .col
         = link_to "I don't need a team", '/I/dont/need/a/team', class: 'btn btn-dark btn-block'

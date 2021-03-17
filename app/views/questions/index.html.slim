@@ -2,7 +2,7 @@
   = render CreateQuestionComponent.new @question
 
 .row.justify-content-end
-  = pagy_bootstrap_nav(@pagy).html_safe
+  = pagy_bootstrap_nav(@pagy).html_safe if @questions.present?
 
 .row
   table.table.table-striped.table-hover
@@ -24,4 +24,4 @@
             = f.submit_tag "Destroy", data: { confirm: 'Are you sure you want to permanently delete question' }, class: 'btn btn-block btn-danger'
 
 .row.justify-content-end
-  = pagy_bootstrap_nav(@pagy).html_safe
+  = pagy_bootstrap_nav(@pagy).html_safe if @questions.present?
