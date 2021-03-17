@@ -58,10 +58,9 @@ class GuessesReflex < ApplicationReflex
         trivium: trivium
       ))
 
-    # Clear the guess form
-    cable_ready[current_player.chat_channel].set_value \
-      selector: '#guess_value',
-      value: nil
+    # Close the guess form Modal
+    cable_ready[current_player.chat_channel].remove \
+      selector: '.modal'
 
     # Update current_player's question status
     cable_ready[current_player.chat_channel].outer_html \

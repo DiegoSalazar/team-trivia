@@ -10,4 +10,12 @@ class GuessFormComponent < ViewComponent::Base
   def render?
     @show
   end
+
+  def modal_params
+    {
+      reflex: 'click->GuessModal#close',
+      question_id: @guess.question_id,
+      trivium_id: @guess.trivium_id
+    }
+  end
 end

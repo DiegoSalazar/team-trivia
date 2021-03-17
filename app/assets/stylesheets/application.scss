@@ -36,3 +36,12 @@
 .fade:not(.show) {
   opacity: 1;
 }
+
+.modal {
+  background: rgba(0, 0, 0, 0.50);
+  display: block;
+
+  .modal-dialog {
+    top: 10%;
+  }
+}

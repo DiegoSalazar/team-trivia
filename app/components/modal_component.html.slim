@@ -1,0 +1,11 @@
+.modal tabindex="-1"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5.modal-title= title
+        button.close data=reflex_data aria-label="Close" type="button"
+          span aria-hidden="true" &times;
+      .modal-body
+        = content
+      .modal-footer
+        = footer
