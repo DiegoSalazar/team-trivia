@@ -1,0 +1,4 @@
+- @choices.each do |choice|
+  .form-check
+    = @guess_form.radio_button :value, choice.value, class: 'form-check-input'
+    = @guess_form.label "value_#{choice.value.underscore}", choice.value, class: 'form-check-label'

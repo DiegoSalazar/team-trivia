@@ -7,6 +7,12 @@ class TriviumRevealComponent < ViewComponent::Base
     @questions = trivium.questions.recent
   end
 
+  def title
+    return if all_questions_revealed?
+
+    content_tag :h2, 'Question Reveal'
+  end
+
   def reveal_button
     return if all_questions_revealed?
 

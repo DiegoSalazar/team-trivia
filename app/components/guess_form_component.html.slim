@@ -2,11 +2,9 @@
   = render ModalComponent.new :guess, modal_params do |component|
     = component.with(:title) { @guess.question.body }
 
-    .form-group
-      = f.label :value, 'Type your answer or guess', class: 'sr-only'
-      = f.text_area :value, required: true, placeholder: 'Type your answer or guess', class: 'form-control', autofocus: true
-      = f.hidden_field :question_id
-      = f.hidden_field :trivium_id
+    .form-group= render GuessFieldsComponent.new @guess.question, f
+    = f.hidden_field :question_id
+    = f.hidden_field :trivium_id
 
     = component.with :footer do
       = f.submit 'Submit', class: 'btn btn-success btn-block'
