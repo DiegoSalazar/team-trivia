@@ -11,7 +11,7 @@ class PlayerStatsComponent < ViewComponent::Base
   end
 
   def points
-    @player.guesses.sum(&:points)
+    @player.guesses.includes(question: :answers).sum(&:points)
   end
 
   def guesses
