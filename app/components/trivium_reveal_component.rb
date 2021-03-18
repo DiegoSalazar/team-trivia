@@ -14,6 +14,7 @@ class TriviumRevealComponent < ViewComponent::Base
   end
 
   def reveal_button
+    return unless moderator?
     return if all_questions_revealed?
 
     button_tag \
@@ -24,6 +25,10 @@ class TriviumRevealComponent < ViewComponent::Base
         reflex: 'click->Question#reveal',
         trivium_id: @trivium.id
       }
+  end
+
+  def moderator?
+    controller.current_player.trivium_ids.include? @trivium.id
   end
 
   def winners
