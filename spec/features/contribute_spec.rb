@@ -72,10 +72,6 @@ feature 'Contribute', type: :feature do
         expect(page).to have_content t.title
       end
     end
-
-    it 'shows a New Question button' do
-      expect(page).to have_button 'New Question'
-    end
   end
 
   context 'When I have contributed Questions to the Upcoming Trivia' do

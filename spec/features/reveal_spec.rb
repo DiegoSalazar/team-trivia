@@ -7,7 +7,7 @@ feature 'Reveal', type: :feature do
     login_player_one!
     visit reveal_trivium_path trivium
   end
-  let(:trivium) { create :trivium, :populated, :expired }
+  let(:trivium) { create :trivium, :populated, :expired, player: current_player }
   let(:ended_at) { I18n.l trivium.game_ends_at, format: :long }
 
   it 'displays the Trivia title' do

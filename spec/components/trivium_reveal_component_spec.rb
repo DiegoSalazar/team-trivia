@@ -3,8 +3,9 @@
 require 'rails_helper'
 
 describe TriviumRevealComponent, type: :component do
-  subject { described_class.new trivium }
+  subject { described_class.new trivium, player }
   let(:trivium) { create :trivium, :populated }
+  let(:player) { create :player }
   let(:question) { trivium.questions.sample }
 
   it 'renders the questions' do

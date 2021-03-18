@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class TriviumRevealComponent < ViewComponent::Base
-  def initialize(trivium)
+  def initialize(trivium, player)
     super
     @trivium = trivium
     @questions = trivium.questions.recent
+    @player = player
   end
 
   def title
@@ -28,7 +29,7 @@ class TriviumRevealComponent < ViewComponent::Base
   end
 
   def moderator?
-    controller.current_player.trivium_ids.include? @trivium.id
+    @player.trivium_ids.include? @trivium.id
   end
 
   def winners

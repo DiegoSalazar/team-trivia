@@ -47,7 +47,7 @@ describe Guess, type: :model do
       end
 
       context '2nd guess' do
-        let(:aggregated_guess) { question.aggregated_guesses[1] }
+        let(:aggregated_guess) { question.reload.aggregated_guesses[1] }
 
         it 'is the percent of 3 to 6' do
           expect(aggregated_guess.same_count_percent_of(guesses_count)).to eq 50
@@ -55,7 +55,7 @@ describe Guess, type: :model do
       end
 
       context '3rd guess' do
-        let(:aggregated_guess) { question.aggregated_guesses[2] }
+        let(:aggregated_guess) { question.reload.aggregated_guesses[2] }
 
         it 'is the percent of 1 to 6' do
           expect(aggregated_guess.same_count_percent_of(guesses_count)).to eq 16
