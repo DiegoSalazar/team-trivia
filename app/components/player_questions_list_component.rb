@@ -15,16 +15,25 @@ class PlayerQuestionsListComponent < ViewComponent::Base
     @questions.present?
   end
 
+  def question_type_icon(question)
+    icon = 'list-task'
+    icon = 'card-text' if question.free_text?
+    content_tag \
+      :span,
+      helpers.icon(icon, class: 'mr-2'),
+      title: question.question_type.titleize
+  end
+
   def edit_question_button(question)
     return if @trivium.started?
 
     button_tag \
-      helpers.icon('pencil'),
+      helpers.icon('pencil-fill'),
+      class: 'btn btn-sm btn-default',
       data: {
         reflex: 'click->Question#edit',
         id: question.id,
         trivium_id: @trivium.id
-      },
-      class: 'btn btn-sm btn-default'
+      }
   end
 end

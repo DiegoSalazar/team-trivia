@@ -5,8 +5,9 @@ ul.list-group
     .list-group-item.list-group-item-action
       .d-flex.justify-content-between.align-items-center
         .d-flex.align-items-center
-          span.badge.badge-pill.badge-info.mr-2
+          span.badge.badge-pill.badge-info.mr-2 title="Question #{question_number question}"
             = question_number question
+          = question_type_icon question
           = question.body
 
         .d-flex.justify-content-between.align-items-center
