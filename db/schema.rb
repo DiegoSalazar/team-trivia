@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2021_03_17_010427) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "answers", force: :cascade do |t|
     t.text "value"
     t.integer "question_id"
@@ -58,12 +61,6 @@ ActiveRecord::Schema.define(version: 2021_03_17_010427) do
   create_table "questions", force: :cascade do |t|
     t.text "body"
     t.integer "question_type", default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "trivium_id"
-    t.integer "revealed", default: 0
-    t.boolean "active", default: false
-    t.integer "player_id"
   end
 
   create_table "submissions", force: :cascade do |t|
@@ -105,9 +102,9 @@ ActiveRecord::Schema.define(version: 2021_03_17_010427) do
 
   create_table "votes", force: :cascade do |t|
     t.string "votable_type"
-    t.integer "votable_id"
+    t.bigint "votable_id"
     t.string "voter_type"
-    t.integer "voter_id"
+    t.bigint "voter_id"
     t.boolean "vote_flag"
     t.string "vote_scope"
     t.integer "vote_weight"
