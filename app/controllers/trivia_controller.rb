@@ -15,7 +15,7 @@ class TriviaController < ApplicationController
     end
 
     if params[:question_id].present?
-      flash.now[:guess_modal] = true
+      flash.now[:guess_modal] = !flash[:close_guess_modal]
       @current_question = @trivium.questions.find params[:question_id]
     end
 
