@@ -1,5 +1,6 @@
 .badass {
-  background-color: rgba(146, 146, 212, 0.76);
+  background-color: var(--dark);
+  color: var(--light);
   display: flex;
   justify-content: center;
   align-items: center;

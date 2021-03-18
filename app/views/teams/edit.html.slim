@@ -1,4 +1,4 @@
-- model_class = Team
-.page-header
-  h1=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize
-= render :partial => "form"
+.row.mt-4
+  .col
+    h1 Edit Team
+    = render partial: 'form'
