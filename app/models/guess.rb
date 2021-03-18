@@ -14,7 +14,7 @@ class Guess < ApplicationRecord
   scope :accepted, -> { where 'cached_votes_up > 0' }
   scope :with_same_count, -> do
     select('COUNT(*) AS same_count, *')
-      .group('LOWER(value)')
+      .group('LOWER(value), id')
       .order 'LOWER(value)'
   end
 

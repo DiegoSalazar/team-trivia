@@ -19,12 +19,9 @@ class Question < ApplicationRecord
   end
 
   def aggregated_guesses
-    aggregate = guesses.with_same_count
-
-    if aggregate.none?(&:correct?)
-      aggregate += [CorrectAnswer.new(answer_value, 0)]
-    end
-    aggregate
+    g = guesses.with_same_count
+    g += [CorrectAnswer.new(answer_value, 0)] if g.none?(&:correct?)
+    g
   end
 
   def num_accepted_guesses

@@ -14,7 +14,7 @@ class QuestionReflex < ApplicationReflex
     if next_question && active_question.nil?
       reveal_and_mark_active! next_question
 
-    elsif active_question.question_revealed?
+    elsif active_question&.question_revealed?
       cable_ready['trivium_reveal'].add_css_class \
         selector: "#question_#{active_question.id} [data-guess-value='#{active_question.answer_value}']",
         name: 'correct'
@@ -26,7 +26,7 @@ class QuestionReflex < ApplicationReflex
         set_next_button 'Next Question', %w[btn-success btn-danger]
       end
 
-    elsif active_question.answer_revealed?
+    elsif active_question&.answer_revealed?
       cable_ready['trivium_reveal'].remove_css_class \
         selector: "#question_#{active_question.id}",
         name: 'active'

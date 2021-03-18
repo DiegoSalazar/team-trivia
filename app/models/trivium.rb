@@ -98,9 +98,9 @@ class Trivium < ApplicationRecord
   private
 
   def starts_before_it_ends
-    return true if seconds_apart >= 60
+    return true if seconds_apart >= 10
 
-    errors.add :base, 'game must end at least a minute after it starts'
+    errors.add :base, 'game must end at least 10 seconds after it starts'
   end
 
   def seconds_apart
