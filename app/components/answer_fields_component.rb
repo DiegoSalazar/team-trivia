@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class AnswerFieldsComponent < ViewComponent::Base
-  def initialize(answers, question_form, tab_start = 0)
+  def initialize(answers, question_form, tabindex: 0)
     super
     @answers = answers
     @question_form = question_form
-    @tab = tab_start
+    @tab = tabindex + @answers.size
   end
 
   def add_question_button
@@ -15,7 +15,7 @@ class AnswerFieldsComponent < ViewComponent::Base
       data: {
         reflex: 'click->Question#add_answer'
       },
-      tabindex: @tab + @answers.size
+      tabindex: @tab
   end
 
   def remove_answer_button(answer, i)
