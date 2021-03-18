@@ -13,6 +13,8 @@
     "bootstrap-icons": "^1.1.0",
     "cable_ready": "^4.4.0-pre1",
     "jquery": "^2.2.4",
+    "node": "^15.10.0",
+    "npm": "^7.6.3",
     "stimulus": "^2.0.0",
     "stimulus_reflex": "^3.3.0",
     "ts-loader": "^8.0.17",
