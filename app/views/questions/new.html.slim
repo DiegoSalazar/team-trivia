@@ -4,7 +4,7 @@
 
 .row
   .col
-    = render CreateQuestionComponent.new @trivium, @question, @notice, @errors
+    = render CreateQuestionComponent.new @trivium, @question || @new_question, @errors
 
 .row.mb-3
   .col

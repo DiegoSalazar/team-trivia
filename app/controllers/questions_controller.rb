@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
 
   before_action :authenticate_player!
   before_action :set_current_trivium, only: :index
-  before_action :set_trivium, only: :new
+  before_action :set_trivium, only: %i[new create]
   before_action :set_question, only: :destroy
   before_action :set_questions, only: :index
 
@@ -13,18 +13,24 @@ class QuestionsController < ApplicationController
 
   def new
     @current_trivium = @trivium || Trivium.new
-    @questions_pagy, @player_questions = pagy @trivium.questions_by(current_player).recent, page_param: 'q-page'
+
+    @questions_pagy, @player_questions = pagy @trivium.questions_by(current_player).recent
+    @trivia_pagy, @upcoming_trivia = pagy @trivium.following_trivia
+
     @questions_pagy.vars[:page_param] = 'q-page'
-    @trivia_pagy, @upcoming_trivia = pagy @trivium.following_trivia, page_param: 't-page'
     @trivia_pagy.vars[:page_param] = 't-page'
+
     @notice = flash[:notice]
+    @new_question = current_player.questions.build trivium_id: @trivium.id
+    @new_question.answers.build
   end
 
   def create
     @question = current_player.questions.build question_params
     @question.save!
 
-    flash[:notice] = 'Thank you for contributing a Question!'
+    flash[:commit] = params[:commit]
+    flash[:notice] = "Question #{@question.question_number} created"
     redirect_to action: :new
   end
 
@@ -32,7 +38,7 @@ class QuestionsController < ApplicationController
     @question = current_player.questions.find params[:id]
     @question.update! question_params
 
-    flash[:notice] = "Question #{@question.question_number} updated."
+    flash[:notice] = "Question #{@question.question_number} updated"
     redirect_to action: :new
   end
 

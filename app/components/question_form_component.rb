@@ -12,18 +12,39 @@ class QuestionFormComponent < ViewComponent::Base
   end
 
   def title
-    @question&.persisted? ? edit_question_title : 'New Question'
+    @question.persisted? ? edit_question_title : 'New Question'
   end
 
-  def submit_button_text
-    action = @question&.persisted? ? 'Save' : 'Create'
-    "#{action} Question"
+  def create_button(form, tabindex:)
+    form.submit \
+      @question.persisted? ? 'Save' : 'Create',
+      class: 'btn btn-sm btn-success flex-grow-1',
+      disable_with: 'Creating...',
+      tabindex: tabindex
+  end
+
+  def cancel_button(tabindex:)
+    return if @question.new_record?
+
+    link_to \
+      'Cancel',
+      new_trivium_question_path(@trivium),
+      class: 'btn btn-sm btn-secondary flex-grow-0',
+      tabindex: tabindex
   end
 
   def delete_button
-    return if @question&.new_record?
+    return if @question.new_record?
 
-    link_to 'Delete', trivium_question_path(@trivium, @question), class: 'btn btn-sm btn-danger', tabindex: -1, data: { method: :delete, confirm: 'Are you sure?', disable_with: 'Deleting...' }
+    link_to \
+      'Delete',
+      trivium_question_path(@trivium, @question),
+      class: 'btn btn-sm btn-danger flex-grow-0',
+      tabindex: -1,
+      data: {
+        method: :delete,
+        disable_with: 'Deleting...'
+      }
   end
 
   private

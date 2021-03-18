@@ -133,6 +133,6 @@ class QuestionReflex < ApplicationReflex
       :body,
       :trivium_id,
       :question_type,
-      answers_attributes: %i[value]
+      answers_attributes: %i[value points]
   end
 end

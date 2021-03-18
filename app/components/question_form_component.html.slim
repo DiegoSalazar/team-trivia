@@ -13,11 +13,11 @@
       = f.label :body
       = f.text_area :body, class: 'form-control', placeholder: 'Type a Question...', required: true, autofocus: true, tabindex: 1
     .col-5
-      = render AnswerFieldsComponent.new @question.answers, f, 2
+      = render AnswerFieldsComponent.new @question.answers, f, tabindex: 2
 
   .btn-group.w-100
+    = create_button f, tabindex: @question.answers.size + 4
+    = cancel_button tabindex: @question.answers.size + 5
     = delete_button
-    = link_to 'Cancel', new_trivium_question_path(@trivium), class: 'btn btn-sm btn-secondary', tabindex: @question.answers.size + 5
-    = f.submit submit_button_text, class: 'btn btn-sm btn-success btn-block flex-grow-1', tabindex: @question.answers.size + 4
 
   = f.hidden_field :trivium_id

@@ -1,22 +1,15 @@
 # frozen_string_literal: true
 
 class CreateQuestionComponent < ViewComponent::Base
-  def initialize(trivium, question, notice = nil, errors = [])
+  def initialize(trivium, question, errors = [])
     super
     @trivium = trivium
     @question = question
-    @notice = notice
     @errors = errors
   end
 
   def render?
     !@trivium.started? && !@trivium.full?
-  end
-
-  def notice
-    return if @question.nil? || @notice.blank?
-
-    content_tag :div, @notice, class: 'alert alert-success'
   end
 
   def new_question_button
