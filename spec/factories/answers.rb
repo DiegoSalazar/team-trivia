@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :answer do
-    value {}
+    value { Faker::Marketing.buzzwords }
   end
 end

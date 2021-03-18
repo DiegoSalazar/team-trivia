@@ -41,7 +41,7 @@ feature 'Contribute', type: :feature do
             'Body should include a hint',
             'Game starts at is invalid',
             'Game ends at is invalid',
-            'and game must end at least a minute after it starts'
+            'and game must end at least 10 seconds after it starts'
           ].join(', ')
         end
       end

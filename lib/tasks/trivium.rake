@@ -17,10 +17,12 @@ namespace :trivium do
 
     ActiveRecord::Base.transaction do
       ActiveRecord::Base.descendants.each do |model_class|
+        next if [ApplicationRecord, Player].include? model_class
+
         model_class.delete_all
         puts "Deleted #{model_class.name}"
       rescue ActiveRecord::StatementInvalid => e
-        # ignore
+        $stderr.warn e.class, e.message
       end
     end
   end
