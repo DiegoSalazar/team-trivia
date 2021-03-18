@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :trivia, only: [] do
       member do
         get :play
+        get 'play/:question_id', action: :play, as: :play_question
       end
     end
   end

@@ -1,6 +1,6 @@
 ul#question-list.list-group
   - @questions.each do |question|
-    = button_tag class: button_class(question), data: button_data(question) do
+    = link_to play_question_team_trivium_path(@team, @trivium, question), class: button_class(question) do
       .d-flex.justify-content-between.align-items-center
         span.badge.badge-pill.badge-info.mr-2
           = question_number question

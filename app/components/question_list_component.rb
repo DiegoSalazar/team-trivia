@@ -3,27 +3,18 @@
 class QuestionListComponent < ViewComponent::Base
   include TriviumQuestions
 
-  def initialize(questions, question, trivium)
+  def initialize(questions, question, trivium, team)
     super
     @questions = questions
     @question = question
     @trivium = trivium
+    @team = team
   end
 
   def button_class(question)
     c = 'list-group-item list-group-item-action'
     c += ' active' if active? question
     c
-  end
-
-  def button_data(question)
-    return {} if @trivium.ended?
-
-    {
-      reflex: 'click->play#select_question',
-      question_id: question.id,
-      trivium_id: @trivium.id
-    }
   end
 
   private

@@ -7,7 +7,7 @@
 
     #questions.row
       .col
-        = render QuestionListComponent.new @trivium.questions, @current_question, @trivium
+        = render QuestionListComponent.new @trivium.questions, @current_question, @trivium, current_team
       = render GuessFormComponent.new @current_guess, show: !@trivium.ended?
 
   .col
