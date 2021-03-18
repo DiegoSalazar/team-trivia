@@ -18,8 +18,7 @@ nav.navbar.navbar-expand-md.navbar-dark.bg-dark
             | Play
             span.sr-only
               = '(current)' if current_page? current_play_path
-
-      - if current_team.nil?
+      - else
         li.nav-item class="#{'active' if current_page? teams_path}"
           a.nav-link[href="/teams"]
             | Join
