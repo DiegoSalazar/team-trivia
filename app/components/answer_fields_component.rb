@@ -12,6 +12,7 @@ class AnswerFieldsComponent < ViewComponent::Base
     link_to \
       helpers.icon('plus-square-fill', class: 'text-info'),
       nil,
+      title: 'Add Question',
       data: {
         reflex: 'click->Question#add_answer'
       },
@@ -20,7 +21,7 @@ class AnswerFieldsComponent < ViewComponent::Base
 
   def remove_answer_button(answer, i)
     link_to \
-      helpers.icon('x-circle', class: 'text-danger mt-2'),
+      helpers.icon('x-circle', class: 'text-danger'),
       nil,
       title: 'Remove this Answer',
       role: 'button',
