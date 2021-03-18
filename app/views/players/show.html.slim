@@ -22,5 +22,6 @@
     .d-flex.justify-content-around.mt-5
       .btn-group
         = link_to 'Back', root_path, class: 'btn btn-light'
-        = link_to 'Edit', edit_player_path(@player), class: 'btn btn-info'
-        = link_to 'Destroy', player_path(@player), data: { method: :delete, confirm: 'Are you sure?' }, class: 'btn btn-danger'
+        - if @player.id == current_player.id
+          = link_to 'Edit', edit_player_path(@player), class: 'btn btn-info'
+          = link_to 'Destroy', player_path(@player), data: { method: :delete, confirm: 'Are you sure?' }, class: 'btn btn-danger'
