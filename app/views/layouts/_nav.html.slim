@@ -1,4 +1,4 @@
-nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+nav.navbar.navbar-expand-md.navbar-dark.bg-primary
   a.navbar-brand[href="/" tabindex="-1"]
     | Team Trivia
   button.navbar-toggler[type="button" data-toggle="collapse" data-target="#links" aria-controls="links" aria-expanded="false" aria-label="Toggle navigation"]
@@ -40,5 +40,5 @@ nav.navbar.navbar-expand-md.navbar-dark.bg-dark
 
   div
     - if player_signed_in?
-      = link_to current_player.username, player_path(current_player)
-      = link_to 'Logout', destroy_player_session_path, method: :delete, class: 'ml-3'
+      = link_to current_player.username, player_path(current_player), class: 'text-light'
+      = link_to 'Logout', destroy_player_session_path, method: :delete, class: 'text-light ml-3'
