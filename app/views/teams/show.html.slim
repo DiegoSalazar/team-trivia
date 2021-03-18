@@ -1,9 +1,26 @@
-h1
-  | Team&nbsp;
-  = @team.name
+.row
+  .col
+    .d-flex.flex-column.align-items-center
+      .display-3
+        = icon 'people-fill'
 
-= link_to t('.back', :default => t("helpers.links.back")), teams_path, :class => 'btn btn-default'
-'
-= link_to t('.edit', :default => t("helpers.links.edit")), edit_team_path(@team), :class => 'btn btn-default'
-'
-= link_to t('.destroy', :default => t("helpers.links.destroy")), team_path(@team), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+      h2.display-4.my-3
+        .badge.badge-secondary.mr-1
+          | Team
+        .badge.badge-light.text-dark
+          = @team.name
+
+      ul.list-group.my-3
+        - @team.players.each do |player|
+          li.list-group-item.flex-row.d-flex.align-items-center
+            = icon 'person-circle', class: 'mr-2'
+            = link_to player.username, player, class: 'text-dark'
+
+    .d-flex.justify-content-around.my-4
+      = render TeamStatsComponent.new @team
+
+    .d-flex.justify-content-around.mt-5
+      .btn-group
+        = link_to 'Back', root_path, class: 'btn btn-light'
+        = link_to 'Edit', edit_team_path(@team), class: 'btn btn-info'
+        = link_to 'Destroy', team_path(@team), data: { method: :delete, confirm: 'Are you sure?' }, class: 'btn btn-danger'
