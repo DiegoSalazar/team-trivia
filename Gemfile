@@ -37,7 +37,6 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'pry-rails'
   gem 'pry-byebug'
-  gem 'factory_bot_rails', '~> 6.1'
   gem 'faker', '~> 2.16'
 end
 
@@ -67,6 +66,7 @@ gem 'acts_as_votable', '~> 0.13.1'
 gem 'bootstrap', '~> 4.5.3'
 gem 'cable_ready', '~> 4.3'
 gem 'devise'
+gem 'factory_bot_rails', '~> 6.1'
 gem 'pagy'
 gem 'pg'
 gem 'redis-session-store', '~> 0.11.3'
