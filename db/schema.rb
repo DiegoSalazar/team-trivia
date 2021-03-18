@@ -59,8 +59,14 @@ ActiveRecord::Schema.define(version: 2021_03_17_010427) do
   end
 
   create_table "questions", force: :cascade do |t|
+    t.integer "player_id"
+    t.integer "trivium_id"
     t.text "body"
     t.integer "question_type", default: 0
+    t.integer "revealed", default: 0
+    t.boolean "active", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "submissions", force: :cascade do |t|
