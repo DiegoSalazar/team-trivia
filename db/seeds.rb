@@ -24,6 +24,7 @@ def create_realistic_trivium(player, questions, team_count, guess_count, i)
   questions.each do |q|
     question = FactoryBot.create \
       :question,
+      [:free_text, :multiple_choice].sample,
       body: q['body'],
       trivium: trivium,
       player: player
