@@ -28,4 +28,10 @@ class GuessesChartComponent < ViewComponent::Base
   def answer_status(guess)
     'correct' if @question.answer_revealed? && @question.correct?(guess)
   end
+
+  def best_guess_value(guesses)
+    return @question.best_answer.value if guesses.first.is_a? Question::CorrectAnswer
+
+    guesses.min_by(&:value).value
+  end
 end
