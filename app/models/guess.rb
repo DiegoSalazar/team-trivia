@@ -22,7 +22,7 @@ class Guess < ApplicationRecord
   end
 
   def correct?
-    question.correct? self
+    question&.correct? self
   end
 
   def points
