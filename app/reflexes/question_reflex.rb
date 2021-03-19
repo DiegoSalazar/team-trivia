@@ -38,20 +38,10 @@ class QuestionReflex < ApplicationReflex
     morph :nothing
   end
 
-  def new
-    @trivium = Trivium.find element.dataset.trivium_id
-    @question = @trivium.questions.build
-    @question.answers.build
-  end
-
-  def edit
-    @trivium = Trivium.find element.dataset.trivium_id
-    @question = @trivium.questions.find element.dataset.id
-  end
-
   def add_answer
     @question = Question.new question_params
     @trivium = @question.trivium
+    @question = @trivium.questions.find element.dataset.question_id if element.dataset.question_id
     @question.answers.build
   end
 

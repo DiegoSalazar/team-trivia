@@ -5,23 +5,24 @@ class QuestionsController < ApplicationController
 
   before_action :authenticate_player!
   before_action :set_current_trivium, only: :index
-  before_action :set_trivium, only: %i[new create]
+  before_action :set_trivium, only: %i[new edit create]
   before_action :set_question, only: :destroy
   before_action :set_questions, only: :index
+  before_action :init_contribute, only: %i[new edit]
 
   def index; end
 
   def new
-    @current_trivium = @trivium || Trivium.new
+    @question ||= begin
+      question = current_player.questions.build trivium_id: @trivium.id
+      question.answers.build
+      question
+    end
+  end
 
-    @questions = @trivium.questions_by current_player
-    @questions = @trivium.questions if current_player.moderates? @trivium
-    @questions_pagy, @questions = pagy @questions, page_param: 'q-page'
-    @trivia_pagy, @upcoming_trivia = pagy @trivium.following_trivia, page_param: 't-page'
-
-    @notice = flash[:notice]
-    @new_question = current_player.questions.build trivium_id: @trivium.id
-    @new_question.answers.build
+  def edit
+    @question ||= @trivium.questions.find params[:id]
+    render action: :new
   end
 
   def create
@@ -67,5 +68,13 @@ class QuestionsController < ApplicationController
       :question_type,
       :max_questions,
       answers_attributes: %i[id value points _destroy]
+  end
+
+  def init_contribute
+    @questions = @trivium.questions_by current_player
+    @questions = @trivium.questions if current_player.moderates? @trivium
+    @questions = @questions.recent
+    @questions_pagy, @questions = pagy @questions, page_param: 'q-page'
+    @trivia_pagy, @upcoming_trivia = pagy @trivium.following_trivia, page_param: 't-page'
   end
 end

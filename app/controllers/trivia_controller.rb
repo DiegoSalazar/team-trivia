@@ -56,36 +56,22 @@ class TriviaController < ApplicationController
   def create
     @trivium = current_player.trivia.build trivium_params
 
-    respond_to do |format|
-      if @trivium.save
-        format.html do
-          redirect_to new_trivium_question_path(@trivium), notice: 'Trivium was successfully created.'
-        end
-        format.json { render json: @trivium }
-      else
-        format.html do
-          @errors = @trivium.errors.full_messages
-          render :new
-        end
-        format.json { render json: @trivium.errors, status: :unprocessable_entity }
-      end
+    if @trivium.save
+      redirect_to new_trivium_question_path(@trivium), notice: 'Trivium was successfully created.'
+    else
+      @errors = @trivium.errors.full_messages
+      render :new
     end
   end
 
   # PATCH/PUT /trivia/1
   # PATCH/PUT /trivia/1.json
   def update
-    respond_to do |format|
-      if @trivium.update(trivium_params)
-        format.html { redirect_to @trivium, notice: 'Trivium was successfully updated.' }
-        format.json { render :show, status: :ok, location: @trivium }
-      else
-        format.html do
-          @errors = @trivium.errors.full_messages
-          render :edit
-        end
-        format.json { render json: @trivium.errors, status: :unprocessable_entity }
-      end
+    if @trivium.update(trivium_params)
+      redirect_to new_trivium_question_path(@trivium), notice: 'Trivium was successfully updated.'
+    else
+      @errors = @trivium.errors.full_messages
+      render :edit
     end
   end
 

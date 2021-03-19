@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PlayerQuestionsListComponent < ViewComponent::Base
+class ContributeQuestionsListComponent < ViewComponent::Base
   include Pagy::Frontend
   include TriviumQuestions
 
@@ -27,13 +27,15 @@ class PlayerQuestionsListComponent < ViewComponent::Base
   def edit_question_button(question)
     return if @trivium.started?
 
-    button_tag \
+    link_to \
       helpers.icon('pencil-fill'),
-      class: 'btn btn-sm btn-default',
-      data: {
-        reflex: 'click->Question#edit',
-        id: question.id,
-        trivium_id: @trivium.id
-      }
+      edit_trivium_question_path(@trivium, question, page_params),
+      class: 'text-secondary ml-2'
+  end
+
+  private
+
+  def page_params
+    controller.params.slice('q-page', 't-page').to_unsafe_h
   end
 end

@@ -14,7 +14,8 @@ class AnswerFieldsComponent < ViewComponent::Base
       nil,
       title: 'Add Question',
       data: {
-        reflex: 'click->Question#add_answer'
+        reflex: 'click->Question#add_answer',
+        question_id: @question_form.object.id
       },
       tabindex: @tab
   end

@@ -3,7 +3,7 @@
     h3= title
 
     div
-      - Question.question_types.keys.each_with_index do |type|
+      - Question.question_types.keys.each do |type|
         .form-check.form-check-inline
           = f.radio_button :question_type, type, class: 'form-check-input', role: 'button', tabindex: @question.answers.size + 3
           = f.label :question_type, type.titleize, value: type, class: 'form-check-label', role: 'button'

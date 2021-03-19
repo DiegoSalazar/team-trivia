@@ -4,11 +4,11 @@
 
 .row
   .col
-    = render CreateQuestionComponent.new @trivium, @question || @new_question, @errors
+    = render CreateQuestionComponent.new @trivium, @question, @errors
 
 .row.mb-3
   .col
-    = render PlayerQuestionsListComponent.new @trivium, @questions, @questions_pagy
+    = render ContributeQuestionsListComponent.new @trivium, @questions, @questions_pagy
 
 .row.mb-3
   .col
