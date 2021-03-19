@@ -33,6 +33,10 @@ class Player < ApplicationRecord
     team&.name == username
   end
 
+  def in_team?(team)
+    team_id == team.id
+  end
+
   def moderates?(trivium)
     trivium_ids.include? trivium.id
   end
