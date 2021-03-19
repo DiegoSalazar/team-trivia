@@ -44,6 +44,8 @@ class TriviumStatsComponent < ViewComponent::Base
   end
 
   def average_score
+    return 0 if @submissions.count.zero?
+
     (@submissions.sum(&:score) / @submissions.count.to_f).round 1
   end
 end
