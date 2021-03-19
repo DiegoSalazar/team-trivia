@@ -8,7 +8,7 @@
       = link_to 'Play', current_play_path, class: 'btn btn-sm btn-success' if @current_trivium.active?
       = link_to 'Join', teams_path, class: 'btn btn-sm btn-info' unless current_team
       = link_to 'Contribute', trivium_contribution_path, class: 'btn btn-sm btn-primary'
-      - if current_player.moderates? @current_trivium
+      - if current_player&.moderates? @current_trivium
         = link_to 'Edit', edit_trivium_path(@current_trivium), class: 'btn btn-sm btn-secondary'
 
 .row
