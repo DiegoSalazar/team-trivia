@@ -22,9 +22,11 @@
     .col-sm-1.form-group
       = f.label :max_questions, class: 'sr-only'
       = f.number_field :max_questions, placeholder: 'Max Qs', class: 'form-control', min: 1, max: 100
-    div class="col#{'-sm-8' if action_name == 'edit'}"
-      = f.submit "#{action_name == 'new' ? 'Create' : 'Update'} Trivia", class: 'btn btn-block btn-success'
 
+  .form-row
     - if action_name.in? %w(edit update)
-      .col-sm-4
+      .col-sm-2
         = link_to 'Cancel', root_path, class: 'btn btn-danger btn-block'
+
+    div class="col#{'-sm-10' if action_name == 'edit'}"
+      = f.submit "#{action_name == 'new' ? 'Create' : 'Update'} Trivia", class: 'btn btn-block btn-success'

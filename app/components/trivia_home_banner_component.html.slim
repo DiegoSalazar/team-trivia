@@ -1,9 +1,6 @@
 = render TriviumBannerComponent.new @trivium, title: @title, hint: @hint do |component|
   = component.with :right do
     = countdown
-
-    - if current_player&.moderates? @trivium
-      .mt-2.text-right
-        = link_to 'Edit', edit_trivium_path(@trivium), class: 'btn btn-sm btn-secondary'
+    = edit_trivium_button
 
   = component.with(:footer) { footer }
