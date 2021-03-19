@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe QuestionStatusComponent, type: :component do
+describe QuestionStatusComponent, type: :component do
   subject do
     described_class.new \
       guess.question,
@@ -23,7 +23,7 @@ RSpec.describe QuestionStatusComponent, type: :component do
 
   describe '#id' do
     it 'is the question dom_id' do
-      expect(subject.id).to eq 'question_1-status'
+      expect(subject.id).to eq "question_#{question.id}-status"
     end
   end
 

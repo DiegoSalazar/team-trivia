@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe QuestionRevealComponent, type: :component do
   subject { described_class.new question, question_number }
-  let(:question) { create :question, trivium: trivium }
+  let(:question) { create :question, :multiple_choice, trivium: trivium }
   let(:guess) { create :guess, player: player, team: team, trivium: trivium, question: question }
   let(:player) { team.players.first }
   let(:team) { create :team, :with_players, player_count: 1 }

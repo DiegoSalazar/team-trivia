@@ -17,14 +17,16 @@ module Support
       end
 
       def current_player!
-        raise KeyError, 'missing env var TEAM_TRIVIA_TEST_EM' if ENV['TEAM_TRIVIA_TEST_EM'].blank?
-        raise KeyError, 'missing env var TEAM_TRIVIA_TEST_PW' if ENV['TEAM_TRIVIA_TEST_PW'].blank?
+        current_player || begin
+          raise KeyError, 'missing env var TEAM_TRIVIA_TEST_EM' if ENV['TEAM_TRIVIA_TEST_EM'].blank?
+          raise KeyError, 'missing env var TEAM_TRIVIA_TEST_PW' if ENV['TEAM_TRIVIA_TEST_PW'].blank?
 
-        current_player || FactoryBot.create(
-          :player,
-          email: ENV['TEAM_TRIVIA_TEST_EM'],
-          password: ENV['TEAM_TRIVIA_TEST_PW']
-        )
+          FactoryBot.create(
+            :player,
+            email: ENV['TEAM_TRIVIA_TEST_EM'],
+            password: ENV['TEAM_TRIVIA_TEST_PW']
+          )
+        end
       end
 
       def current_player

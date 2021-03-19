@@ -3,10 +3,11 @@
 require 'rails_helper'
 
 describe QuestionListComponent, type: :component do
-  subject { described_class.new questions, question, trivium }
+  subject { described_class.new questions, question, trivium, team }
   let(:questions) { create_list :question, 2, trivium: trivium }
   let(:question) { questions.last }
   let(:trivium) { create :trivium }
+  let(:team) { create :team }
 
   it 'renders questions' do
     expect(render_inline(subject).to_html).to include question.body

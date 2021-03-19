@@ -27,7 +27,7 @@ FactoryBot.define do
 
       after(:create) do |trivium, overrides|
         create_list :team_message, overrides.team_messages_count, trivium_id: trivium.id
-        questions = create_list :question, overrides.question_count, trivium: trivium
+        questions = create_list :question, overrides.question_count, :multiple_choice, trivium: trivium
         create_list :guess_message, overrides.guess_messages_count, question: questions.first, trivium_id: trivium.id
         trivium.reload
       end
