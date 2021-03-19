@@ -2,6 +2,7 @@
 
 class TriviaHomeBannerComponent < ViewComponent::Base
   with_content_areas :footer
+  delegate :current_player, to: :controller
 
   def initialize(trivium, team = nil)
     super
