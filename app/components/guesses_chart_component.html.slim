@@ -1,9 +1,11 @@
 .guesses-chart.d-flex.justify-content-around
-  - @question.aggregated_guesses.each do |guess|
-    .guess-bar-wrap title= guess.value
+  - @question.grouped_guesses.each_pair do |value, guesses|
+    .guess-bar-wrap title= value
 
-      .guess-bar.d-flex.flex-column.justify-content-end.text-center class= answer_status(guess) data-guess-value= guess.value
+      .guess-bar.d-flex.flex-column.justify-content-end.text-center class= answer_status(guesses.first) data-guess-value= value
+
         .text-muted.text-center
-          = percent_of_similar_guesses guess
-        .unit.d-flex.justify-content-center.align-items-center style= height_percent(guess)
-          = guess.value
+          = percent_of_similar_guesses guesses
+
+        .unit.d-flex.justify-content-center.align-items-center style= height_percent(guesses)
+          = value
