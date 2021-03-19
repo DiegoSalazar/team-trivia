@@ -27,7 +27,8 @@ class TriviaHomeBannerComponent < ViewComponent::Base
   end
 
   def edit_trivium_button
-    return if @trivium.started? && !current_player&.moderates?(@trivium)
+    return if @trivium.new_record? || @trivium.started?
+    return unless current_player&.moderates? @trivium
 
     content_tag :div, class: 'mt-2 text-right' do
       link_to 'Edit', edit_trivium_path(@trivium), class: 'btn btn-sm btn-secondary'
