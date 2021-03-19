@@ -5,6 +5,7 @@ class Question < ApplicationRecord
   belongs_to :player
   has_many :guesses
   has_many :answers
+  has_many :correct_answers, -> { where 'points > 0' }, class_name: 'Answer'
   accepts_nested_attributes_for :answers, allow_destroy: true
 
   validates :body, presence: true
@@ -42,7 +43,7 @@ class Question < ApplicationRecord
   end
 
   def correct?(guess)
-    answers.any? { |answer| guess === answer }
+    correct_answers.any? { |answer| guess === answer }
   end
 
   def answer_value
