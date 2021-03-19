@@ -4,9 +4,9 @@ class WinnerComponent < ViewComponent::Base
   PLACES = %w[1st 2nd 3rd].freeze
   STYLES = %w[primary dark info].freeze
 
-  def initialize(winner_name, index = 0, score = 0)
+  def initialize(team, index = 0, score = 0)
     super
-    @winner_name = winner_name
+    @team = team
     @index = index
     @place = "#{PLACES[index]} Place"
     @score = score
