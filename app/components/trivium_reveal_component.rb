@@ -4,7 +4,7 @@ class TriviumRevealComponent < ViewComponent::Base
   def initialize(trivium, player)
     super
     @trivium = trivium
-    @questions = trivium.questions.recent
+    @questions = trivium.questions
     @player = player
   end
 

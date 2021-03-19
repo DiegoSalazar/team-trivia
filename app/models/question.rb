@@ -8,8 +8,8 @@ class Question < ApplicationRecord
   has_many :correct_answers, -> { where 'points > 0' }, class_name: 'Answer'
   accepts_nested_attributes_for :answers, allow_destroy: true
 
+  default_scope { order created_at: :desc }
   validates :body, presence: true
-  scope :recent, -> { order created_at: :desc }
 
   enum question_type: %i[free_text multiple_choice]
   enum revealed: %i[unrevealed question_revealed answer_revealed]

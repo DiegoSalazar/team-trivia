@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
   def new
     @current_trivium = @trivium || Trivium.new
 
-    @questions_pagy, @player_questions = pagy @trivium.questions_by(current_player).recent
+    @questions_pagy, @player_questions = pagy @trivium.questions_by(current_player)
     @trivia_pagy, @upcoming_trivia = pagy @trivium.following_trivia
 
     @questions_pagy.vars[:page_param] = 'q-page'
@@ -58,7 +58,7 @@ class QuestionsController < ApplicationController
   end
 
   def set_questions
-    @pagy, @questions = pagy Question.recent
+    @pagy, @questions = pagy Question.all
   end
 
   def question_params

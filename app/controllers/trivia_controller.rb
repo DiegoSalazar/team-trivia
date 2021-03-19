@@ -29,6 +29,11 @@ class TriviaController < ApplicationController
   end
 
   def reveal
+    unless @trivium.ended?
+      redirect_to play_team_trivium_path current_team, @trivium
+      return
+    end
+
     TriviumSubmitter.ensure_submissions! @trivium
   end
 

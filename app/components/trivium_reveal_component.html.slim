@@ -5,5 +5,5 @@
   = reveal_button
 
 ul#trivium-reveal.list-group.list-group-flush
-  - @questions.each do |question|
+  - @questions.reverse.each do |question|
     = render QuestionRevealComponent.new question, @trivium.question_number(question)
