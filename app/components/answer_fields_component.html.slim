@@ -6,7 +6,7 @@ label.sr-only Possible Answers
       .form-group.col-9
         = answer_fields.text_field :value, class: 'form-control', placeholder: 'Type an answer', required: true, autofocus: true, tabindex: i + @tab
       .form-group.col
-        = answer_fields.number_field :points, in: (0..5).to_a, class: 'form-control', placeholder: 'Points', tabindex: i + @tab
+        = answer_fields.number_field :points, in: (0..100).to_a, class: 'form-control', placeholder: 'Points', tabindex: i + @tab
 
       .form-group-col-1
         = remove_answer_button answer, i
