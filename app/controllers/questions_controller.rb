@@ -14,11 +14,10 @@ class QuestionsController < ApplicationController
   def new
     @current_trivium = @trivium || Trivium.new
 
-    @questions_pagy, @player_questions = pagy @trivium.questions_by(current_player)
-    @trivia_pagy, @upcoming_trivia = pagy @trivium.following_trivia
-
-    @questions_pagy.vars[:page_param] = 'q-page'
-    @trivia_pagy.vars[:page_param] = 't-page'
+    @questions = @trivium.questions_by current_player
+    @questions = @trivium.questions if current_player.moderates? @trivium
+    @questions_pagy, @questions = pagy @questions, page_param: 'q-page'
+    @trivia_pagy, @upcoming_trivia = pagy @trivium.following_trivia, page_param: 't-page'
 
     @notice = flash[:notice]
     @new_question = current_player.questions.build trivium_id: @trivium.id

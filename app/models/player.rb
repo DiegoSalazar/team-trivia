@@ -33,6 +33,10 @@ class Player < ApplicationRecord
     team&.name == username
   end
 
+  def moderates?(trivium)
+    trivium_ids.include? trivium.id
+  end
+
   private
 
   def create_self_team!
