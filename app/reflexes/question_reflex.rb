@@ -80,6 +80,8 @@ class QuestionReflex < ApplicationReflex
   def remove_answer_at(index)
     cable_ready[current_player.chat_channel].remove \
       selector: "[data-answer-index='#{index}']"
+    cable_ready[current_player.chat_channel].remove \
+      selector: "#question_answers_attributes_#{index}_id"
   end
 
   def replace_answer_with_delete_field(index)
@@ -124,5 +126,8 @@ class QuestionReflex < ApplicationReflex
       :trivium_id,
       :question_type,
       answers_attributes: %i[value points]
+  rescue => e
+    Rails.logger.error e
+    params[:question] || {}
   end
 end
