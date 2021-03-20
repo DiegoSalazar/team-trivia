@@ -10,7 +10,7 @@ class AnswerFieldsComponent < ViewComponent::Base
 
   def add_question_button
     link_to \
-      helpers.icon('plus-square-fill', class: 'text-info'),
+      helpers.icon('plus-circle-fill', class: 'text-info'),
       nil,
       title: 'Add Question',
       data: {
