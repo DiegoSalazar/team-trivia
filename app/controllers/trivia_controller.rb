@@ -9,7 +9,7 @@ class TriviaController < ApplicationController
   before_action :set_my_trivium, only: %i[edit update destroy]
 
   def play
-    unless @trivium.started?
+    if @trivium.upcoming? && !current_player.moderates?(@trivium)
       redirect_to root_path, alert: "That game hasn't started yet."
       return
     end
@@ -20,8 +20,8 @@ class TriviaController < ApplicationController
     end
 
     @current_question ||= @trivium.questions.first
-    @current_guess = :guess
     @current_guess = @current_question.guesses.new trivium: @trivium if @current_question
+    @current_guess ||= :guess
     @team_messages = current_team.team_messages_from @trivium
     @title = current_team.chat_title
 
