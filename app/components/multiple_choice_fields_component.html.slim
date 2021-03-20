@@ -1,4 +1,6 @@
-- @choices.each do |choice|
-  .form-check
-    = @guess_form.radio_button :value, choice.value, class: 'form-check-input'
-    = @guess_form.label "value_#{choice.value.underscore}", choice.value, class: 'form-check-label'
+.list-group
+  - @choices.each do |choice|
+    - input = "guess_value_#{choice.value.underscore}"
+    label for=input class="list-group-item list-group-item-action d-flex align-items-middle mb-0 pl-2" role="button"
+      = @guess_form.radio_button :value, choice.value, class: 'col-1 mr-2'
+      .flex-grow-1= choice.value

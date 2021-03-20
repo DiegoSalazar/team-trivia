@@ -2,7 +2,9 @@
   = render ModalComponent.new :guess_modal, modal_params do |component|
     = component.with(:title) { @guess.question.body }
 
-    .form-group= render GuessFieldsComponent.new @guess.question, f
+    .form-group
+      = render GuessFieldsComponent.new @guess.question, f
+
     = f.hidden_field :question_id
     = f.hidden_field :trivium_id
 

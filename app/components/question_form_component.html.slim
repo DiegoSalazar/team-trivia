@@ -15,7 +15,7 @@
     .col-6
       = render AnswerFieldsComponent.new @question.answers, f, tabindex: 2
 
-  .btn-group.w-100.mb-1
+  .d-flex.w-100.mb-1.gap-sm
     = create_button f, tabindex: @question.answers.size + 4
     = delete_button
     = cancel_button tabindex: @question.answers.size + 5

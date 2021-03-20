@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class GuessFieldsComponent < ViewComponent::Base
-  UnsupportedQuestionType = Class.new KeyError
+  UnknownQuestionType = Class.new KeyError
 
   def initialize(question, guess_form)
     super
@@ -17,7 +17,7 @@ class GuessFieldsComponent < ViewComponent::Base
     when 'multiple_choice'
       render MultipleChoiceFieldsComponent.new @question.answers, @guess_form
     else
-      raise UnsupportedQuestionType, @type
+      raise UnknownQuestionType, @type
     end
   end
 end
