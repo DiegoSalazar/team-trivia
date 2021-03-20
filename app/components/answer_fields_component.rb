@@ -8,21 +8,21 @@ class AnswerFieldsComponent < ViewComponent::Base
     @tab = tabindex + @answers.size
   end
 
-  def add_question_button
+  def add_answer_button
     link_to \
       helpers.icon('plus-circle-fill', class: 'text-secondary'),
       nil,
-      title: 'Add Question',
+      title: 'Add Answer or Choice',
+      tabindex: @tab,
       data: {
         reflex: 'click->Question#add_answer',
         question_id: @question_form.object.id
-      },
-      tabindex: @tab
+      }
   end
 
   def remove_answer_button(answer, i)
     link_to \
-      helpers.icon('x-circle', class: 'text-danger'),
+      helpers.icon('x-circle', class: 'text-danger mt-2'),
       nil,
       title: 'Remove this Answer',
       role: 'button',
