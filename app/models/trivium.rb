@@ -62,19 +62,19 @@ class Trivium < ApplicationRecord
     scope = self.class.series.limit 10
     return scope.none if game_ends_at.blank?
 
-    scope.where 'game_starts_at > ?', game_ends_at.in_time_zone(Time.zone)
+    scope.where 'game_starts_at > ?', game_ends_at
   end
 
   def upcoming?
     return false if game_starts_at.blank?
 
-    Time.zone.now.to_datetime <= game_starts_at.in_time_zone(Time.zone)
+    Time.now.to_datetime <= game_starts_at
   end
 
   def started?
     return false if game_starts_at.blank?
 
-    Time.zone.now.to_datetime >= game_starts_at.in_time_zone(Time.zone)
+    Time.now.to_datetime >= game_starts_at
   end
 
   def active?
@@ -84,7 +84,7 @@ class Trivium < ApplicationRecord
   def ended?
     return false if game_ends_at.blank?
 
-    Time.zone.now.to_datetime >= game_ends_at.in_time_zone(Time.zone)
+    Time.now.to_datetime >= game_ends_at
   end
 
   def full?
