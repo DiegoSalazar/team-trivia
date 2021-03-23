@@ -16,13 +16,16 @@
   .col.flex-grow-1
     = link_to 'New Trivia', new_trivium_path, class: 'btn btn-sm btn-block btn-secondary'
 
-
+.row.mb-4
+  .col
+    = render TriviaListComponent.new @upcoming_trivia, @upcoming_trivia_pagy
 
 .row
   .col
     .card
       .card-body
         h3.card-title Past Games
+
         .card-text
           table.table.table-hover.mb-0
             tbody

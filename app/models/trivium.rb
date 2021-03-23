@@ -60,7 +60,7 @@ class Trivium < ApplicationRecord
 
   def following_trivia
     scope = self.class.series.limit 10
-    return scope if game_ends_at.blank?
+    return scope.none if game_ends_at.blank?
 
     scope.where 'game_starts_at > ?', game_ends_at.in_time_zone(Time.zone)
   end
