@@ -40,7 +40,8 @@ class TriviaController < ApplicationController
   # GET /trivia
   # GET /trivia.json
   def index
-    @pagy, @trivia = pagy Trivium.past
+    @past_trivia_pagy, @past_trivia = pagy Trivium.past, page_param: 'p-page'
+    @upcoming_trivia_pagy, @upcoming_trivia = pagy @current_trivium.following_trivia, page_param: 'u-page'
   end
 
   # GET /trivia/new

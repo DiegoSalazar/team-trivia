@@ -11,4 +11,4 @@ ul.list-group
           small.mb-2= l trivium.game_starts_at, format: :long
           = link_to 'Contribute', new_trivium_question_path(trivium), class: 'btn btn-sm btn-success'
 
-.mt-3= pagy_bootstrap_nav(@pagy).html_safe if @trivia.present?
+.mt-3= pagy_bootstrap_nav(@pagy).html_safe if @pagy.pages > 1
