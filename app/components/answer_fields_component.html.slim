@@ -4,7 +4,7 @@ label.sr-only Possible Answers
   - @question_form.fields_for :answers, answer do |answer_fields|
     .form-row data-answer-index= i
       .form-group.col-9
-        = answer_fields.text_field :value, class: 'form-control', placeholder: 'Type an answer', required: true, autofocus: true, tabindex: i + @tab
+        = answer_fields.text_field :value, class: 'form-control', placeholder: 'Possible Answer...', required: true, autofocus: true, tabindex: i + @tab
       .form-group.col
         = answer_fields.number_field :points, in: (0..100).to_a, class: 'form-control', placeholder: 'Points', tabindex: i + @tab
 

@@ -127,7 +127,8 @@ class QuestionReflex < ApplicationReflex
       :question_type,
       answers_attributes: %i[value points]
   rescue => e
-    Rails.logger.error e, 'question_params'
+    Rails.logger.debug 'question_params'
+    Rails.logger.error e
     pq = params[:question]&.to_unsafe_h || {}
     Rails.logger.debug pq
     pq
