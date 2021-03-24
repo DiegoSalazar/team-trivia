@@ -5,6 +5,8 @@ class ContributionsBannerComponent < ViewComponent::Base
     super
     @trivium = trivium
     @team = team
+    @current_progress = trivium.questions.count
+    @progress_max = trivium.max_questions
   end
 
   def status_text

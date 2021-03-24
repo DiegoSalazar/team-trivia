@@ -98,6 +98,11 @@ class TriviaController < ApplicationController
   end
 
   def trivium_params
-    params.require(:trivium).permit :title, :body, :game_starts_at, :game_ends_at
+    params.require(:trivium).permit \
+      :title,
+      :body,
+      :game_starts_at,
+      :game_ends_at,
+      :max_questions
   end
 end
