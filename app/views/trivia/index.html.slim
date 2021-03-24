@@ -13,8 +13,10 @@
 
   .col.flex-grow-1
     = link_to 'Contribute', trivium_contribution_path, class: 'btn btn-sm btn-block btn-primary'
-  .col.flex-grow-1
-    = link_to 'New Trivia', new_trivium_path, class: 'btn btn-sm btn-block btn-secondary'
+
+  - if @current_trivium.persisted?
+    .col.flex-grow-1
+      = link_to 'New Trivia', new_trivium_path, class: 'btn btn-sm btn-block btn-secondary'
 
 .row.mb-4
   .col

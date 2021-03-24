@@ -12,20 +12,13 @@ class ContributionsBannerComponent < ViewComponent::Base
   def status_text
     return '' if @trivium.new_record?
 
-    @trivium.full? ? "#{trivium_status} questions" : "Only #{trivium_status} questions"
-  end
-
-  def call_to_action
-    return '' if @trivium.new_record? || @trivium.ended?
-    return 'Ready to Play!' if @trivium.full?
-
-    "Create up to #{badge q_count_diff, 'badge-dark'} more!"
+    @trivium.full? ? "#{trivium_status} questions" : "#{trivium_status} questions"
   end
 
   private
 
   def trivium_status
-    "#{badge @trivium.questions.count} out of #{badge @trivium.max_questions}"
+    "#{badge @trivium.questions.count} of #{badge @trivium.max_questions}"
   end
 
   def badge(text, klass = nil)

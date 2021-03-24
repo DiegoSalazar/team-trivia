@@ -57,6 +57,19 @@ namespace :trivium do
     end
   end
 
+  desc 'reset with random number and set of questions'
+  task reset_with_rand_questions: :environment do
+    Trivium.transaction do
+      Trivium.find_each.with_index do |trivium, i|
+        next if i < 2 # leave some in the past
+
+        reset_trivium trivium, i - 2
+        drop_questions = trivium.questions.sample rand(trivium.questions.count)
+        drop_questions.map(&:destroy!)
+      end
+    end
+  end
+
   def reset_trivium(trivium, i)
     starts_at = 40.seconds.from_now
     starts_at = ENV['s'].to_i.seconds.from_now if ENV['s'].present?

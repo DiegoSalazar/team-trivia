@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 class ProgressBarComponent < ViewComponent::Base
-  def initialize(current = 0, total = 1, show: true, height: '1rem')
+  def initialize(current = 0, total = 1, show: true, css_class: 'w-75')
     super
     @current = current
     @total = total
     @show = show
-    @height = height
+    @css_class = css_class
   end
 
   def render?
@@ -17,9 +17,5 @@ class ProgressBarComponent < ViewComponent::Base
     return 0 unless @total.positive?
 
     (@current / @total.to_f) * 100
-  end
-
-  def style
-    "width: #{percent}%; height: #{@height};"
   end
 end

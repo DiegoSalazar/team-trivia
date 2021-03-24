@@ -13,8 +13,12 @@ module ApplicationHelper
   def trivium_contribution_path
     if @current_trivium.nil? || @current_trivium.new_record?
       new_trivium_path
-    elsif @current_trivium.started? && @current_trivium.next_trivium.present?
-      new_trivium_question_path @current_trivium.next_trivium
+    elsif @current_trivium.started?
+      if @current_trivium.next_trivium.present?
+        new_trivium_question_path @current_trivium.next_trivium
+      else
+        new_trivium_path
+      end
     else
       new_trivium_question_path @current_trivium
     end

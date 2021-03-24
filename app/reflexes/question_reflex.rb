@@ -132,8 +132,12 @@ class QuestionReflex < ApplicationReflex
     pq = params[:question]&.to_unsafe_h || {}
     Rails.logger.debug pq
     Rails.logger.debug paramKeys: params.keys
+    Rails.logger.debug dataset: element&.dataset
     Rails.logger.debug envKeys: (begin; request.env.keys; rescue => e; e end)
     Rails.logger.debug formData: params['formData']
+    qd = element.dataset.question
+    Rails.logger.debug questionDataset: qd
+
     pq
   end
 end

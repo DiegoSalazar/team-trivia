@@ -1,8 +1,6 @@
 = render TriviaHomeBannerComponent.new @trivium, @team
 
 .d-flex.justify-content-between.align-items-center.mb-3
-  strong= status_text.html_safe
-
   = render ProgressBarComponent.new @current_progress, @progress_max, show: @trivium.upcoming?
 
-  strong= call_to_action.html_safe
+  strong= status_text.html_safe

@@ -16,7 +16,8 @@ class AnswerFieldsComponent < ViewComponent::Base
       tabindex: @tab,
       data: {
         reflex: 'click->Question#add_answer',
-        question_id: @question_form.object.id
+        question_id: @question_form.object.id,
+        question: @question_form.object.as_json
       }
   end
 
