@@ -4,5 +4,7 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require twitter/bootstrap
-//= require_tree .
+//= Xrequire twitter/bootstrap
+//= Xrequire_tree .
+//= require no_team1
+//= require no_team2
