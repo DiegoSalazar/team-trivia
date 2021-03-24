@@ -137,6 +137,15 @@ class QuestionReflex < ApplicationReflex
     Rails.logger.debug formData: params['formData']
     qd = element.dataset.question
     Rails.logger.debug questionDataset: qd
+    Rails.logger.debug questionDataset: qd
+    %w[
+      action_dispatch.request.content_type
+      action_dispatch.request.request_parameters
+      action_dispatch.request.query_parameters
+      action_dispatch.request.parameters
+    ].each do |key|
+      Rails.logger.debug key => request.env[key]
+    end
 
     pq
   end
