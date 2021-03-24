@@ -25,7 +25,7 @@ class ContributeQuestionsListComponent < ViewComponent::Base
   end
 
   def edit_question_button(question)
-    return if @trivium.started?
+    return if @trivium.started? || @trivium.full?
 
     link_to \
       helpers.icon('pencil-fill'),
