@@ -131,7 +131,8 @@ class QuestionReflex < ApplicationReflex
     Rails.logger.error e
     pq = params[:question]&.to_unsafe_h || {}
     Rails.logger.debug pq
-    Rails.logger.debug keys: params.keys
+    Rails.logger.debug paramKeys: params.keys
+    Rails.logger.debug envKeys: (begin; request.env.keys; rescue => e; e end)
     Rails.logger.debug formData: params['formData']
     pq
   end
