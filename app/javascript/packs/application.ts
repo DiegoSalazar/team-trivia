@@ -8,7 +8,9 @@ import "controllers"
 
 // Bootstraps alerts were not working. They weren't showing on their own.
 // Had to add CSS in application.scss to force them to show
-var $ = require("jquery")
-$(document).on('click', '[data-dismiss="alert"]', () => {
-  $('.alert').slideUp('fast')
+document.addEventListener('click', (e) => {
+  const el = <Element>e.target
+  if (!el.matches('[data-dismiss="alert"]')) return
+
+  document.querySelector('.alert').remove()
 })
