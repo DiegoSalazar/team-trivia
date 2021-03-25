@@ -13,7 +13,12 @@ import TeamMessagesController from './team_messages_controller'
 
 const application = Application.start()
 const context = require.context("controllers", true, /_controller\.js$/)
-
 application.load(definitionsFromContext(context))
+
+if (process.env.RAILS_ENV === 'development') {
+  import('radiolabel').then(Radiolabel =>
+    application.register('radiolabel', Radiolabel.default)
+  )
+}
 
 StimulusReflex.initialize(application, { consumer, controller: TeamMessagesController, debug: false })
