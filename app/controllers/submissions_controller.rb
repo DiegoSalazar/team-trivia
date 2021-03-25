@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class SubmissionsController < ApplicationController
-  include CableReady::Broadcaster
-
   # skip_before_action :verify_authenticity_token, only: [:add_guess]
 
   before_action :set_submission, only: %i[show update destroy]

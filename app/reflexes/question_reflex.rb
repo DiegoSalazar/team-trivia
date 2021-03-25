@@ -15,7 +15,7 @@ class QuestionReflex < ApplicationReflex
       reveal_and_mark_active! next_question
 
     elsif active_question&.question_revealed?
-      cable_ready['trivium_reveal'].add_css_class \
+      cable_ready.add_css_class \
         selector: "#question_#{active_question.id} [data-guess-value='#{active_question.answer_value.parameterize}']",
         name: 'correct'
       active_question.answer_revealed!
@@ -27,7 +27,7 @@ class QuestionReflex < ApplicationReflex
       end
 
     elsif active_question&.answer_revealed?
-      cable_ready['trivium_reveal'].remove_css_class \
+      cable_ready.remove_css_class \
         selector: "#question_#{active_question.id}",
         name: 'active'
       active_question.inactive!
@@ -46,18 +46,18 @@ class QuestionReflex < ApplicationReflex
   end
 
   def remove_answer
+    answer_id = element.dataset.id
     answer_index = element.dataset.answer_index
-
-    if element.dataset.id.blank?
+    if answer_id.blank?
       @question = Question.new
       remove_answer_at answer_index
 
-      cable_ready.broadcast
       morph :nothing
+      cable_ready.broadcast
       return
     end
 
-    @question = current_player.questions.find element.dataset.id
+    @question = current_player.questions.find answer_id
 
     if element.dataset.answer_id.blank?
       remove_answer_at answer_index
@@ -71,21 +71,20 @@ class QuestionReflex < ApplicationReflex
     return morph :nothing if answer.nil?
 
     replace_answer_with_delete_field answer_index
-    cable_ready.broadcast
     morph :nothing
+    cable_ready.broadcast
   end
 
   private
 
   def remove_answer_at(index)
-    cable_ready[current_player.chat_channel].remove \
-      selector: "[data-answer-index='#{index}']"
-    cable_ready[current_player.chat_channel].remove \
-      selector: "#question_answers_attributes_#{index}_id"
+    cable_ready
+      .remove(selector: "[data-answer-index='#{index}']")
+      .remove selector: "#question_answers_attributes_#{index}_id"
   end
 
   def replace_answer_with_delete_field(index)
-    cable_ready[current_player.chat_channel].outer_html \
+    cable_ready.outer_html \
       selector: "[data-answer-index='#{index}']",
       html: <<-HTML.strip_heredoc
         <input
@@ -98,7 +97,7 @@ class QuestionReflex < ApplicationReflex
 
   def reveal_and_mark_active!(question)
     %w[revealed active].each do |klass|
-      cable_ready['trivium_reveal'].add_css_class \
+      cable_ready.add_css_class \
         selector: "#question_#{question.id}",
         name: klass
     end
@@ -109,15 +108,18 @@ class QuestionReflex < ApplicationReflex
   end
 
   def set_next_button(text, (add_class, remove_class))
-    cable_ready['trivium_reveal'].text_content \
-      selector: '#next-question-btn',
-      text: text
-    cable_ready['trivium_reveal'].add_css_class \
-      selector: '#next-question-btn',
-      name: add_class
-    cable_ready['trivium_reveal'].remove_css_class \
-      selector: '#next-question-btn',
-      name: remove_class
+    cable_ready
+      .text_content(
+        selector: '#next-question-btn',
+        text: text
+      )
+      .add_css_class(
+        selector: '#next-question-btn',
+        name: add_class
+      )
+      .remove_css_class \
+        selector: '#next-question-btn',
+        name: remove_class
   end
 
   def question_params
@@ -137,15 +139,8 @@ class QuestionReflex < ApplicationReflex
     Rails.logger.debug formData: params['formData']
     qd = element.dataset.question
     Rails.logger.debug questionDataset: qd
-    Rails.logger.debug questionDataset: qd
-    %w[
-      action_dispatch.request.content_type
-      action_dispatch.request.request_parameters
-      action_dispatch.request.query_parameters
-      action_dispatch.request.parameters
-    ].each do |key|
-      Rails.logger.debug key => request.env[key]
-    end
+    Rails.logger.debug controllerParams: controller.params
+
 
     pq
   end

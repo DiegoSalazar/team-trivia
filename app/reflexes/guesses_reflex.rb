@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class GuessesReflex < ApplicationReflex
-  include CableReady::Broadcaster
-
   def create
     @current_team = current_player.current_team
     guess = Guess.new guess_params
@@ -48,7 +46,7 @@ class GuessesReflex < ApplicationReflex
     end
 
     # Update the current_player's chat
-    cable_ready[current_player.chat_channel].insert_adjacent_html \
+    cable_ready.insert_adjacent_html \
       focus_selector: '#team_message_body',
       selector: '#team_messages',
       position: 'beforeend',
@@ -59,16 +57,16 @@ class GuessesReflex < ApplicationReflex
       ))
 
     # Close the guess form Modal
-    cable_ready[current_player.chat_channel].remove \
+    cable_ready.remove \
       selector: '.modal'
 
     # Update current_player's question status
-    cable_ready[current_player.chat_channel].outer_html \
+    cable_ready.outer_html \
       selector: "##{question_status.id}",
       html: question_status_html
 
     # Trigger explicit team message event so we can scroll the chat
-    cable_ready[current_player.chat_channel].dispatch_event(
+    cable_ready.dispatch_event(
       name: 'team-message',
       selector: '#team_messages'
     )

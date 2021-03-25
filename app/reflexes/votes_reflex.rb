@@ -44,16 +44,15 @@ class VotesReflex < ApplicationReflex
       message: @message,
       player: current_player,
       trivium: @current_trivium
-    cable_ready[current_player.chat_channel].outer_html \
+    cable_ready.outer_html \
       selector: dom_id(@message),
       html: message_html
 
     # Update current_player's question status
-    cable_ready[current_player.chat_channel].outer_html \
+    cable_ready.outer_html \
       selector: "##{question_status.id}",
       html: question_status_html
 
     cable_ready.broadcast
-    morph :nothing
   end
 end
