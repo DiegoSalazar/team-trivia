@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :team_messages, only: %i[index create]
   resources :players
+  resources :guesses, only: :create
   resources :teams do
     resources :trivia, only: [] do
       member do
