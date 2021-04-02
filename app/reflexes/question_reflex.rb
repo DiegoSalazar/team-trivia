@@ -15,7 +15,7 @@ class QuestionReflex < ApplicationReflex
       reveal_and_mark_active! next_question
 
     elsif active_question&.question_revealed?
-      cable_ready.add_css_class \
+      cable_ready['trivium_reveal'].add_css_class \
         selector: "#question_#{active_question.id} [data-guess-value='#{active_question.answer_value.parameterize}']",
         name: 'correct'
       active_question.answer_revealed!
@@ -27,14 +27,14 @@ class QuestionReflex < ApplicationReflex
       end
 
     elsif active_question&.answer_revealed?
-      cable_ready.remove_css_class \
+      cable_ready['trivium_reveal'].remove_css_class \
         selector: "#question_#{active_question.id}",
         name: 'active'
       active_question.inactive!
       reveal_and_mark_active! next_question
     end
 
-    cable_ready.broadcast
+    cable_ready['trivium_reveal'].broadcast
     morph :nothing
   end
 
@@ -48,6 +48,7 @@ class QuestionReflex < ApplicationReflex
   def remove_answer
     answer_id = element.dataset.id
     answer_index = element.dataset.answer_index
+
     if answer_id.blank?
       @question = Question.new
       remove_answer_at answer_index
@@ -97,7 +98,7 @@ class QuestionReflex < ApplicationReflex
 
   def reveal_and_mark_active!(question)
     %w[revealed active].each do |klass|
-      cable_ready.add_css_class \
+      cable_ready['trivium_reveal'].add_css_class \
         selector: "#question_#{question.id}",
         name: klass
     end
@@ -108,7 +109,7 @@ class QuestionReflex < ApplicationReflex
   end
 
   def set_next_button(text, (add_class, remove_class))
-    cable_ready
+    cable_ready['trivium_reveal']
       .text_content(
         selector: '#next-question-btn',
         text: text
