@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ModalComponent < ViewComponent::Base
-  with_content_areas :title, :footer
+  with_content_areas :title, :footer, :close_button
 
   def initialize(key, reflex = {})
     super

@@ -44,6 +44,6 @@ class Player < ApplicationRecord
   private
 
   def create_self_team!
-    create_team! name: username
+    Team.where(name: username).first || create_team!(name: username)
   end
 end

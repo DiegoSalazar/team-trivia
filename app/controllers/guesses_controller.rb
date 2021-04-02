@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class GuessesController < ApplicationController
-  before_action :authenticate_player!
-  before_action :set_guess, only: %i[show edit update destroy]
+  include CableReady::Broadcaster
 
-  skip_before_action :verify_authenticity_token, only: [:vote]
+  before_action :authenticate_player!
+  before_action :set_current_trivium, only: :create
+  before_action :set_guess, only: %i[show edit update destroy]
 
   # GET /guesses
   # GET /guesses.json
@@ -25,19 +26,58 @@ class GuessesController < ApplicationController
   def edit; end
 
   # POST /guesses
-  # POST /guesses.json
   def create
-    @guess = Guess.new(guess_params)
+    @current_team = current_player.current_team
+    guess = current_trivium.guesses.build guess_params
+    guess.player = current_player
+    guess.team = @current_team
+    guess.save!
+    @current_question = guess.question
 
-    respond_to do |format|
-      if @guess.save
-        format.html { redirect_to @guess, notice: 'Guess was successfully created.' }
-        format.json { render :show, status: :created, location: @guess }
-      else
-        format.html { render :new }
-        format.json { render json: @guess.errors, status: :unprocessable_entity }
-      end
+    # Create a voteable Message for this Guess
+    message = current_player.team_messages.create! \
+      team: @current_team,
+      trivium: current_trivium,
+      guess: guess
+
+    # Upvoted question status
+    question_status = QuestionStatusComponent.new \
+      @current_question,
+      num: @current_question.num_accepted_guesses,
+      denom: @current_question.guesses.count,
+      title: 'Accepted / Guesses'
+    question_status_html = question_status.render_in view_context
+
+    # Broadcast message to team including current_player
+    @current_team.players.each do |player|
+      # Update their chat
+      cable_ready[player.chat_channel].insert_adjacent_html \
+        selector: '#team_messages',
+        position: 'beforeend',
+        html: TeamMessageComponent.new(
+          message: message,
+          player: player,
+          trivium: current_trivium
+        ).render_in(view_context)
+
+      # Update question status
+      cable_ready[player.chat_channel].outer_html \
+        selector: "##{question_status.id}",
+        html: question_status_html
+
+      # Trigger explicit team message event so we can scroll the chat
+      cable_ready[player.chat_channel].dispatch_event(
+        name: 'team-message',
+        selector: '#team_messages'
+      )
     end
+
+    # Close the guess form Modal
+    cable_ready[current_player.chat_channel].remove selector: '.modal'
+    cable_ready[current_player.chat_channel].push_state url: close_path
+    flash[:close_guess_modal] = true
+
+    cable_ready.broadcast
   end
 
   # PATCH/PUT /guesses/1
@@ -73,6 +113,13 @@ class GuessesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def guess_params
-    params.require(:guess).permit(:submission_id, :question_id, :user_id, :value)
+    params.require(:guess).permit \
+      :trivum_id,
+      :question_id,
+      :value
+  end
+
+  def close_path
+    play_team_trivium_path current_player.team, current_trivium
   end
 end

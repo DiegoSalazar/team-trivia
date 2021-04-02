@@ -39,18 +39,18 @@ class TeamMessageComponent < ViewComponent::Base
   def guessable
     return if @guess.blank?
 
-    controller.render GuessedByComponent.new @message, @player, @trivium
+    controller.render_to_string GuessedByComponent.new @message, @player, @trivium
   end
 
   def votable
     return if sender? || @guess.blank?
 
-    controller.render VoteComponent.new @player, @guess, @trivium
+    controller.render_to_string VoteComponent.new @player, @guess, @trivium
   end
 
   def acceptable
     return unless my_guess_accepted?
 
-    controller.render CheckmarkComponent.new
+    controller.render_to_string CheckmarkComponent.new
   end
 end

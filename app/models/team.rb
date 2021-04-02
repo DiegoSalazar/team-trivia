@@ -6,6 +6,7 @@ class Team < ApplicationRecord
   has_many :guesses
   has_many :submissions
 
+  validates :name, uniqueness: true
   scope :recent, -> { order created_at: :desc }
 
   def team_messages_from(trivium)

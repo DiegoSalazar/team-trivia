@@ -11,7 +11,7 @@ class GuessFormComponent < ViewComponent::Base
     @show
   end
 
-  def modal_params
+  def modal_options
     {
       reflex: 'click->GuessModal#close',
       question_id: @guess.question_id,

@@ -1,2 +1,3 @@
-= button_tag data: { reflex: 'click->Votes#create', reflex_root: @reflex_root, player_id: @player.id, guess_id: @guess.id, trivium_id: @trivium.id }, class: link_class, disabled: disabled? do
-  = helpers.icon 'hand-thumbs-up'
+= form_for [@guess.team, @trivium, @guess, Vote.new], data: { remote: true } do |f|
+  = button_tag class: link_class, disabled: disabled? do
+    = helpers.icon 'hand-thumbs-up'

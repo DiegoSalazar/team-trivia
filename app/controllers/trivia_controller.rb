@@ -20,8 +20,8 @@ class TriviaController < ApplicationController
     end
 
     @current_question ||= @trivium.questions.first
-    @current_guess = @current_question&.guesses&.build trivium: @trivium
-    @current_guess ||= current_player.guesses.build trivium: @trivium
+    @current_guess = @current_question&.guesses&.build trivium: @trivium, player: current_player, team: current_team
+    @current_guess ||= current_player.guesses.build trivium: @trivium, team: current_team, question: @current_question
     @team_messages = current_team.team_messages_from @trivium
     @title = current_team.chat_title
 

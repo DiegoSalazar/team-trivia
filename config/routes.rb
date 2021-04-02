@@ -5,12 +5,17 @@ Rails.application.routes.draw do
 
   resources :team_messages, only: %i[index create]
   resources :players
-  resources :guesses, only: :index
   resources :teams do
     resources :trivia, only: [] do
       member do
         get :play
         get 'play/:question_id', action: :play, as: :play_question
+      end
+
+      resources :guesses, only: [:show] do
+        member do
+          resources :votes, only: :create, as: :guess_votes
+        end
       end
     end
   end

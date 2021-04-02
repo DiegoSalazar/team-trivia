@@ -13,10 +13,8 @@ class TeamMessagesController < ApplicationController
     message = current_player.team_messages.new team: current_team, trivium: current_trivium
     message.update! message_params
 
-    # Broadcast message to team
+    # Broadcast message to all team players
     current_team.players.each do |player|
-      next if player.id == current_player.id
-
       cable_ready[player.chat_channel].insert_adjacent_html \
         selector: '#team_messages',
         position: 'beforeend',
@@ -25,27 +23,19 @@ class TeamMessagesController < ApplicationController
           player: player,
           trivium: current_trivium
         ))
+
+      # Trigger explicit team message event so we can scroll the chat
+      cable_ready[player.chat_channel].dispatch_event(
+        name: 'team-message',
+        selector: '#team_messages'
+      )
     end
 
-    # Update current_player's message and form
-    cable_ready[current_player.chat_channel].insert_adjacent_html \
-      selector: '#team_messages',
-      position: 'beforeend',
-      html: render_to_string(TeamMessageComponent.new(
-        message: message,
-        player: current_player,
-        trivium: current_trivium
-      ))
+    # Refresh current_player's message form
     cable_ready[current_player.chat_channel].inner_html \
       selector: '#new_team_message',
       focus_selector: '#team_message_body',
       html: render_to_string(partial: 'team_messages/form')
-
-    # Trigger explicit team message event so we can scroll the chat
-    cable_ready[current_player.chat_channel].dispatch_event(
-      name: 'team-message',
-      selector: '#team_messages'
-    )
 
     cable_ready.broadcast
   end
