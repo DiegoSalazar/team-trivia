@@ -18,7 +18,7 @@ feature 'Profile', type: :feature do
     end
 
     it 'displays my Team name' do
-      expect(page).to have_content current_player.team.name
+      expect(page).to have_content current_player.current_team.name
     end
   end
 
@@ -52,7 +52,7 @@ feature 'Profile', type: :feature do
       select new_team.name, from: 'Team'
 
       expect { click_on 'Update Player' }
-        .to change { current_player.team.name }
+        .to change { current_player.current_team.name }
         .to new_team.name
     end
   end

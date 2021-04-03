@@ -14,7 +14,7 @@
         .badge.badge-secondary.mr-1
           | Team
         .badge.badge-light
-          = link_to @player.team_name, team_path(@player.team), class: 'text-dark'
+          = link_to @player.team_name, team_path(@player.current_team), class: 'text-dark'
 
     .d-flex.justify-content-around.my-4
       = render PlayerStatsComponent.new @player

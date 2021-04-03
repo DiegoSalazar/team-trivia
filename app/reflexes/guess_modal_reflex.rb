@@ -13,6 +13,6 @@ class GuessModalReflex < ModalReflex
   private
 
   def close_path
-    controller.play_team_trivium_path current_player.team, @trivium
+    controller.play_team_trivium_path current_player.current_team, @trivium
   end
 end

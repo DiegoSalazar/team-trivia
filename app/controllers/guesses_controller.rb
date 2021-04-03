@@ -120,6 +120,6 @@ class GuessesController < ApplicationController
   end
 
   def close_path
-    play_team_trivium_path current_player.team, current_trivium
+    play_team_trivium_path current_player.current_team, current_trivium
   end
 end

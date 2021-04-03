@@ -82,7 +82,7 @@ feature 'Contribute', type: :feature do
     before { visit new_trivium_question_path trivium }
 
     it 'shows list of My Questions' do
-      expect(page).to have_content 'My Questions'
+      expect(page).to have_content 'Questions'
     end
 
     it 'displays my questions' do

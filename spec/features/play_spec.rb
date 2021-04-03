@@ -7,7 +7,7 @@ feature 'Play', type: :feature do
     login_player_one!
     team.players << current_player
   end
-  let(:team) { create :team }
+  let(:team) { create :team, name: 'Test Team' }
   let(:play_page) { play_team_trivium_path team, trivium }
 
   context "Trivia hasn't started yet" do

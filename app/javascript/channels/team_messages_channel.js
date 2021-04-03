@@ -3,6 +3,7 @@ import consumer from './consumer'
 
 consumer.subscriptions.create('TeamMessagesChannel', {
   connected() {
+    console.log('TeamMessagesChannel#connect') // debug
     this.scrollChatDown()
 
     document.addEventListener('team-message', this.scrollChatDown.bind(this))

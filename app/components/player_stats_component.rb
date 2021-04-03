@@ -7,7 +7,7 @@ class PlayerStatsComponent < ViewComponent::Base
   end
 
   def games
-    @player.team.submissions.count
+    @player.current_team.submissions.count
   end
 
   def points
