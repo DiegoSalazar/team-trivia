@@ -21,7 +21,7 @@
                 td= link_to team.name, team
                 td=l team.created_at, format: :long
                 td.text-right
-                  = button_tag 'Join', data: { reflex: 'click->Join#team', team_id: team.id }, class: 'btn btn-sm btn-success btn-block' unless current_player.joined_team? team
+                  = button_tag 'Join', data: { reflex: 'click->Join#team', team_id: team.id }, class: 'btn btn-sm btn-success btn-block' unless current_player.in_team? team
 
     .row
       .col

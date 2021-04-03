@@ -7,7 +7,7 @@
     .col.flex-grow-1
       = link_to 'Play', current_play_path, class: 'btn btn-sm btn-block btn-success'
 
-  - unless current_team
+  - if current_player.in_self_team?
     .col.flex-grow-1
       = link_to 'Join Team', teams_path, class: 'btn btn-sm btn-block btn-info'
 
@@ -37,8 +37,8 @@
                   td= trivium.body
                   td= l trivium.game_ends_at, format: :long
                   td.text-right
-                    = link_to 'Team Chat', play_team_trivium_path(current_team, trivium), class: "btn btn-sm btn-warning mr-2" if current_team.present?
-                    = link_to 'Reveal', reveal_trivium_path(trivium), class: "btn btn-sm btn-info"
+                    = link_to 'Guesses', play_team_trivium_path(current_team, trivium), class: "btn btn-sm btn-warning mr-2" if current_team.present?
+                    = link_to 'Answers', reveal_trivium_path(trivium), class: "btn btn-sm btn-info"
 
               - if @past_trivia.empty?
                 .alert.alert-warning.mb-0

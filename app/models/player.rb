@@ -21,16 +21,20 @@ class Player < ApplicationRecord
     team || create_self_team!
   end
 
+  def username
+    read_attribute(:username) || email_name
+  end
+
+  def email_name
+    email.split('@').first
+  end
+
   def team_name
     current_team&.name
   end
 
-  def joined_team?(team)
-    team_id == team.id
-  end
-
   def in_self_team?
-    team&.name == username
+    team.nil? || team.name == username
   end
 
   def in_team?(team)
