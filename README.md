@@ -4,20 +4,6 @@ A collaborative and accessible, real-time trivia game playing app. Based on Rail
  - [StimulusReflex](https://docs.stimulusreflex.com/)
  - [CableReady](https://cableready.stimulusreflex.com/)
 
-## Local Setup
-Set local user creds:
-```bash
-export TEAM_TRIVIA_USER_EM='test@mail.com'
-export TEAM_TRIVIA_USER_PW='password123'
-```
-
-Clone repo:
-```bash
-bundle && npm i
-rake db:setup
-rails server
-```
-
 ## Features
  - Players can create Trivia to start and end at a specified date and time.
  - Players can join Teams or play by themselves.
@@ -32,3 +18,17 @@ rails server
  - Players will be redirected to a Live Reveal page when a Trivia ends.
  - The creator of the Trivia can Reveal questions and answers one by one.
  - Winners are revealed after all Questions/Answers are revealed.
+
+## Local Setup
+Set local user creds:
+```bash
+export TEAM_TRIVIA_USER_EM='test@mail.com'
+export TEAM_TRIVIA_USER_PW='password123'
+```
+
+Clone repo:
+```bash
+bundle && npm i
+rake db:setup
+rails server
+```
