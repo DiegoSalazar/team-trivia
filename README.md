@@ -2,7 +2,9 @@
 
 Demo: https://team-trivia.herokuapp.com/
 
-A collaborative and accessible, real-time trivia game playing app. Based on Rails and:
+A collaborative and accessible, real-time trivia game playing app. Inspired by Quarantrivia.
+
+Based on Rails and:
  - [StimulusReflex](https://docs.stimulusreflex.com/)
  - [CableReady](https://cableready.stimulusreflex.com/)
 
