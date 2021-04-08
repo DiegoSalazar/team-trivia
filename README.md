@@ -18,7 +18,7 @@ A collaborative and accessible, real-time trivia game playing app. Based on Rail
  - Players can vote on Guesses.
  - Guesses with the highest votes will be counted at the end.
  - Players will be redirected to a Live Reveal page when a Trivia ends.
- - The creator of the Trivia can Reveal questions and answers one by one.
+ - The creator of the Trivia can Reveal questions and Answers one by one.
  - Winners are revealed after all Questions/Answers are revealed.
 
 ## Local Setup
