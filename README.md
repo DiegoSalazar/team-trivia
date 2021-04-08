@@ -31,3 +31,5 @@ bundle && npm i
 rake db:setup
 rails server
 ```
+
+See `rake -T | grep triv` to see trivia seed data creation tasks.
