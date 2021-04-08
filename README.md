@@ -22,14 +22,11 @@ A collaborative and accessible, real-time trivia game playing app. Based on Rail
  - Winners are revealed after all Questions/Answers are revealed.
 
 ## Local Setup
-Set local user creds:
 ```bash
+# Set local user creds
 export TEAM_TRIVIA_USER_EM='test@mail.com'
 export TEAM_TRIVIA_USER_PW='password123'
-```
 
-Clone repo:
-```bash
 bundle && npm i
 rake db:setup
 rails server
