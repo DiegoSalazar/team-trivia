@@ -6,14 +6,7 @@
   "scripts": {
     "postdeploy": "bundle exec rake db:migrate"
   },
-  "addons": [
-    {
-      "plan": "heroku-postgresql",
-      "options": {
-        "version": "9.5"
-      }
-    }
-  ],
+  "addons": ["heroku-postgresql"],
   "environments": {
     "test": {
       "scripts": {
