@@ -1,0 +1,24 @@
+{
+  "name": "Team Trivia",
+  "description": "Play Trivia with Teams",
+  "website": "https://team-trivia.herokuapp.com/",
+  "repository": "https://github.com/DiegoSalazar/team-trivia",
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:hobby-dev",
+      "options": {
+        "version": "9.5"
+      }
+    }
+  ],
+  "environments": {
+    "test": {
+      "scripts": {
+        "test": "bundle exec rspec"
+      }
+    }
+  }
+}
