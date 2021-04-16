@@ -7,7 +7,7 @@
     .col.flex-grow-1
       = link_to 'Play', current_play_path, class: 'btn btn-sm btn-block btn-success'
 
-  - if current_player.in_self_team?
+  - if current_player.nil? || current_player.in_self_team?
     .col.flex-grow-1
       = link_to 'Join Team', teams_path, class: 'btn btn-sm btn-block btn-info'
 
