@@ -24,6 +24,9 @@ Based on Rails and:
  - Winners are revealed after all Questions/Answers are revealed
 
 ## Local Setup
+
+Required: postgres, redis
+
 ```bash
 # Set local user creds
 export TEAM_TRIVIA_USER_EM='test@mail.com'
