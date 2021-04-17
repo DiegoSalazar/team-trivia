@@ -13,5 +13,15 @@
         "test": "bundle exec rspec"
       }
     }
+  },
+  "env": {
+    "TEAM_TRIVIA_TEST_EM": {
+      "description": "Test user email",
+      "generator": "test@mail.com"
+    },
+    "TEAM_TRIVIA_TEST_PW": {
+      "description": "Test user password",
+      "value": "drowssap"
+    }
   }
 }
