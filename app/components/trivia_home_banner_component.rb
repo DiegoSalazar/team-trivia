@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TriviaHomeBannerComponent < ViewComponent::Base
-  with_content_areas :footer
+  renders_one :footer
   delegate :current_player, to: :controller
 
   def initialize(trivium, team = nil)

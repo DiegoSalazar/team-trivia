@@ -1,7 +1,7 @@
 .row
   .col-sm-8
     = render TriviumBannerComponent.new @trivium do |component|
-      = component.with :right do
+      = component.right do
         = render CountdownComponent.new @trivium.game_ends_at, @trivium.game_ends_at, redirect_to: reveal_trivium_path(@trivium), redirect_msg: 'Game ready! Go see the answer reveal?'
         = link_to 'Reveal', reveal_trivium_path(@trivium), class: 'btn btn-sm btn-info float-right mt-2' if @trivium.ended?
 

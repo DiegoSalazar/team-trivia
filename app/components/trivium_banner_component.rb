@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class TriviumBannerComponent < ViewComponent::Base
-  with_content_areas :right, :footer
+  renders_one :right
+  renders_one :footer
 
   def initialize(trivium, title: trivium.title, hint: trivium.body)
     super

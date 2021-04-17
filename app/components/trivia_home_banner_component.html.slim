@@ -1,6 +1,6 @@
 = render TriviumBannerComponent.new @trivium, title: @title, hint: @hint do |component|
-  = component.with :right do
+  = component.right do
     = countdown
     = edit_trivium_button
 
-  = component.with(:footer) { footer }
+  = component.footer { footer }
